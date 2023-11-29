@@ -1,3 +1,5 @@
+import { getBirdDetails } from "./modelSource";
+
 export default {
   user: {
     id: null,
@@ -6,21 +8,27 @@ export default {
   hotBirds: [],
   searchParams: {},
   searchResultsPromiseState: {},
-  currentBird: {
-    id: null,
-    name: "",
-    images: [],
-    lengthMin: "",
-    lengthMax: "",
-    family: "",
-    region: [],
-    sciName: "",
-    status: "",
-    recordings: [],
-  },
+  currentBird: null,
   birdOfTheDay: {
     id: null,
     name: "",
     images: [],
+  },
+
+  setCurrentBird(id) {
+    getBirdDetails(id).then((res) => res.json())
+    .then(async (res) => this.currentBird = res);
+  },
+
+  addLikedBird(bird) {
+    this.likedBirds = [...this.likedBirds, bird];
+  },
+
+  removeLikedBird(birdToRemove) {
+    function checkBirdsCB(bird) {
+      return bird.id != birdToRemove.id;
+    }
+
+    this.likedBirds = this.likedBirds.filter(checkBirdsCB)
   },
 };
