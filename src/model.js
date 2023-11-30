@@ -17,7 +17,7 @@ export default {
 
   setCurrentBird(id) {
     getBirdDetails(id).then((res) => res.json())
-    .then(async (res) => this.currentBird = res);
+    .then((res) => this.currentBird = res);
   },
 
   addLikedBird(bird) {
