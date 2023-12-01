@@ -12,8 +12,9 @@ export default {
   birdOfTheDay: null,
 
   setCurrentBird(id) {
-    getBirdDetails(id).then((res) => res.json())
-    .then((res) => this.currentBird = res);
+    getBirdDetails(id)
+      .then((res) => res.json())
+      .then((res) => (this.currentBird = res));
   },
 
   addLikedBird(bird) {
@@ -25,20 +26,21 @@ export default {
       return bird.id != birdToRemove.id;
     }
 
-    this.likedBirds = this.likedBirds.filter(checkBirdsCB)
+    this.likedBirds = this.likedBirds.filter(checkBirdsCB);
   },
 
-  setBirdOfTheDay() {
-      const id = Math.floor(Math.random()*1000)+1
-      getBirdDetails(id).then((res) => res.json())
-      .then((res) => this.birdOfTheDay = res);
+  async setBirdOfTheDay() {
+    const id = Math.floor(Math.random() * 1000) + 1;
+    getBirdDetails(id)
+      .then((res) => res.json())
+      .then((res) => (this.birdOfTheDay = res));
   },
 
   setSearchName(name) {
     this.searchParams.name = name;
   },
 
- /* setSearchRegion(region) {
+  /* setSearchRegion(region) {
     this.searchParams.region = region;
   },
 

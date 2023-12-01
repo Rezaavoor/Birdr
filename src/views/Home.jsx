@@ -3,7 +3,7 @@ import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { InfoIcon, AddIcon } from "@chakra-ui/icons";
 
-export default function Home() {
+export default function Home(props) {
   const theme = useTheme();
   return (
     <div
