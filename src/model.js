@@ -30,7 +30,7 @@ export default {
 
   setBirdOfTheDay() {
       const id = Math.floor(Math.random()*1000)+1
-      getBirdDetails(id).then((res) => checkResponseCB(res))
+      getBirdDetails(id).then((res) => res.json())
       .then((res) => this.birdOfTheDay = res);
   },
 
