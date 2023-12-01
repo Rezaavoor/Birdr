@@ -1,5 +1,7 @@
 import { API_KEY, BASE_URL } from "./apiConfig";
 
+
+
 export function getBirdDetails(id) {
     const url = BASE_URL + "birds/" + id;
 
