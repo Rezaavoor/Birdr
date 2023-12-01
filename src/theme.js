@@ -3,7 +3,8 @@ export const theme = {
     black: "#000000",
     white: "#FFFFFF",
     light: "#D9D9D9",
-    dark: "#414141",
+    gray: "#242424",
+    dark: "#151515",
   },
   breakpoints: {
     small: "576px",
