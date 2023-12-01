@@ -1,6 +1,7 @@
 //import "/src/teacherFetch.js";
 import model from "/src/model.js";
 import "/src/firebaseModel.js";
+import "../globalstyle.css";
 
 import { observable, configure, reaction } from "mobx";
 configure({ enforceActions: "never" });
