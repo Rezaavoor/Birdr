@@ -9,11 +9,7 @@ export default {
   searchParams: {},
   searchResultsPromiseState: {},
   currentBird: null,
-  birdOfTheDay: {
-    id: null,
-    name: "",
-    images: [],
-  },
+  birdOfTheDay: null,
 
   setCurrentBird(id) {
     getBirdDetails(id).then((res) => res.json())
@@ -31,4 +27,22 @@ export default {
 
     this.likedBirds = this.likedBirds.filter(checkBirdsCB)
   },
+
+  setBirdOfTheDay() {
+      const id = Math.floor(Math.random()*1000)+1
+      getBirdDetails(id).then((res) => checkResponseCB(res))
+      .then((res) => this.birdOfTheDay = res);
+  },
+
+  setSearchName(name) {
+    this.searchParams.name = name;
+  },
+
+ /* setSearchRegion(region) {
+    this.searchParams.region = region;
+  },
+
+  setSearchSciName(sciName) {
+    this.searchParams.sciName = sciName;
+  },*/
 };
