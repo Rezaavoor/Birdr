@@ -9,6 +9,3 @@ const PATH = "birdr";
 const app= initializeApp(firebaseConfig)
 const db= getDatabase(app)
 const rf = ref(db, PATH)
-
-
-
