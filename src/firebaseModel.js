@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "/src/firebaseConfig.js";
 import { getDatabase, ref, get, set} from "firebase/database";
-import { getDetails } from "./birdSource";
+import { getDetails } from "./modelSource";
 import { getAuth, signInWithPopup, GoogleAuthProvider,onAuthStateChanged, signOut,} from 'firebase/auth';
 
 const PATH = "Model";
