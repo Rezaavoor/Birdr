@@ -41,9 +41,11 @@ export default {
   ],
 
   setCurrentBird(id) {
-   /* getBirdDetails(id)
+    getBirdDetails(id)
       .then((res) => res.json())
-      .then((res) => (this.currentBird = res));
+      .then((res) => (this.currentBird = res ,
+        this.updataViewCount(res)
+        ));
   },
  /*********** change********************** */
   updataViewCount(bird){

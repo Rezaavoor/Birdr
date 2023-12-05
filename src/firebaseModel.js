@@ -2,7 +2,6 @@ import { initializeApp } from "firebase/app";
 import firebaseConfig from "/src/firebaseConfig.js";
 import { getDatabase, ref, get, set} from "firebase/database";
 import { getDetails } from "./birdSource";
-import { getAuth } from "firebase/auth";
 import { getAuth, signInWithPopup, GoogleAuthProvider,onAuthStateChanged, signOut,} from 'firebase/auth';
 
 const PATH = "Model";
@@ -41,6 +40,7 @@ function persistenceToModel(data , model){
 
     function getHotBirdsDetail(hotBirds){
         const hotBirdsDetails = [];
+
         for(const entry of hotBirds){
             const birdName = entry.name;
             const viewCount = entry.viewCount;
