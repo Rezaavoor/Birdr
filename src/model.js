@@ -7,7 +7,7 @@ export default {
     likedBirds: [],
   },
   hotBirds: [],
-  
+
   searchParams: {},
   searchResultsPromiseState: {},
   currentBird: null,
@@ -38,41 +38,42 @@ export default {
     599, 601, 602, 603, 605, 606, 608, 610, 616, 617, 618, 621, 622, 623, 624,
     625, 626, 627, 628, 631, 633, 634, 638, 639, 642, 646, 647, 657, 659, 660,
     754, 757, 761, 763, 857, 860, 862, 863, 866, 952, 954, 955, 964, 970, 975,
-    979, 988, 990, 992, 994, 995, 404, 69, 26, 10
+    979, 988, 990, 992, 994, 995, 404, 69, 26, 10,
   ],
 
   setCurrentBird(id) {
-    getBirdDetails(id)
+    /* getBirdDetails(id)
       .then((res) => res.json())
-      .then((res) => (this.currentBird = res ,
-        this.updataViewCount(res)
-        ));
+      .then((res) => (this.currentBird = res));*/
+    resolvePromise(getBirdDetails(id), this.currentBirdPromiseState);
+    this.currentBird = id;
+    this.updataViewCount(id);
   },
- /*********** change********************** */
-  updataViewCount(bird){
+  /*********** change********************** */
+  updataViewCount(birdId) {
     const foundBird = this.hotBirds.find(findBirdCB);
 
-    function findBirdCB(entry){
-      return entry.bird.name === bird.name;
+    function findBirdCB(entry) {
+      return entry.birdId === birdId;
     }
 
-    if(foundBird){
+    if (foundBird) {
       foundBird.viewCount += 1;
-    } else{
-      const birdEntry ={
-        bird : bird,
-        viewCount : 1
-      }
+    } else {
+      const birdEntry = {
+        birdId: birdId,
+        viewCount: 1,
+      };
 
       this.hotBirds.push(birdEntry);
       this.hotBirds.sort(sortBirdCB);
 
-      function sortBirdCB(a, b){
-       return b.viewCount - a.viewCount;
+      function sortBirdCB(a, b) {
+        return b.viewCount - a.viewCount;
       }
     }
   },
- /*********** change********************** */
+  /*********** change********************** */
   addLikedBird(bird) {
     this.user.likedBirds = [...this.user.likedBirds, bird];
   },
@@ -88,10 +89,12 @@ export default {
   async setBirdOfTheDay() {
     const getDateOfYearCB = () => {
       const date = new Date();
-      return Math.floor((date.getTime() - new Date(date.getFullYear(), 0, 0)) / 864e5);
-    }
+      return Math.floor(
+        (date.getTime() - new Date(date.getFullYear(), 0, 0)) / 864e5
+      );
+    };
 
-    if(!this.birdOfTheDay) {
+    if (!this.birdOfTheDay) {
       const id = this.birdsOfTheDay[getDateOfYearCB()];
       resolvePromise(getBirdDetails(id), this.birdOfTheDayPromiseState);
       this.birdOfTheDay = id;
@@ -111,6 +114,6 @@ export default {
   },*/
 
   doSearch(searchParams) {
-    resolvePromise(searchBird(searchParams), this.searchResultsPromiseState)
-  }
+    resolvePromise(searchBird(searchParams), this.searchResultsPromiseState);
+  },
 };
