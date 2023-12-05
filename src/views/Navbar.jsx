@@ -2,9 +2,16 @@ import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { Icon, Input } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
-export default function Navbar({ children }) {
+export default function Navbar({ children }, props) {
   const theme = useTheme();
+  const [searchQuery, setSearchQuery] = useState(""); // State for searchQuery and setting it
+
+  function handleSearchACB(){
+    console.log("Search Query:", searchQuery);
+    props.searchClick();
+  };
   return (
     <div>
       <div
@@ -81,6 +88,8 @@ export default function Navbar({ children }) {
                 backgroundColor={theme.colors.white}
                 color={theme.colors.dark}
                 paddingInlineEnd={10}
+                value={searchQuery}
+                onChange={(inputChange) => setSearchQuery(inputChange.target.value)}
               />
             </div>
             <div
@@ -90,6 +99,7 @@ export default function Navbar({ children }) {
                 z-index: 2;
               `}
             >
+              {handleSearchACB()}
               <SearchIcon boxSize={6} color={theme.colors.dark} />
             </div>
           </div>

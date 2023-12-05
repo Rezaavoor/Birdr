@@ -35,9 +35,9 @@ export default function Home(props) {
         <div
           className={css`
             position: absolute;
-            top: 30vh;
+            top: 10vh;
             width: 100%;
-            text-align: center;
+            text-align: left;
             box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
             -webkit-box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
             -moz-box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 1);
@@ -46,7 +46,7 @@ export default function Home(props) {
             user-select: none;
           `}
         >
-          <p>Search Result</p>
+          <p>Search Result:</p>
         </div>
         <div
           className={css`
@@ -58,32 +58,22 @@ export default function Home(props) {
             align-items: center;
           `}
         >
-          <div
-            className={css`
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              margin: 50px;
-            `}
-          >
-            <AddIcon boxSize={7} color={theme.colors.white} />
-            Add To My Birds
-          </div>
-          <div
-            className={css`
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              margin: 50px;
-            `}
-          >
-            <InfoIcon boxSize={7} color={theme.colors.white} />
-            More Details
-          </div>
+          {[...props.searchResults].map(displayBirdsCB)}
         </div>
       </div>
     </div>
   );
+
+  function displayBirdsCB(bird){
+    function clickHandlerACB(){
+      props.onClickHandler(bird);
+      window.location.hash = "#/details"
+    }
+    return(
+      <span key={bird.id} onClick={clickHandlerACB} class="result-item">
+        <img src={bird.image} height = "100"></img>
+        <div>{bird.name}</div>
+      </span>
+    )
+  }
 }
