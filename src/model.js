@@ -1,24 +1,29 @@
-import { getBirdDetails } from "./modelSource";
+import { getBirdDetails, searchBird } from "./modelSource";
+import resolvePromise from "./resolvePromise";
 
 export default {
   user: {
     id: null,
+    likedBirds: [],
   },
-  likedBirds: [],
   hotBirds: [],
   searchParams: {},
   searchResultsPromiseState: {},
   currentBird: null,
+  currentBirdPromiseState: {},
+  birdOfTheDayPromiseState: {},
   birdOfTheDay: null,
 
   setCurrentBird(id) {
-    getBirdDetails(id)
+   /* getBirdDetails(id)
       .then((res) => res.json())
-      .then((res) => (this.currentBird = res));
+      .then((res) => (this.currentBird = res));*/
+      resolvePromise(getBirdDetails(id), this.currentBirdPromiseState);
+      this.currentBird = id;
   },
 
   addLikedBird(bird) {
-    this.likedBirds = [...this.likedBirds, bird];
+    this.user.likedBirds = [...this.user.likedBirds, bird];
   },
 
   removeLikedBird(birdToRemove) {
@@ -31,9 +36,8 @@ export default {
 
   async setBirdOfTheDay() {
     const id = Math.floor(Math.random() * 1000) + 1;
-    getBirdDetails(id)
-      .then((res) => res.json())
-      .then((res) => (this.birdOfTheDay = res));
+    resolvePromise(getBirdDetails(id), this.birdOfTheDayPromiseState);
+    this.birdOfTheDay = id;
   },
 
   setSearchName(name) {
@@ -47,4 +51,8 @@ export default {
   setSearchSciName(sciName) {
     this.searchParams.sciName = sciName;
   },*/
+
+  doSearch(searchParams) {
+    resolvePromise(searchBird(searchParams), this.searchResultsPromiseState)
+  }
 };
