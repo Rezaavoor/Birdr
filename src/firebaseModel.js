@@ -17,17 +17,10 @@ const auth = getAuth(app)
 const provider = new GoogleAuthProvider();
 
 function modelToPersistence(model){
-    const hotBirds = model.hotBirds.map(extractCB);
-
-    function extractCB(entry){
-      return  {
-            name : entry.bird.name,
-            viewCount : entry.viewCount,
-        }
-    }
+    
     return {
         currentBird : model.currentBird,
-        hotBirds : hotBirds,
+        hotBirds : model.hotBirds,
         birdOfTheDay : model.birdOfTheDay
     }
 }
@@ -37,26 +30,8 @@ function persistenceToModel(data , model){
     const hotBirds = data?.hotBirds || {};
     const birdOfTheDay = data.birdOfTheDay;
 
-
-    function getHotBirdsDetail(hotBirds){
-        const hotBirdsDetails = [];
-
-        for(const entry of hotBirds){
-            const birdName = entry.name;
-            const viewCount = entry.viewCount;
-
-            const bird = getDetails(birdName);
-
-            const birdEntry = {
-                bird : bird,
-                viewCount : viewCount,
-            }
-            hotBirdsDetails.push(birdEntry);
-        }
-        return hotBirdsDetails
-    }
     model.currentBird = currentBird;
-    model.hotBirds = getHotBirdsDetail(hotBirds);
+    model.hotBirds = hotbirds;
     model.birdOfTheDay = birdOfTheDay;
 
     return model;
@@ -87,7 +62,7 @@ function readFromFirebase(model){
 function connectToFirebase(model, watchFunction){
 
     function watchedValues(){
-        return [model.hotBirds, model.currentBird, model.BirdOfTheDay];
+        return [model.hotBirds, model.currentBird, model.birdOfTheDay];
     }
 
     function saveChangedValues(){
