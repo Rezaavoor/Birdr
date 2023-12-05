@@ -20,6 +20,7 @@ export function getBirdDetails(id) {
     }
 }
 
+
 export function searchBird(searchParams){
 
     const queryParams = new URLSearchParams(searchParams);
@@ -46,3 +47,4 @@ export function searchBird(searchParams){
 
     return fetch(url, options).then(responseSearchACB).then(getBirdACB);
 }
+
