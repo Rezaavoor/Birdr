@@ -19,3 +19,4 @@ export function getBirdDetails(id) {
         return Promise.reject(res)
     }
 }
+

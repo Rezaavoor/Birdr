@@ -1,4 +1,4 @@
-import { getBirdDetails } from "./modelSource";
+import { getBirdDetails,getHotBirdsDetail } from "./modelSource";
 
 export default {
   user: {
@@ -6,6 +6,7 @@ export default {
   },
   likedBirds: [],
   hotBirds: [],
+  
   searchParams: {},
   searchResultsPromiseState: {},
   currentBird: null,
@@ -14,9 +15,36 @@ export default {
   setCurrentBird(id) {
     getBirdDetails(id)
       .then((res) => res.json())
-      .then((res) => (this.currentBird = res));
+      .then((res) => {
+        this.currentBird = res;
+        this.updataViewCount(res); 
+      });
   },
+ /*********** change********************** */
+  updataViewCount(bird){
+    const foundBird = this.hotBirds.find(findBirdCB);
 
+    function findBirdCB(entry){
+      return entry.bird.name === bird.name;
+    }
+
+    if(foundBird){
+      foundBird.viewCount += 1;
+    } else{
+      const birdEntry ={
+        bird : bird,
+        viewCount : 1
+      }
+
+      this.hotBirds.push(birdEntry);
+      this.hotBirds.sort(sortBirdCB);
+
+      function sortBirdCB(a, b){
+       return b.viewCount - a.viewCount;
+      }
+    }
+  },
+ /*********** change********************** */
   addLikedBird(bird) {
     this.likedBirds = [...this.likedBirds, bird];
   },
