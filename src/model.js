@@ -1,4 +1,5 @@
 import { getBirdDetails } from "./modelSource";
+import resolvePromise from "./resolvePromise";
 
 export default {
   user: {
