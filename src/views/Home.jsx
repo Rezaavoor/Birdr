@@ -1,4 +1,4 @@
-import { Image } from "@chakra-ui/react";
+import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { InfoIcon, AddIcon } from "@chakra-ui/icons";
@@ -37,10 +37,16 @@ export default function Home(props) {
           z-index: 1;
         `}
       >
-        <Image
-          src="https://images.unsplash.com/photo-1607030396118-721d84ae0ff1"
-          alt="Ruby-throated Hummingbird"
-        />
+        {props.status == "data" &&
+        props.model.birdOfTheDayPromiseState.data.images[0] ? (
+          <Image
+            src={props.model.birdOfTheDayPromiseState.data.images[0]}
+            alt={props.model.birdOfTheDayPromiseState.data.name}
+            fallbackSrc="https://placehold.co/800"
+          />
+        ) : (
+          <div />
+        )}
       </div>
       <div
         className={css`
@@ -62,7 +68,7 @@ export default function Home(props) {
             user-select: none;
           `}
         >
-          <p>Bird Of The Day</p>
+          <p>{props.status == "data" ? "Bird Of The Day" : ""}</p>
         </div>
         <div
           className={css`
@@ -85,7 +91,15 @@ export default function Home(props) {
               background-color: rgba(0, 0, 0, 0.3);
             `}
           >
-            <h1>Ruby-throated Hummingbird</h1>
+            {props.status == "data" ? (
+              <h1>{props.model.birdOfTheDayPromiseState.data.name}</h1>
+            ) : props.status == "loading" ? (
+              <Spinner size="xl" />
+            ) : props.status == "error" ? (
+              <h1>"Error"</h1>
+            ) : (
+              <h1>"No Data"</h1>
+            )}
           </div>
         </div>
         <div
