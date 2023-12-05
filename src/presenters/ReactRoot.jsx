@@ -7,6 +7,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { theme } from "../theme.js";
 import { ThemeProvider } from "@emotion/react";
+import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "../views/Navbar.jsx";
 
 export default observer(function ReactRoot(props) {
@@ -34,10 +35,12 @@ export default observer(function ReactRoot(props) {
   ]);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Navbar>
-        <RouterProvider router={router} />
-      </Navbar>
-    </ThemeProvider>
+    <ChakraProvider disableGlobalStyle>
+      <ThemeProvider theme={theme}>
+        <Navbar>
+          <RouterProvider router={router} />
+        </Navbar>
+      </ThemeProvider>
+    </ChakraProvider>
   );
 });

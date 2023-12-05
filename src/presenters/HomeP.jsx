@@ -1,5 +1,6 @@
 import Home from "../views/Home";
 
 export default function HomeP(props) {
-  return <Home birdOfTheDay = {props.model.birdOfTheDay}/>;
+  props.model.setBirdOfTheDay();
+  return <Home model={props.model} />;
 }
