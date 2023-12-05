@@ -34,10 +34,13 @@ export default {
     this.likedBirds = this.likedBirds.filter(checkBirdsCB);
   },
 
-  async setBirdOfTheDay() {
-    const id = Math.floor(Math.random() * 1000) + 1;
-    resolvePromise(getBirdDetails(id), this.birdOfTheDayPromiseState);
-    this.birdOfTheDay = id;
+  setBirdOfTheDay() {
+    if(!this.birdOfTheDay){
+      console.log("Kill me");
+      const id = Math.floor(Math.random() * 1000) + 1;
+      resolvePromise(getBirdDetails(id), this.birdOfTheDayPromiseState);
+      this.birdOfTheDay = id;
+    }
   },
 
   setSearchName(name) {
