@@ -58,7 +58,7 @@ export default function Home(props) {
             align-items: center;
           `}
         >
-          {[...props.searchResults].map(displayBirdsCB)}
+
         </div>
       </div>
     </div>

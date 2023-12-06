@@ -6,22 +6,26 @@ import { SearchIcon } from "@chakra-ui/icons";
 
 export default function SearchForm(props) {
     const theme = useTheme();
+
     function textChangeACB(event){
+        console.log(event.target.value);
         props.textChange(event.target.value);
     }
 
     function clickSearchHandlerACB(){
+        console.log("You tried to search");
         props.searchClick();
     }
 
-  return <div>SearchForm
+  return (<div>
             <div
                 className={css`
                 display: flex;
                 text-align: center;
                 align-items: center;
                 position: relative;
-                justify-content: space-between;
+                justify-content: center;
+                margin-top: 20vh;
                 `}
             >
                 <div
@@ -49,5 +53,5 @@ export default function SearchForm(props) {
                 <SearchIcon boxSize={6} color={theme.colors.dark} onClick={clickSearchHandlerACB}/>
                 </div>
             </div>
-  </div>;
+  </div>);
 }

@@ -6,12 +6,12 @@ export default function SearchP(props) {
     props.model.setCurrerntBird(bird.id);
   }
 
-  function textChangeHandlerACB(){
-    props.model.setSearchQuery(type);
+  function textChangeHandlerACB(birdName){
+    props.model.setSearchName(birdName);
   }
 
-  function searchClickHandlerACB(bird){
-    PinInputProvider.model.doSearch(bird.id);
+  function searchClickHandlerACB(){
+    props.model.doSearch(props.model.searchParams);
   }
 
   function renderSearchResult(){
