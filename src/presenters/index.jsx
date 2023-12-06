@@ -12,10 +12,10 @@ window.React = { createElement: createElement };
 
 import { createRoot } from "react-dom/client";
 import ReactRoot from "./ReactRoot.jsx";
-//import connectToFirebase from "../firebaseModel.js";
+import connectToFirebase from "../firebaseModel.js";
 
 createRoot(document.getElementById("root")).render(
   <ReactRoot model={reactiveModel} />
 );
 window.myModel = reactiveModel;
-//connectToFirebase(reactiveModel, reaction)
+connectToFirebase(reactiveModel, reaction)

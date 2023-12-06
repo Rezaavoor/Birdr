@@ -9,6 +9,7 @@ import { theme } from "../theme.js";
 import { ThemeProvider } from "@emotion/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "../views/Navbar.jsx";
+import BirdP from "./BirdP.jsx";
 
 export default observer(function ReactRoot(props) {
   const router = createBrowserRouter([
@@ -32,12 +33,16 @@ export default observer(function ReactRoot(props) {
       path: "/currentbird",
       element: <CurrentbirdP model={props.model} />,
     },
+    {
+      path: "/bird",
+      element: <BirdP model={props.model} />,
+    },
   ]);
 
   return (
     <ChakraProvider disableGlobalStyle>
       <ThemeProvider theme={theme}>
-        <Navbar>
+        <Navbar model={props.model}>
           <RouterProvider router={router} />
         </Navbar>
       </ThemeProvider>
