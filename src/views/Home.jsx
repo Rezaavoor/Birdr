@@ -44,7 +44,13 @@ export default function Home({
         `}
       >
         {status == "data" && images[0] ? (
-          <Image src={images[0]} alt={name} />
+          <Image
+            src={images[0]}
+            alt={name}
+            objectFit="cover"
+            width="100%"
+            height="100%"
+          />
         ) : (
           <div />
         )}
