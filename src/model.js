@@ -1,5 +1,6 @@
 import { getBirdDetails } from "./modelSource";
 import resolvePromise from "./resolvePromise";
+import { searchBird } from "./modelSource";
 
 export default {
   user: {
@@ -102,6 +103,7 @@ export default {
   },
 
   setSearchName(name) {
+    console.log(name)
     this.searchParams.name = name;
   },
 

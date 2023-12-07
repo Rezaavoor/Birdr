@@ -3,7 +3,7 @@ import { useTheme } from "@emotion/react";
 import { Icon } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-export default function Navbar({ children }) {
+export default function Navbar({ children }, props) {
   const theme = useTheme();
   const navigate = useNavigate();
   return (
