@@ -77,6 +77,10 @@ export default {
     this.searchParams.name = name;
   },
 
+  setHasImg(hasImg) {
+    this.searchParams.hasImg = hasImg;
+  },
+
   /* setSearchRegion(region) {
     this.searchParams.region = region;
   },
@@ -87,5 +91,14 @@ export default {
 
   doSearch(searchParams) {
     resolvePromise(searchBird(searchParams), this.searchResultsPromiseState)
+  },
+
+  isBirdLiked(id) {
+    return this.user.likedBirds.filter(isBirdLikedCB).length > 0;
+
+    function isBirdLikedCB(curId) {
+      return curId == id;
+    }
+
   }
 };
