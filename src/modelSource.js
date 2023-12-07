@@ -20,6 +20,7 @@ export function getBirdDetails(id) {
     }
 }
 
+
 export function searchBird(searchParams){
 
     const queryParams = new URLSearchParams(searchParams);
@@ -42,6 +43,32 @@ export function searchBird(searchParams){
 
     function getBirdACB(data){
         return data.entities;
+    }
+
+    return fetch(url, options).then(responseSearchACB).then(getBirdACB);
+}
+
+export function getDetails(birdName){
+
+
+    const url = BASE_URL + "v2/birds?page=1&pageSize=25&name=" + birdName + "&hasImg=true&operator=AND"; 
+
+    const options = {
+        method: 'GET',
+        headers: {
+            'API-Key': API_KEY,
+        }
+    }
+
+    function responseSearchACB(response){
+        if(response.status !== 200){
+            throw new Error("Response = " + response);
+        }
+        return response.json();
+    }
+
+    function getBirdACB(data){
+        return data.results;
     }
 
     return fetch(url, options).then(responseSearchACB).then(getBirdACB);

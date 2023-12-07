@@ -3,7 +3,13 @@ import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { InfoIcon, AddIcon } from "@chakra-ui/icons";
 
-export default function Home(props) {
+export default function Home({
+  name,
+  images,
+  status,
+  onClickAddToMyBirds,
+  onClickMoreDetails,
+}) {
   const theme = useTheme();
   return (
     <div
@@ -37,13 +43,8 @@ export default function Home(props) {
           z-index: 1;
         `}
       >
-        {props.status == "data" &&
-        props.model.birdOfTheDayPromiseState.data.images[0] ? (
-          <Image
-            src={props.model.birdOfTheDayPromiseState.data.images[0]}
-            alt={props.model.birdOfTheDayPromiseState.data.name}
-            fallbackSrc="https://placehold.co/800"
-          />
+        {status == "data" && images[0] ? (
+          <Image src={images[0]} alt={name} />
         ) : (
           <div />
         )}
@@ -68,7 +69,7 @@ export default function Home(props) {
             user-select: none;
           `}
         >
-          <p>{props.status == "data" ? "Bird Of The Day" : ""}</p>
+          <p>{status == "data" ? "Bird Of The Day" : ""}</p>
         </div>
         <div
           className={css`
@@ -86,16 +87,15 @@ export default function Home(props) {
               text-align: center;
               font-size: 2.5rem;
               color: ${theme.colors.white};
-              user-select: none;
               font-weight: bold;
               background-color: rgba(0, 0, 0, 0.3);
             `}
           >
-            {props.status == "data" ? (
-              <h1>{props.model.birdOfTheDayPromiseState.data.name}</h1>
-            ) : props.status == "loading" ? (
+            {status == "data" ? (
+              <h1>{name}</h1>
+            ) : status == "loading" ? (
               <Spinner size="xl" />
-            ) : props.status == "error" ? (
+            ) : status == "error" ? (
               <h1>"Error"</h1>
             ) : (
               <h1>"No Data"</h1>
@@ -113,24 +113,36 @@ export default function Home(props) {
           `}
         >
           <div
+            onClick={onClickAddToMyBirds}
             className={css`
               display: flex;
               flex-direction: column;
               justify-content: center;
               align-items: center;
               margin: 50px;
+              cursor: pointer;
+              transition: all 0.2s ease-in-out;
+              :hover {
+                transform: scale(1.1);
+              }
             `}
           >
             <AddIcon boxSize={7} color={theme.colors.white} />
             Add To My Birds
           </div>
           <div
+            onClick={onClickMoreDetails}
             className={css`
               display: flex;
               flex-direction: column;
               justify-content: center;
               align-items: center;
               margin: 50px;
+              cursor: pointer;
+              transition: all 0.2s ease-in-out;
+              :hover {
+                transform: scale(1.1);
+              }
             `}
           >
             <InfoIcon boxSize={7} color={theme.colors.white} />
