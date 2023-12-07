@@ -103,6 +103,7 @@ export default {
   },
 
   setSearchName(name) {
+    console.log(name)
     this.searchParams.name = name;
   },
 
@@ -115,6 +116,7 @@ export default {
   },*/
 
   doSearch(searchParams) {
+    console.log(searchParams);
     resolvePromise(searchBird(searchParams), this.searchResultsPromiseState);
   },
 };

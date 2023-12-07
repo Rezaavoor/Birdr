@@ -12,7 +12,7 @@ export default function SearchForm(props) {
     function textChangeACB(event){
         console.log(event.target.value);
         setValue(event.target.value);
-        props.changeTextValue();
+        props.changeTextValue(event.target.value);
     }
 
     function clickSearchHandlerACB(){

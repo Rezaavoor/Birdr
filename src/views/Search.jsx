@@ -2,8 +2,9 @@ import { Image } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { InfoIcon, AddIcon } from "@chakra-ui/icons";
+import { observer } from "mobx-react-lite";
 
-export default function Home(props, {status}) {
+export default observer (function Home(props) {
   const theme = useTheme();
   return (
     <div
@@ -58,14 +59,14 @@ export default function Home(props, {status}) {
             align-items: center;
           `}
         >
-            {status == "data" ? (
+            {props.status == "data" ? (
               [...props.searchResult].map(displayBirdsCB)
-            ) : status == "loading" ? (
+            ) : props.status == "loading" ? (
               <Spinner size="xl" />
-            ) : status == "error" ? (
+            ) : props.status == "error" ? (
               <h1>"Error"</h1>
             ) : (
-              <h1>"No Data"</h1>
+              <h1>"Hej"</h1>
             )}
         </div>
       </div>
@@ -85,3 +86,4 @@ export default function Home(props, {status}) {
     )
   }
 }
+)
