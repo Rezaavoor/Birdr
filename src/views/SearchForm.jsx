@@ -3,13 +3,16 @@ import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { Icon, Input } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
 export default function SearchForm(props) {
     const theme = useTheme();
+    const [value, setValue] = useState('')
 
     function textChangeACB(event){
         console.log(event.target.value);
-        props.textChange(event.target.value);
+        setValue(event.target.value);
+        props.changeTextValue();
     }
 
     function clickSearchHandlerACB(){
@@ -39,7 +42,7 @@ export default function SearchForm(props) {
                     backgroundColor={theme.colors.white}
                     color={theme.colors.dark}
                     paddingInlineEnd={10}
-                    value={props.text || ""}
+                    value={value}
                     onChange={textChangeACB}
                 />
                 </div>

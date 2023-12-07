@@ -30,7 +30,7 @@ export default function SearchP(props) {
     return <Search searchResults={props.model.searchResultsPromiseState.data} onClickHandler={setCurrerntBirdACB}/>;
   }
 
-  return <div><SearchForm text={props.model.searchParams.name} textChange={textChangeHandlerACB} searchClick={searchClickHandlerACB}/>
+  return <div><SearchForm text={props.model.searchParams.name} changeTextValue={textChangeHandlerACB} searchClick={searchClickHandlerACB}/>
   {renderSearchResult()}
   </div>
 }

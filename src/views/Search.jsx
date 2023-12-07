@@ -3,7 +3,7 @@ import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { InfoIcon, AddIcon } from "@chakra-ui/icons";
 
-export default function Home(props) {
+export default function Home(props, {status}) {
   const theme = useTheme();
   return (
     <div
@@ -58,7 +58,15 @@ export default function Home(props) {
             align-items: center;
           `}
         >
-
+            {status == "data" ? (
+              [...props.searchResult].map(displayBirdsCB)
+            ) : status == "loading" ? (
+              <Spinner size="xl" />
+            ) : status == "error" ? (
+              <h1>"Error"</h1>
+            ) : (
+              <h1>"No Data"</h1>
+            )}
         </div>
       </div>
     </div>
