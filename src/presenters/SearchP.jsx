@@ -1,7 +1,9 @@
 import Search from "../views/Search";
 import SearchForm from "../views/SearchForm";
+import { observer } from "mobx-react-lite";
 
-export default function SearchP(props) {
+export default observer(
+  function SearchP(props) {
   function setCurrerntBirdACB(bird){
     props.model.setCurrerntBird(bird.id);
   }
@@ -34,3 +36,4 @@ export default function SearchP(props) {
   {renderSearchResult()}
   </div>
 }
+)

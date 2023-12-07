@@ -28,7 +28,7 @@ export default function SearchForm(props) {
                 align-items: center;
                 position: relative;
                 justify-content: center;
-                margin-top: 20vh;
+                margin-top: 10vh;
                 `}
             >
                 <div
