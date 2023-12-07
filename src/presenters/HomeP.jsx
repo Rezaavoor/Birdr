@@ -1,7 +1,9 @@
 import { observer } from "mobx-react-lite";
 import Home from "../views/Home";
+import { useNavigate } from "react-router-dom";
 
 export default observer(function HomeP(props) {
+  const navigate = useNavigate();
   props.model.setBirdOfTheDay();
 
   function onClickAddToMyBirds() {
@@ -10,9 +12,7 @@ export default observer(function HomeP(props) {
   }
   function onClickMoreDetails() {
     props.model.setCurrentBird(props.model.birdOfTheDay);
-    console.log(props.model.currentBirdPromiseState);
-    window.alert("Redirecting to Bird Page!");
-    window.location.href = "bird";
+    navigate("/bird");
   }
 
   if (!props.model.birdOfTheDayPromiseState.promise) {
