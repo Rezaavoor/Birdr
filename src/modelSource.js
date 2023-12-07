@@ -25,7 +25,7 @@ export function searchBird(searchParams){
 
     const queryParams = new URLSearchParams(searchParams);
 
-    const url = BASE_URL + "v2/birds?page=1&pageSize=10&" + queryParams + "&hasImg=true&operator=AND"; 
+    const url = BASE_URL + "v2/birds?page=1&pageSize=10&" + queryParams + "&operator=AND"; 
 
     const options = {
         method: 'GET',
