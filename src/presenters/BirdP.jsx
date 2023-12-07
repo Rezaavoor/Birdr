@@ -1,9 +1,18 @@
 import { observer } from "mobx-react-lite";
 import Bird from "../views/Bird";
+import { useToast } from "@chakra-ui/react";
 
 export default observer(function BirdP(props) {
+  const toast = useToast();
   function onClickAddToMyBirds() {
-    props.model.addLikedBird(props.model.birdOfTheDay);
+    props.model.addLikedBird(props.model.currentBird);
+    toast({
+      title: "Bird added.",
+      description: `You added ${props.model.currentBirdPromiseState.data.name} to My Birds.`,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
   }
   if (!props.model.currentBirdPromiseState.promise) {
     return <Bird status="no data" />;

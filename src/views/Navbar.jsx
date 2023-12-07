@@ -10,7 +10,7 @@ export default function Navbar({ children }) {
     <div>
       <div
         className={css`
-          border-bottom: 1px solid ${theme.colors.gray};
+          border-bottom: 1px solid ${theme.colors.light};
           width: 100vw;
           margin: auto;
           padding: 10px 50px;
@@ -19,12 +19,19 @@ export default function Navbar({ children }) {
           justify-content: space-between;
           top: 0;
           z-index: 99;
+          * {
+            transition: all 0.2s ease-in-out;
+          }
         `}
       >
         <div
+          onClick={() => navigate("/")}
           className={css`
             user-select: none;
             cursor: pointer;
+            :hover {
+              transform: scale(1.2);
+            }
           `}
         >
           <Icon viewBox="0 0 256 256" color="red.500" boxSize={10}>
@@ -59,6 +66,11 @@ export default function Navbar({ children }) {
             display: flex;
             width: 50%;
             justify-content: space-between;
+            div {
+              :hover {
+                transform: scale(1.1);
+              }
+            }
           `}
         >
           <div
