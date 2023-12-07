@@ -79,6 +79,7 @@ export default function Bird({ bird, status, onClickAddToMyBirds }) {
                 alt={bird.name}
                 objectFit="cover"
                 boxSize={500}
+                borderRadius={"20%"}
                 fallbackSrc="/Placeholder.svg"
               />
             ) : (
