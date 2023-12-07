@@ -10,7 +10,7 @@ export default function Navbar({ children }) {
     <div>
       <div
         className={css`
-          border-bottom: 1px solid ${theme.colors.gray};
+          border-bottom: 1px solid ${theme.colors.light};
           width: 100vw;
           margin: auto;
           padding: 10px 50px;
