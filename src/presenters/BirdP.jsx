@@ -1,25 +1,26 @@
+import { observer } from "mobx-react-lite";
 import Bird from "../views/Bird";
 
-export default function BirdP(props) {
+export default observer(function BirdP(props) {
   function onClickAddToMyBirds() {
     props.model.addLikedBird(props.model.birdOfTheDay);
   }
-  if (!props.model.birdOfTheDayPromiseState.promise) {
+  if (!props.model.currentBirdPromiseState.promise) {
     return <Bird status="no data" />;
   }
 
   if (
-    props.model.birdOfTheDayPromiseState.promise &&
-    props.model.birdOfTheDayPromiseState.error &&
-    !props.model.birdOfTheDayPromiseState.data
+    props.model.currentBirdPromiseState.promise &&
+    props.model.currentBirdPromiseState.error &&
+    !props.model.currentBirdPromiseState.data
   ) {
     return <Bird status="error" />;
   }
 
   if (
-    props.model.birdOfTheDayPromiseState.promise &&
-    !props.model.birdOfTheDayPromiseState.error &&
-    !props.model.birdOfTheDayPromiseState.data
+    props.model.currentBirdPromiseState.promise &&
+    !props.model.currentBirdPromiseState.error &&
+    !props.model.currentBirdPromiseState.data
   ) {
     return <Bird status="loading" />;
   }
@@ -31,4 +32,4 @@ export default function BirdP(props) {
       status="data"
     />
   );
-}
+});
