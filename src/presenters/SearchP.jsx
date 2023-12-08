@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 export default observer(
   function SearchP(props) {
   function setCurrerntBirdACB(bird){
-    props.model.setCurrerntBird(bird.id);
+    props.model.setCurrentBird(bird.id);
   }
 
   function textChangeHandlerACB(birdName){
