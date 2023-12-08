@@ -22,6 +22,13 @@ Live webpage: https://birdr-7cc64.web.app/
 
 # File structure
 We follow MVP dataflow and have two different folders (views, presenters) and a model (model.js).
+ - Home and HomeP: It the homepage of the webapp and shows the Bird Of The Day
+ - SearchForm and SearchP: the search input in search page
+ - Search and SearchP: Here you see the search results
+ - Hotlist and HotlistP: It shows a global list of most viewed birds
+ - MyBids and MyBirdsP: It "will" show user's liked birds
+ - Navbar: The navigation bar on top
+
 The public folder stores favicon and image placeholder.
 model.js holds all required data for the website.
 modelSource.js handles the communication with the API.
