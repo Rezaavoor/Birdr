@@ -2,12 +2,11 @@ import { getBirdDetails } from "./modelSource";
 import resolvePromise from "./resolvePromise";
 
 export default {
-  user: {
-    id: null,
-    likedBirds: [],
-  },
-  hotBirds: [],
+  user: null,
 
+  likedBirds: [],
+
+  hotBirds: [],
   searchParams: {},
   searchResultsPromiseState: {},
   currentBird: null,
@@ -60,6 +59,7 @@ export default {
     if (foundBird) {
       foundBird.viewCount += 1;
     } else {
+
       const birdEntry = {
         birdId: birdId,
         viewCount: 1,

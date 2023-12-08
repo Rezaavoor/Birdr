@@ -3,13 +3,13 @@ import Home from "../views/Home";
 
 export default observer(function HomeP(props) {
   props.model.setBirdOfTheDay();
-
   function onClickAddToMyBirds() {
     props.model.addLikedBird(props.model.birdOfTheDay);
     window.alert("Added to My Birds!");
   }
   function onClickMoreDetails() {
     props.model.setCurrentBird(props.model.birdOfTheDay);
+    
     console.log(props.model.currentBirdPromiseState);
     window.alert("Redirecting to Bird Page!");
     window.location.href = "bird";
