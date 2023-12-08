@@ -12,6 +12,8 @@ const app= initializeApp(firebaseConfig)
 const db= getDatabase(app)
 const rf = ref(db, PATH)
 
+//set(rf,"test");
+
 const auth = getAuth(app)
 
 const provider = new GoogleAuthProvider();
@@ -27,7 +29,7 @@ function modelToPersistence(model){
 
 function persistenceToModel(data , model){ 
     const currentBird = data?.currentBird || null;
-    const hotBirds = data?.hotBirds || {};
+    const hotBirds = data?.hotBirds || [];
     const birdOfTheDay = data.birdOfTheDay;
 
     model.currentBird = currentBird;
