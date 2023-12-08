@@ -17,7 +17,7 @@ export default function Bird({ bird, status, onClickAddToMyBirds }) {
       `}
     >
       {status == "data" ? (
-        <>
+        <div>
           <div
             className={css`
               padding: 20px;
@@ -96,10 +96,10 @@ export default function Bird({ bird, status, onClickAddToMyBirds }) {
                 <AudioPlayer src={bird.recordings[0].file} volume={0.5} />
               </div>
             ) : (
-              <></>
+              <div></div>
             )}
           </div>
-        </>
+        </div>
       ) : status == "loading" ? (
         <Spinner size="xl" />
       ) : status == "error" ? (
