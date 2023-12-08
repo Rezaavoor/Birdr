@@ -1,6 +1,10 @@
 # Birdr
 A wiki for bird watchers and bird enthusiasts!
 
+On Birdr you can see the bird of the day, search for different birds and add the ones you like to your personal bird list. 
+You can listen to many different bird calls as well as check out all the pictures of the birds. 
+The most popular birds gets a spot on the hotlist which is a list for the most popular birds. 
+
 Live webpage: https://birdr-7cc64.web.app/
 
 # What we have done so far:
