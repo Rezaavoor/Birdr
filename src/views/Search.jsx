@@ -83,7 +83,6 @@ export default function Search(props) {
   function displayBirdsCB(bird){
     function clickHandlerACB(){
       props.onClickHandler(bird);
-      window.location.hash = "#/details"
     }
     return(
       <span key={bird.id} onClick={clickHandlerACB} class="result-item">

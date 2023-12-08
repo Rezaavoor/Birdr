@@ -5,7 +5,8 @@ import { observer } from "mobx-react-lite";
 export default observer(
   function SearchP(props) {
   function setCurrerntBirdACB(bird){
-    props.model.setCurrentBird(bird.id);
+    props.model.setCurrentBird(bird);
+    navigate("/bird");
   }
 
   function textChangeHandlerACB(birdName){
@@ -32,7 +33,7 @@ export default observer(
     return <Search searchResults={props.model.searchResultsPromiseState.data} onClickHandler={setCurrerntBirdACB} status="data"/>;
   }
 
-  return <div><SearchForm text={props.model.searchParams.name} changeTextValue={textChangeHandlerACB} searchClick={searchClickHandlerACB}/>
+  return <div><SearchForm text={props.model.searchParams.name} changeTextValue={textChangeHandlerACB} searchClick={searchClickHandlerACB} onClickHandler={setCurrerntBirdACB}/>
   {renderSearchResult()}
   </div>
 }
