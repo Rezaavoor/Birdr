@@ -17,7 +17,14 @@ export default function Bird({ bird, status, onClickAddToMyBirds }) {
       `}
     >
       {status == "data" ? (
-        <div>
+        <div
+          className={css`
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+          `}
+        >
           <div
             className={css`
               padding: 20px;
