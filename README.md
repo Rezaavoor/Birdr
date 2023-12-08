@@ -1,6 +1,8 @@
 # Birdr
 A wiki for bird watchers and bird enthusiasts!
 
+Live webpage: https://birdr-7cc64.web.app/
+
 # What we have done so far:
  - Homepage (Bird Of The Day Feature)
  - Search page (you can search for birds)
