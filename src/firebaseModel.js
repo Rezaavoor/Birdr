@@ -1,8 +1,8 @@
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "/src/firebaseConfig.js";
 import { getDatabase, ref, get, set} from "firebase/database";
-import { getDetails } from "./modelSource";
-import { getAuth, signInWithPopup, GoogleAuthProvider,onAuthStateChanged, signOut,} from 'firebase/auth';
+
+import { getAuth, GoogleAuthProvider,onAuthStateChanged, signOut,} from 'firebase/auth';
 
 const PATH = "Model";
 
@@ -11,6 +11,8 @@ const PATH = "Model";
 const app= initializeApp(firebaseConfig)
 const db= getDatabase(app)
 const rf = ref(db, PATH)
+
+//set(rf,"test");
 
 const auth = getAuth(app)
 
@@ -27,11 +29,11 @@ function modelToPersistence(model){
 
 function persistenceToModel(data , model){ 
     const currentBird = data?.currentBird || null;
-    const hotBirds = data?.hotBirds || {};
+    const hotBirds = data?.hotBirds || [];
     const birdOfTheDay = data.birdOfTheDay;
 
     model.currentBird = currentBird;
-    model.hotBirds = hotbirds;
+    model.hotBirds = hotBirds;
     model.birdOfTheDay = birdOfTheDay;
 
     return model;
