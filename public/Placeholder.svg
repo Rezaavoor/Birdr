@@ -1,0 +1,6 @@
+<svg id="Logo-white" xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <rect id="Rectangle_1" data-name="Rectangle 1" width="256" height="256" fill="none"/>
+  <circle id="Ellipse_1" data-name="Ellipse 1" cx="8.5" cy="8.5" r="8.5" transform="translate(152 56)" fill="#242424"/>
+  <line id="Line_1" data-name="Line 1" x1="40" y2="48" transform="translate(80 136)" fill="none" stroke="#242424" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
+  <path id="Path_1" data-name="Path 1" d="M208,96v24a96,96,0,0,1-96,96H8L104,96V76A52,52,0,0,1,206.3,62.9L232,80Z" fill="none" stroke="#242424" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+</svg>

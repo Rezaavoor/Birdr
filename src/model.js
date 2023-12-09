@@ -1,5 +1,6 @@
 import { getBirdDetails } from "./modelSource";
 import resolvePromise from "./resolvePromise";
+import { searchBird } from "./modelSource";
 
 export default {
   user: null,
@@ -102,7 +103,12 @@ export default {
   },
 
   setSearchName(name) {
+    console.log(name)
     this.searchParams.name = name;
+  },
+
+  setHasImg(hasImg) {
+    this.searchParams.hasImg = hasImg;
   },
 
   /* setSearchRegion(region) {
@@ -114,6 +120,16 @@ export default {
   },*/
 
   doSearch(searchParams) {
-    resolvePromise(searchBird(searchParams), this.searchResultsPromiseState);
+    resolvePromise(searchBird(searchParams), this.searchResultsPromiseState)
   },
+
+  isBirdLiked(id) {
+    return this.user.likedBirds.filter(isBirdLikedCB).length > 0;
+
+    function isBirdLikedCB(curId) {
+      return curId == id;
+    }
+
+  }
+
 };

@@ -15,36 +15,58 @@ export default observer(function ReactRoot(props) {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <HomeP model={props.model} />,
+      element: (
+        <Navbar>
+          <HomeP model={props.model} />
+        </Navbar>
+      ),
     },
     {
       path: "/search",
-      element: <SearchP model={props.model} />,
+      element: (
+        <Navbar>
+          <SearchP model={props.model} />
+        </Navbar>
+      ),
     },
     {
       path: "/hotlist",
-      element: <HotlistP model={props.model} />,
+      element: (
+        <Navbar>
+          <HotlistP model={props.model} />
+        </Navbar>
+      ),
     },
     {
       path: "/mybirds",
-      element: <MyBirdsP model={props.model} />,
+      element: (
+        <Navbar>
+          <MyBirdsP model={props.model} />
+        </Navbar>
+      ),
     },
     {
       path: "/currentbird",
-      element: <CurrentbirdP model={props.model} />,
+      element: (
+        <Navbar>
+          <CurrentbirdP model={props.model} />
+        </Navbar>
+      ),
     },
     {
       path: "/bird",
-      element: <BirdP model={props.model} />,
+      element: (
+        <Navbar>
+          <BirdP model={props.model} />
+        </Navbar>
+      ),
     },
   ]);
 
   return (
     <ChakraProvider disableGlobalStyle>
       <ThemeProvider theme={theme}>
-        <Navbar model={props.model}>
-          <RouterProvider router={router} />
-        </Navbar>
+        <RouterProvider router={router} />
       </ThemeProvider>
     </ChakraProvider>
   );

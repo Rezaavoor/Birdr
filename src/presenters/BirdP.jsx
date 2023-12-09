@@ -1,25 +1,35 @@
+import { observer } from "mobx-react-lite";
 import Bird from "../views/Bird";
+import { useToast } from "@chakra-ui/react";
 
-export default function BirdP(props) {
+export default observer(function BirdP(props) {
+  const toast = useToast();
   function onClickAddToMyBirds() {
-    props.model.addLikedBird(props.model.birdOfTheDay);
+    props.model.addLikedBird(props.model.currentBird);
+    toast({
+      title: "Bird added.",
+      description: `You added ${props.model.currentBirdPromiseState.data.name} to My Birds.`,
+      status: "success",
+      duration: 5000,
+      isClosable: true,
+    });
   }
-  if (!props.model.birdOfTheDayPromiseState.promise) {
+  if (!props.model.currentBirdPromiseState.promise) {
     return <Bird status="no data" />;
   }
 
   if (
-    props.model.birdOfTheDayPromiseState.promise &&
-    props.model.birdOfTheDayPromiseState.error &&
-    !props.model.birdOfTheDayPromiseState.data
+    props.model.currentBirdPromiseState.promise &&
+    props.model.currentBirdPromiseState.error &&
+    !props.model.currentBirdPromiseState.data
   ) {
     return <Bird status="error" />;
   }
 
   if (
-    props.model.birdOfTheDayPromiseState.promise &&
-    !props.model.birdOfTheDayPromiseState.error &&
-    !props.model.birdOfTheDayPromiseState.data
+    props.model.currentBirdPromiseState.promise &&
+    !props.model.currentBirdPromiseState.error &&
+    !props.model.currentBirdPromiseState.data
   ) {
     return <Bird status="loading" />;
   }
@@ -31,4 +41,4 @@ export default function BirdP(props) {
       status="data"
     />
   );
-}
+});

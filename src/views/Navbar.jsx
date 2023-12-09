@@ -1,15 +1,16 @@
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { Icon, Input } from "@chakra-ui/react";
-import { SearchIcon } from "@chakra-ui/icons";
+import { Icon } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-export default function Navbar({ children }) {
+export default function Navbar({ children }, props) {
   const theme = useTheme();
+  const navigate = useNavigate();
   return (
     <div>
       <div
         className={css`
-          border-bottom: 1px solid ${theme.colors.gray};
+          border-bottom: 1px solid ${theme.colors.light};
           width: 100vw;
           margin: auto;
           padding: 10px 50px;
@@ -18,12 +19,19 @@ export default function Navbar({ children }) {
           justify-content: space-between;
           top: 0;
           z-index: 99;
+          * {
+            transition: all 0.2s ease-in-out;
+          }
         `}
       >
         <div
+          onClick={() => navigate("/")}
           className={css`
             user-select: none;
             cursor: pointer;
+            :hover {
+              transform: scale(1.2);
+            }
           `}
         >
           <Icon viewBox="0 0 256 256" color="red.500" boxSize={10}>
@@ -56,130 +64,94 @@ export default function Navbar({ children }) {
         <div
           className={css`
             display: flex;
-            width: 100%;
-            padding-left: 40px;
+            width: 50%;
             justify-content: space-between;
+            div {
+              :hover {
+                transform: scale(1.1);
+              }
+            }
           `}
         >
           <div
             className={css`
-              display: flex;
-              text-align: center;
               align-items: center;
-              position: relative;
-              justify-content: space-between;
+              margin: auto;
             `}
           >
-            <div
+            <p
               className={css`
-                z-index: 1;
+                cursor: pointer;
+                user-select: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
+                :hover {
+                  border-bottom: 1px solid ${theme.colors.light};
+                }
               `}
+              onClick={() => navigate("/")}
             >
-              <Input
-                placeholder="Looking for a bird?..."
-                size="sm"
-                backgroundColor={theme.colors.white}
-                color={theme.colors.dark}
-                paddingInlineEnd={10}
-              />
-            </div>
-            <div
-              className={css`
-                position: relative;
-                left: -30px;
-                z-index: 2;
-              `}
-            >
-              <SearchIcon boxSize={6} color={theme.colors.dark} />
-            </div>
+              Home
+            </p>
           </div>
           <div
             className={css`
-              display: flex;
-              width: 50%;
-              justify-content: space-around;
+              align-items: center;
+              margin: auto;
             `}
           >
-            <div
+            <p
               className={css`
-                align-items: center;
-                margin: auto;
+                cursor: pointer;
+                user-select: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
+                :hover {
+                  border-bottom: 1px solid ${theme.colors.light};
+                }
               `}
+              onClick={() => navigate("/search")}
             >
-              <p
-                className={css`
-                  cursor: pointer;
-                  user-select: none;
-                  border-bottom: 1px solid rgba(0, 0, 0, 0);
-                  :hover {
-                    border-bottom: 1px solid ${theme.colors.light};
-                  }
-                `}
-                onClick={() => (window.location.href = "/")}
-              >
-                Home
-              </p>
-            </div>
-            <div
+              Search
+            </p>
+          </div>
+          <div
+            className={css`
+              align-items: center;
+              margin: auto;
+            `}
+          >
+            <p
               className={css`
-                align-items: center;
-                margin: auto;
+                cursor: pointer;
+                user-select: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
+                :hover {
+                  border-bottom: 1px solid ${theme.colors.light};
+                }
               `}
+              onClick={() => navigate("/hotlist")}
             >
-              <p
-                className={css`
-                  cursor: pointer;
-                  user-select: none;
-                  border-bottom: 1px solid rgba(0, 0, 0, 0);
-                  :hover {
-                    border-bottom: 1px solid ${theme.colors.light};
-                  }
-                `}
-                onClick={() => (window.location.href = "search")}
-              >
-                Search
-              </p>
-            </div>
-            <div
+              Hot List
+            </p>
+          </div>
+          <div
+            className={css`
+              align-items: center;
+              margin: auto;
+            `}
+          >
+            <p
               className={css`
-                align-items: center;
-                margin: auto;
+                cursor: pointer;
+                user-select: none;
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
+                :hover {
+                  border-bottom: 1px solid ${theme.colors.light};
+                }
               `}
+              onClick={() => navigate("/mybirds")}
             >
-              <p
-                className={css`
-                  cursor: pointer;
-                  user-select: none;
-                  border-bottom: 1px solid rgba(0, 0, 0, 0);
-                  :hover {
-                    border-bottom: 1px solid ${theme.colors.light};
-                  }
-                `}
-                onClick={() => (window.location.href = "hotlist")}
-              >
-                Hot List
-              </p>
-            </div>
-            <div
-              className={css`
-                align-items: center;
-                margin: auto;
-              `}
-            >
-              <p
-                className={css`
-                  cursor: pointer;
-                  user-select: none;
-                  border-bottom: 1px solid rgba(0, 0, 0, 0);
-                  :hover {
-                    border-bottom: 1px solid ${theme.colors.light};
-                  }
-                `}
-                onClick={() => (window.location.href = "mybirds")}
-              >
-                My Birds
-              </p>
-            </div>
+              My Birds
+            </p>
           </div>
         </div>
       </div>
