@@ -15,15 +15,15 @@ export default observer(function ReactRoot(props) {
     {
       path: "/",
       element: (
-        <NavbarP>
-          <HomeP model={props.model} auth={props.auth} />
+        <NavbarP auth={props.auth} model={props.model} >
+          <HomeP model={props.model}  />
         </NavbarP>
       ),
     },
     {
       path: "/search",
       element: (
-        <NavbarP>
+        <NavbarP auth={props.auth} model={props.model} >
           <SearchP model={props.model} />
         </NavbarP>
       ),
@@ -31,7 +31,7 @@ export default observer(function ReactRoot(props) {
     {
       path: "/hotlist",
       element: (
-        <NavbarP>
+        <NavbarP auth={props.auth} model={props.model} >
           <HotlistP model={props.model} />
         </NavbarP>
       ),
@@ -39,7 +39,7 @@ export default observer(function ReactRoot(props) {
     {
       path: "/mybirds",
       element: (
-        <NavbarP>
+        <NavbarP auth={props.auth} model={props.model} >
           <MyBirdsP model={props.model} />
         </NavbarP>
       ),
@@ -47,7 +47,7 @@ export default observer(function ReactRoot(props) {
     {
       path: "/bird",
       element: (
-        <NavbarP>
+        <NavbarP auth={props.auth} model={props.model}>
           <BirdP model={props.model} />
         </NavbarP>
       ),

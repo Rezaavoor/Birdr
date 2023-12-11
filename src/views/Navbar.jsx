@@ -2,7 +2,7 @@ import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { Icon } from "@chakra-ui/react";
 
-export default function Navbar({ children, onButtonClick, currentRoute }) {
+export default function Navbar({ children, onButtonClick, currentRoute, logOutHandler, logInHandler, user}) {
   const theme = useTheme();
   const onHomeClickACB = () => {
     onButtonClick("/");
@@ -19,6 +19,14 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
   const onAuthClickACB = () => {
     //onButtonClick("/auth");
   };
+
+  const onLogInClickACB =() => {
+    logInHandler();
+  }
+
+  const onLogOutClick = () => {
+    logOutHandler();
+  }
   return (
     <div>
       <div
@@ -188,7 +196,8 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
               align-items: center;
               margin: auto;
             `}
-          >
+          >    {user ? (
+            // User is logged in, show logout button
             <p
               className={css`
                 cursor: pointer;
@@ -201,10 +210,29 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
                   border-bottom: 1px solid ${theme.colors.light};
                 }
               `}
-              onClick={onAuthClickACB}
+              onClick={onLogOutClick}
+            >
+              Logout
+            </p>
+          ) : (
+            // User is not logged in, show login button
+            <p
+              className={css`
+                cursor: pointer;
+                user-select: none;
+                border-bottom: 1px solid
+                  ${currentRoute == "/auth"
+                    ? theme.colors.light
+                    : "rgba(0, 0, 0, 0)"};
+                :hover {
+                  border-bottom: 1px solid ${theme.colors.light};
+                }
+              `}
+              onClick={onLogInClickACB}
             >
               Login
             </p>
+          )}
           </div>
         </div>
       </div>

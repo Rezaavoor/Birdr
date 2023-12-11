@@ -1,8 +1,7 @@
 const firebaseConfig = {
   apiKey: "AIzaSyD2Q91uYr1djFgJYdLZczTw9Mb_VaPA4Vc",
   authDomain: "birdr-7cc64.firebaseapp.com",
-  databaseURL:
-    "https://birdr-7cc64-default-rtdb.europe-west1.firebasedatabase.app",
+  databaseURL:"https://birdr-7cc64-default-rtdb.europe-west1.firebasedatabase.app",
   projectId: "birdr-7cc64",
   storageBucket: "birdr-7cc64.appspot.com",
   messagingSenderId: "706065286091",

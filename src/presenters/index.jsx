@@ -2,6 +2,7 @@
 import model from "/src/model.js";
 import "../globalstyle.css";
 import "/src/firebaseModel.js";
+import {auth} from "../firebaseModel"
 
 import { observable, configure, reaction } from "mobx";
 configure({ enforceActions: "never" });
@@ -14,8 +15,10 @@ import { createRoot } from "react-dom/client";
 import ReactRoot from "./ReactRoot.jsx";
 import connectToFirebase from "../firebaseModel.js";
 
+
+
 createRoot(document.getElementById("root")).render(
-  <ReactRoot model={reactiveModel} />
+  <ReactRoot model={reactiveModel} auth = {auth} />
 );
 window.myModel = reactiveModel;
 connectToFirebase(reactiveModel, reaction)
