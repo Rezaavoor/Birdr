@@ -9,11 +9,8 @@ export default function Home({
   status,
   onClickAddToMyBirds,
   onClickMoreDetails,
-  signInhandler,
-  signOuthandler
 }) {
   const theme = useTheme();
-
   return (
     <div
       className={css`
@@ -167,14 +164,7 @@ export default function Home({
             <InfoIcon boxSize={7} color={theme.colors.white} />
             More Details
           </div>
-          <button onClick={signInhandler}>Log In</button>
-
-          <span>
-          <button onClick={signOuthandler}>Log out</button>
-          </span>
-          
         </div>
-        
       </div>
     </div>
   );

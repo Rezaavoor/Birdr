@@ -1,63 +1,51 @@
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "/src/firebaseConfig.js";
-import { getDatabase, ref, get, set, off, remove} from "firebase/database";
+import { getDatabase, ref, get, set } from "firebase/database";
 
-import { getAuth, onAuthStateChanged,} from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 
 const PATH = "Model";
 
-const Users = "Users";
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const rf = ref(db, PATH);
 
+//set(rf,"test");
 
-const app= initializeApp(firebaseConfig)
-const db= getDatabase(app)
-const rf = ref(db, PATH)
+const auth = getAuth(app);
 
-const auth = getAuth(app)
+const provider = new GoogleAuthProvider();
 
-
-
-function modelToPersistence(model){
-        return {
-            hotBirds : model.hotBirds,
-        }
+function modelToPersistence(model) {
+  return {
+    currentBird: model.currentBird,
+    hotBirds: model.hotBirds,
+    //birdOfTheDay: model.birdOfTheDay,
+  };
 }
 
-function userModelToPresistence(model){
-    return {
-        likedBirds: model.likedBirds,
-        currentBird : model.currentBird,
-    } 
-}
+function persistenceToModel(data, model) {
+  const currentBird = data?.currentBird || null;
+  const hotBirds = data?.hotBirds || [];
+  const birdOfTheDay = data.birdOfTheDay;
 
-function persistenceToModel(data , model){ 
-        const hotBirds = data?.hotBirds || [];
-        model.hotBirds = hotBirds;
-    
-
+  model.currentBird = currentBird;
+  model.hotBirds = hotBirds;
+  //model.birdOfTheDay = birdOfTheDay;
 
   return model;
 }
-function userPresistenceToModel(data, model){
-    const likedBirds = data?.likedBirds || [];
-    const currentBird = data?.currentBird || null;
 
-    model.currentBird = currentBird;
-    model.likedBirds = likedBirds;
-
-    return model;
-}
-function saveToFirebase(model){
-    if(model.ready){
-        const data = modelToPersistence(model);
-        if(model.user){
-        const userData = userModelToPresistence(model);
-        
-        set(ref(db,`${Users}/${model.user.uid}`), userData);
-        }
-        set(rf, data);
-    }
-    
+function saveToFirebase(model) {
+  if (model.ready) {
+    const data = modelToPersistence(model);
+    set(rf, data);
+  }
 }
 
 function readFromFirebase(model) {
@@ -67,24 +55,11 @@ function readFromFirebase(model) {
     return persistenceToModel(snapshot.val(), model);
   }
 
-    function convertACB(snapshot){
-        return persistenceToModel(snapshot.val(), model);
-    }
-    function convertUserDataACB(snapshot){
-        return userPresistenceToModel(snapshot.val(), model);
-    }
+  function setModelToReadyACB(model) {
+    model.ready = true;
+  }
 
-    function setModelToReadyACB(model){
-        model.ready = true;
-    }
-    if(model.user){
-        const userPromise = get(ref(db,`${Users}/${model.user.uid}`)).then(convertUserDataACB);
-        const modelPromise = get(rf).then(convertACB);
-            
-        return Promise.all([userPromise, modelPromise]).then(setModelToReadyACB);
-    } else{
-        return get(rf).then(convertACB).then(setModelToReadyACB);
-    }
+  return get(rf).then(convertACB).then(setModelToReadyACB);
 }
 
 function connectToFirebase(model, watchFunction) {
@@ -92,30 +67,19 @@ function connectToFirebase(model, watchFunction) {
     return [model.hotBirds, model.currentBird, model.birdOfTheDay];
   }
 
-    function watchedValues(){
-        return [model.hotBirds, model.currentBird, model.birdOfTheDay, model.likedBirds];
-    }
+  function saveChangedValues() {
+    saveToFirebase(model);
+  }
 
-    function saveChangedValues(){
-        saveToFirebase(model);
-    }
-
-    function loginOrOutACB(user){
-        console.log("user " + user);
-        if(user){
-            model.user = user;
-        }
-        else{
-            model.user = null;
-            
-        }
-    }
-
-    onAuthStateChanged(auth, loginOrOutACB);
-    readFromFirebase(model);
-    watchFunction(watchedValues, saveChangedValues);
+  readFromFirebase(model);
+  watchFunction(watchedValues, saveChangedValues);
 }
 
-export {modelToPersistence, persistenceToModel, saveToFirebase, readFromFirebase,userPresistenceToModel, auth}
+export {
+  modelToPersistence,
+  persistenceToModel,
+  saveToFirebase,
+  readFromFirebase,
+};
 
 export default connectToFirebase;
