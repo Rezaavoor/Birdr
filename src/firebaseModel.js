@@ -1,81 +1,85 @@
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "/src/firebaseConfig.js";
-import { getDatabase, ref, get, set} from "firebase/database";
+import { getDatabase, ref, get, set } from "firebase/database";
 
-import { getAuth, GoogleAuthProvider,onAuthStateChanged, signOut,} from 'firebase/auth';
+import {
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signOut,
+} from "firebase/auth";
 
 const PATH = "Model";
 
-
-
-const app= initializeApp(firebaseConfig)
-const db= getDatabase(app)
-const rf = ref(db, PATH)
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+const rf = ref(db, PATH);
 
 //set(rf,"test");
 
-const auth = getAuth(app)
+const auth = getAuth(app);
 
 const provider = new GoogleAuthProvider();
 
-function modelToPersistence(model){
-    
-    return {
-        currentBird : model.currentBird,
-        hotBirds : model.hotBirds,
-        birdOfTheDay : model.birdOfTheDay
-    }
+function modelToPersistence(model) {
+  return {
+    currentBird: model.currentBird,
+    hotBirds: model.hotBirds,
+    //birdOfTheDay: model.birdOfTheDay,
+  };
 }
 
-function persistenceToModel(data , model){ 
-    const currentBird = data?.currentBird || null;
-    const hotBirds = data?.hotBirds || [];
-    const birdOfTheDay = data.birdOfTheDay;
+function persistenceToModel(data, model) {
+  const currentBird = data?.currentBird || null;
+  const hotBirds = data?.hotBirds || [];
+  const birdOfTheDay = data.birdOfTheDay;
 
-    model.currentBird = currentBird;
-    model.hotBirds = hotBirds;
-    model.birdOfTheDay = birdOfTheDay;
+  model.currentBird = currentBird;
+  model.hotBirds = hotBirds;
+  //model.birdOfTheDay = birdOfTheDay;
 
-    return model;
+  return model;
 }
 
-function saveToFirebase(model){
-    if(model.ready){
-        const data = modelToPersistence(model);
-        set(rf, data);
-    }
+function saveToFirebase(model) {
+  if (model.ready) {
+    const data = modelToPersistence(model);
+    set(rf, data);
+  }
 }
 
-function readFromFirebase(model){
+function readFromFirebase(model) {
+  model.ready = false;
 
-    model.ready = false;
+  function convertACB(snapshot) {
+    return persistenceToModel(snapshot.val(), model);
+  }
 
-    function convertACB(snapshot){
-        return persistenceToModel(snapshot.val(), model);
-    }
+  function setModelToReadyACB(model) {
+    model.ready = true;
+  }
 
-    function setModelToReadyACB(model){
-        model.ready = true;
-    }
-
-    return get(rf).then(convertACB).then(setModelToReadyACB);
+  return get(rf).then(convertACB).then(setModelToReadyACB);
 }
 
-function connectToFirebase(model, watchFunction){
+function connectToFirebase(model, watchFunction) {
+  function watchedValues() {
+    return [model.hotBirds, model.currentBird, model.birdOfTheDay];
+  }
 
-    function watchedValues(){
-        return [model.hotBirds, model.currentBird, model.birdOfTheDay];
-    }
+  function saveChangedValues() {
+    saveToFirebase(model);
+  }
 
-    function saveChangedValues(){
-        saveToFirebase(model);
-    }
-    
-    readFromFirebase(model);
-    watchFunction(watchedValues, saveChangedValues);
+  readFromFirebase(model);
+  watchFunction(watchedValues, saveChangedValues);
 }
 
-export {modelToPersistence, persistenceToModel, saveToFirebase, readFromFirebase}
+export {
+  modelToPersistence,
+  persistenceToModel,
+  saveToFirebase,
+  readFromFirebase,
+};
 
 export default connectToFirebase;
-
