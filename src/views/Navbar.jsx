@@ -1,31 +1,18 @@
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { Icon } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
-export default function Navbar({ children, onButtonClick, currentRoute }) {
+export default function Navbar({ children }, props) {
   const theme = useTheme();
-  const onHomeClickACB = () => {
-    onButtonClick("/");
-  };
-  const onSearchClickACB = () => {
-    onButtonClick("/search");
-  };
-  const onHotlistClickACB = () => {
-    onButtonClick("/hotlist");
-  };
-  const onMybirdsClickACB = () => {
-    onButtonClick("/mybirds");
-  };
-  const onAuthClickACB = () => {
-    //onButtonClick("/auth");
-  };
+  const navigate = useNavigate();
+
+  
   return (
     <div>
       <div
         className={css`
-          border-bottom: 1px solid
-            ${currentRoute != "/" ? theme.colors.light : "rgba(0, 0, 0, 0)"};
-          background-color: ${currentRoute != "/" && theme.colors.dark};
+          border-bottom: 1px solid ${theme.colors.light};
           width: 100vw;
           margin: auto;
           padding: 10px 50px;
@@ -40,7 +27,7 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
         `}
       >
         <div
-          onClick={onHomeClickACB}
+          onClick={() => navigate("/")}
           className={css`
             user-select: none;
             cursor: pointer;
@@ -49,7 +36,7 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
             }
           `}
         >
-          <Icon viewBox="0 0 256 256" color="red.500" boxSize={9}>
+          <Icon viewBox="0 0 256 256" color="red.500" boxSize={10}>
             <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
               <rect fill="none" height="256" width="256" />
               <circle cx="164" cy="68" r="8" fill="#fff" />
@@ -86,9 +73,6 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
                 transform: scale(1.1);
               }
             }
-            ${theme.breakpoints.medium} {
-              width: 100%;
-            }
           `}
         >
           <div
@@ -101,15 +85,12 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
               className={css`
                 cursor: pointer;
                 user-select: none;
-                border-bottom: 1px solid
-                  ${currentRoute == "/"
-                    ? theme.colors.light
-                    : "rgba(0, 0, 0, 0)"};
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
                 :hover {
                   border-bottom: 1px solid ${theme.colors.light};
                 }
               `}
-              onClick={onHomeClickACB}
+              onClick={() => navigate("/")}
             >
               Home
             </p>
@@ -124,15 +105,12 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
               className={css`
                 cursor: pointer;
                 user-select: none;
-                border-bottom: 1px solid
-                  ${currentRoute == "/search"
-                    ? theme.colors.light
-                    : "rgba(0, 0, 0, 0)"};
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
                 :hover {
                   border-bottom: 1px solid ${theme.colors.light};
                 }
               `}
-              onClick={onSearchClickACB}
+              onClick={() => navigate("/search")}
             >
               Search
             </p>
@@ -147,15 +125,12 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
               className={css`
                 cursor: pointer;
                 user-select: none;
-                border-bottom: 1px solid
-                  ${currentRoute == "/hotlist"
-                    ? theme.colors.light
-                    : "rgba(0, 0, 0, 0)"};
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
                 :hover {
                   border-bottom: 1px solid ${theme.colors.light};
                 }
               `}
-              onClick={onHotlistClickACB}
+              onClick={() => navigate("/hotlist")}
             >
               Hot List
             </p>
@@ -170,51 +145,19 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
               className={css`
                 cursor: pointer;
                 user-select: none;
-                border-bottom: 1px solid
-                  ${currentRoute == "/mybirds"
-                    ? theme.colors.light
-                    : "rgba(0, 0, 0, 0)"};
+                border-bottom: 1px solid rgba(0, 0, 0, 0);
                 :hover {
                   border-bottom: 1px solid ${theme.colors.light};
                 }
               `}
-              onClick={onMybirdsClickACB}
+              onClick={() => navigate("/mybirds")}
             >
               My Birds
             </p>
           </div>
-          <div
-            className={css`
-              align-items: center;
-              margin: auto;
-            `}
-          >
-            <p
-              className={css`
-                cursor: pointer;
-                user-select: none;
-                border-bottom: 1px solid
-                  ${currentRoute == "/auth"
-                    ? theme.colors.light
-                    : "rgba(0, 0, 0, 0)"};
-                :hover {
-                  border-bottom: 1px solid ${theme.colors.light};
-                }
-              `}
-              onClick={onAuthClickACB}
-            >
-              Login
-            </p>
-          </div>
         </div>
       </div>
-      <div
-        className={css`
-          padding-top: 90px;
-        `}
-      >
-        {children}
-      </div>
+      <div className={css``}>{children}</div>
     </div>
   );
 }

@@ -2,12 +2,13 @@ import HomeP from "./HomeP.jsx";
 import SearchP from "./SearchP.jsx";
 import HotlistP from "./HotlistP.jsx";
 import MyBirdsP from "./MyBirdsP.jsx";
+import CurrentbirdP from "./CurrentbirdP.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { theme } from "../theme.js";
 import { ThemeProvider } from "@emotion/react";
 import { ChakraProvider } from "@chakra-ui/react";
-import NavbarP from "./NavbarP.jsx";
+import Navbar from "../views/Navbar.jsx";
 import BirdP from "./BirdP.jsx";
 
 export default observer(function ReactRoot(props) {
@@ -15,41 +16,49 @@ export default observer(function ReactRoot(props) {
     {
       path: "/",
       element: (
-        <NavbarP>
-          <HomeP model={props.model} auth={props.auth} />
-        </NavbarP>
+        <Navbar>
+          <HomeP model={props.model} auth={props.auth} /> 
+        </Navbar>
       ),
     },
     {
       path: "/search",
       element: (
-        <NavbarP>
+        <Navbar>
           <SearchP model={props.model} />
-        </NavbarP>
+        </Navbar>
       ),
     },
     {
       path: "/hotlist",
       element: (
-        <NavbarP>
+        <Navbar>
           <HotlistP model={props.model} />
-        </NavbarP>
+        </Navbar>
       ),
     },
     {
       path: "/mybirds",
       element: (
-        <NavbarP>
+        <Navbar>
           <MyBirdsP model={props.model} />
-        </NavbarP>
+        </Navbar>
+      ),
+    },
+    {
+      path: "/currentbird",
+      element: (
+        <Navbar>
+          <CurrentbirdP model={props.model} />
+        </Navbar>
       ),
     },
     {
       path: "/bird",
       element: (
-        <NavbarP>
+        <Navbar>
           <BirdP model={props.model} />
-        </NavbarP>
+        </Navbar>
       ),
     },
   ]);

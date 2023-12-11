@@ -22,16 +22,13 @@ export function getBirdDetails(id) {
 
 
 export function searchBird(searchParams){
-
-    //const queryParams = new URLSearchParams(searchParams);
-
-    const url = BASE_URL + "v2/birds?page=1&pageSize=10&name=" + searchParams + "&hasImg=true&operator=AND"; 
-
-
+    const queryParams = new URLSearchParams(searchParams);
+    const url = BASE_URL + "v2/birds?page=1&pageSize=10&" + queryParams + "&operator=AND"; 
+    
     const options = {
         method: 'GET',
         headers: {
-            'API-Key': API_KEY,
+            'api-key': API_KEY,
         }
     }
     function responseSearchACB(response){
