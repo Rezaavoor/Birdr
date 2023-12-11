@@ -1,64 +1,60 @@
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "/src/firebaseConfig.js";
-import { getDatabase, ref, get, set} from "firebase/database";
+import { getDatabase, ref, get, set, off, remove} from "firebase/database";
 
 import { getAuth, onAuthStateChanged,} from 'firebase/auth';
 
 const PATH = "Model";
 
+const Users = "Users";
+
+
 const app= initializeApp(firebaseConfig)
 const db= getDatabase(app)
 const rf = ref(db, PATH)
-
-//set(rf,"test");
 
 const auth = getAuth(app)
 
 
 
 function modelToPersistence(model){
-    if(model.user){
         return {
-            likedBirds: model.likedBirds,
-            currentBird : model.currentBird,
             hotBirds : model.hotBirds,
-            birdOfTheDay : model.birdOfTheDay
-        } 
-    } else{
-        return {
-            currentBird : model.currentBird,
-            hotBirds : model.hotBirds,
-            birdOfTheDay : model.birdOfTheDay
         }
-    }
+}
+
+function userModelToPresistence(model){
+    return {
+        likedBirds: model.likedBirds,
+        currentBird : model.currentBird,
+    } 
 }
 
 function persistenceToModel(data , model){ 
-    
-        const currentBird = data?.currentBird || null;
         const hotBirds = data?.hotBirds || [];
-        const birdOfTheDay = data?.birdOfTheDay || null;
-        
-        const likedBirds = model.user ? (data?.likedBirds || []) : [];
-
-
-        model.currentBird = currentBird;
-        model.likedBirds = likedBirds;
         model.hotBirds = hotBirds;
-        model.birdOfTheDay = birdOfTheDay;
+    
 
 
     return model;
-
-    
 }
+function userPresistenceToModel(data, model){
+    const likedBirds = data?.likedBirds || [];
+    const currentBird = data?.currentBird || null;
 
+    model.currentBird = currentBird;
+    model.likedBirds = likedBirds;
+
+    return model;
+}
 function saveToFirebase(model){
-    if(model.ready && model.user){
+    if(model.ready){
         const data = modelToPersistence(model);
-        set(ref(db, model.user.uid), data);
-    } else if(model.ready && !model.user){
-        const data = modelToPersistence(model);
+        if(model.user){
+        const userData = userModelToPresistence(model);
+        
+        set(ref(db,`${Users}/${model.user.uid}`), userData);
+        }
         set(rf, data);
     }
     
@@ -71,12 +67,18 @@ function readFromFirebase(model){
     function convertACB(snapshot){
         return persistenceToModel(snapshot.val(), model);
     }
+    function convertUserDataACB(snapshot){
+        return userPresistenceToModel(snapshot.val(), model);
+    }
 
     function setModelToReadyACB(model){
         model.ready = true;
     }
     if(model.user){
-        return get(ref(db, model.user.uid)).then(convertACB).then(setModelToReadyACB);
+        const userPromise = get(ref(db,`${Users}/${model.user.uid}`)).then(convertUserDataACB);
+        const modelPromise = get(rf).then(convertACB);
+            
+        return Promise.all([userPromise, modelPromise]).then(setModelToReadyACB);
     } else{
         return get(rf).then(convertACB).then(setModelToReadyACB);
     }
@@ -93,7 +95,14 @@ function connectToFirebase(model, watchFunction){
     }
 
     function loginOrOutACB(user){
-        model.user = user || null;
+        console.log("user " + user);
+        if(user){
+            model.user = user;
+        }
+        else{
+            model.user = null;
+            
+        }
     }
 
     onAuthStateChanged(auth, loginOrOutACB);
@@ -101,7 +110,7 @@ function connectToFirebase(model, watchFunction){
     watchFunction(watchedValues, saveChangedValues);
 }
 
-export {modelToPersistence, persistenceToModel, saveToFirebase, readFromFirebase}
+export {modelToPersistence, persistenceToModel, saveToFirebase, readFromFirebase,userPresistenceToModel, auth}
 
 export default connectToFirebase;
 

@@ -1,12 +1,13 @@
-import "src/firebaseModel";
+import {auth } from  "src/firebaseModel.js";
+import Home from "views/Home,jsx"
 
 
-export default function authPresenter() {
+export default function authPresenter(auth) {
 
     const provider = new GoogleAuthProvider();
 
     function signInHnadlerACB() {
         signInWithPopup(auth, provider);
     }
-    return <AuthView singIn ={signInHnadlerACB}/>;
+    return <Home singInhandler ={signInHnadlerACB}/>;
 }

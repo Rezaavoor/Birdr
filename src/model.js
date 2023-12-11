@@ -1,6 +1,8 @@
 import { getBirdDetails } from "./modelSource";
 import resolvePromise from "./resolvePromise";
 import { searchBird } from "./modelSource";
+import {auth} from "./firebaseModel";
+import {signOut} from "firebase/auth";
 
 export default {
   user: null,
@@ -76,7 +78,7 @@ export default {
   },
   /*********** change********************** */
   addLikedBird(bird) {
-    this.user.likedBirds = [...this.user.likedBirds, bird];
+    this.likedBirds = [...this.likedBirds, bird];
   },
 
   removeLikedBird(birdToRemove) {
@@ -130,6 +132,10 @@ export default {
       return curId == id;
     }
 
-  }
+  },
+
+  signOut(){
+    signOut(auth);
+  },
 
 };
