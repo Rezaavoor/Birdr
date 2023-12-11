@@ -120,7 +120,7 @@ export default {
   },*/
 
   doSearch(searchParams) {
-    resolvePromise(searchBird(searchParams), this.searchResultsPromiseState)
+    resolvePromise(searchBird(searchParams.name, searchParams.hasImg), this.searchResultsPromiseState)
   },
 
   isBirdLiked(id) {
