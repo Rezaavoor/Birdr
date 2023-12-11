@@ -49,7 +49,7 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
             }
           `}
         >
-          <Icon viewBox="0 0 256 256" color="red.500" boxSize={10}>
+          <Icon viewBox="0 0 256 256" color="red.500" boxSize={9}>
             <svg viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
               <rect fill="none" height="256" width="256" />
               <circle cx="164" cy="68" r="8" fill="#fff" />
@@ -85,6 +85,9 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
               :hover {
                 transform: scale(1.1);
               }
+            }
+            ${theme.breakpoints.medium} {
+              width: 100%;
             }
           `}
         >
@@ -205,7 +208,13 @@ export default function Navbar({ children, onButtonClick, currentRoute }) {
           </div>
         </div>
       </div>
-      <div className={css``}>{children}</div>
+      <div
+        className={css`
+          padding-top: 90px;
+        `}
+      >
+        {children}
+      </div>
     </div>
   );
 }
