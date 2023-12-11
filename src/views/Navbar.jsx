@@ -4,7 +4,21 @@ import { Icon } from "@chakra-ui/react";
 
 export default function Navbar({ children, onButtonClick, currentRoute }) {
   const theme = useTheme();
-  const navigate = useNavigate();
+  const onHomeClickACB = () => {
+    onButtonClick("/");
+  };
+  const onSearchClickACB = () => {
+    onButtonClick("/search");
+  };
+  const onHotlistClickACB = () => {
+    onButtonClick("/hotlist");
+  };
+  const onMybirdsClickACB = () => {
+    onButtonClick("/mybirds");
+  };
+  const onAuthClickACB = () => {
+    //onButtonClick("/auth");
+  };
   return (
     <div>
       <div

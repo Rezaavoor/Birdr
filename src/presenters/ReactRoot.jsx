@@ -15,11 +15,8 @@ export default observer(function ReactRoot(props) {
     {
       path: "/",
       element: (
-        <Navbar>
-          <HomeP model={props.model} auth={props.auth} /> 
-        </Navbar>
         <NavbarP>
-          <HomeP model={props.model} />
+          <HomeP model={props.model} auth={props.auth} />
         </NavbarP>
       ),
     },
