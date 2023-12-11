@@ -1,16 +1,31 @@
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { Icon } from "@chakra-ui/react";
-import { useNavigate } from "react-router-dom";
 
-export default function Navbar({ children }, props) {
+export default function Navbar({ children, onButtonClick, currentRoute }) {
   const theme = useTheme();
-  const navigate = useNavigate();
+  const onHomeClickACB = () => {
+    onButtonClick("/");
+  };
+  const onSearchClickACB = () => {
+    onButtonClick("/search");
+  };
+  const onHotlistClickACB = () => {
+    onButtonClick("/hotlist");
+  };
+  const onMybirdsClickACB = () => {
+    onButtonClick("/mybirds");
+  };
+  const onAuthClickACB = () => {
+    //onButtonClick("/auth");
+  };
   return (
     <div>
       <div
         className={css`
-          border-bottom: 1px solid ${theme.colors.light};
+          border-bottom: 1px solid
+            ${currentRoute != "/" ? theme.colors.light : "rgba(0, 0, 0, 0)"};
+          background-color: ${currentRoute != "/" && theme.colors.dark};
           width: 100vw;
           margin: auto;
           padding: 10px 50px;
@@ -25,7 +40,7 @@ export default function Navbar({ children }, props) {
         `}
       >
         <div
-          onClick={() => navigate("/")}
+          onClick={onHomeClickACB}
           className={css`
             user-select: none;
             cursor: pointer;
@@ -83,12 +98,15 @@ export default function Navbar({ children }, props) {
               className={css`
                 cursor: pointer;
                 user-select: none;
-                border-bottom: 1px solid rgba(0, 0, 0, 0);
+                border-bottom: 1px solid
+                  ${currentRoute == "/"
+                    ? theme.colors.light
+                    : "rgba(0, 0, 0, 0)"};
                 :hover {
                   border-bottom: 1px solid ${theme.colors.light};
                 }
               `}
-              onClick={() => navigate("/")}
+              onClick={onHomeClickACB}
             >
               Home
             </p>
@@ -103,12 +121,15 @@ export default function Navbar({ children }, props) {
               className={css`
                 cursor: pointer;
                 user-select: none;
-                border-bottom: 1px solid rgba(0, 0, 0, 0);
+                border-bottom: 1px solid
+                  ${currentRoute == "/search"
+                    ? theme.colors.light
+                    : "rgba(0, 0, 0, 0)"};
                 :hover {
                   border-bottom: 1px solid ${theme.colors.light};
                 }
               `}
-              onClick={() => navigate("/search")}
+              onClick={onSearchClickACB}
             >
               Search
             </p>
@@ -123,12 +144,15 @@ export default function Navbar({ children }, props) {
               className={css`
                 cursor: pointer;
                 user-select: none;
-                border-bottom: 1px solid rgba(0, 0, 0, 0);
+                border-bottom: 1px solid
+                  ${currentRoute == "/hotlist"
+                    ? theme.colors.light
+                    : "rgba(0, 0, 0, 0)"};
                 :hover {
                   border-bottom: 1px solid ${theme.colors.light};
                 }
               `}
-              onClick={() => navigate("/hotlist")}
+              onClick={onHotlistClickACB}
             >
               Hot List
             </p>
@@ -143,14 +167,40 @@ export default function Navbar({ children }, props) {
               className={css`
                 cursor: pointer;
                 user-select: none;
-                border-bottom: 1px solid rgba(0, 0, 0, 0);
+                border-bottom: 1px solid
+                  ${currentRoute == "/mybirds"
+                    ? theme.colors.light
+                    : "rgba(0, 0, 0, 0)"};
                 :hover {
                   border-bottom: 1px solid ${theme.colors.light};
                 }
               `}
-              onClick={() => navigate("/mybirds")}
+              onClick={onMybirdsClickACB}
             >
               My Birds
+            </p>
+          </div>
+          <div
+            className={css`
+              align-items: center;
+              margin: auto;
+            `}
+          >
+            <p
+              className={css`
+                cursor: pointer;
+                user-select: none;
+                border-bottom: 1px solid
+                  ${currentRoute == "/auth"
+                    ? theme.colors.light
+                    : "rgba(0, 0, 0, 0)"};
+                :hover {
+                  border-bottom: 1px solid ${theme.colors.light};
+                }
+              `}
+              onClick={onAuthClickACB}
+            >
+              Login
             </p>
           </div>
         </div>

@@ -7,7 +7,7 @@ import { observer } from "mobx-react-lite";
 import { theme } from "../theme.js";
 import { ThemeProvider } from "@emotion/react";
 import { ChakraProvider } from "@chakra-ui/react";
-import Navbar from "../views/Navbar.jsx";
+import NavbarP from "./NavbarP.jsx";
 import BirdP from "./BirdP.jsx";
 
 export default observer(function ReactRoot(props) {
@@ -15,41 +15,41 @@ export default observer(function ReactRoot(props) {
     {
       path: "/",
       element: (
-        <Navbar>
+        <NavbarP>
           <HomeP model={props.model} />
-        </Navbar>
+        </NavbarP>
       ),
     },
     {
       path: "/search",
       element: (
-        <Navbar>
+        <NavbarP>
           <SearchP model={props.model} />
-        </Navbar>
+        </NavbarP>
       ),
     },
     {
       path: "/hotlist",
       element: (
-        <Navbar>
+        <NavbarP>
           <HotlistP model={props.model} />
-        </Navbar>
+        </NavbarP>
       ),
     },
     {
       path: "/mybirds",
       element: (
-        <Navbar>
+        <NavbarP>
           <MyBirdsP model={props.model} />
-        </Navbar>
+        </NavbarP>
       ),
     },
     {
       path: "/bird",
       element: (
-        <Navbar>
+        <NavbarP>
           <BirdP model={props.model} />
-        </Navbar>
+        </NavbarP>
       ),
     },
   ]);
