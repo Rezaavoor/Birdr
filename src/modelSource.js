@@ -22,15 +22,19 @@ export function getBirdDetails(id) {
 
 
 export function searchBird(searchParams){
-    const queryParams = new URLSearchParams(searchParams);
-    const url = BASE_URL + "v2/birds?page=1&pageSize=10&" + queryParams + "&operator=AND"; 
-    
+
+    //const queryParams = new URLSearchParams(searchParams);
+
+    const url = BASE_URL + "v2/birds?page=1&pageSize=10&name=" + searchParams + "&hasImg=true&operator=AND"; 
+
+
     const options = {
         method: 'GET',
         headers: {
-            'api-key': API_KEY,
+            'API-Key': API_KEY,
         }
     }
+
     function responseSearchACB(response){
         if(response.status !== 200){
             throw new Error("Response = " + response);
@@ -44,5 +48,4 @@ export function searchBird(searchParams){
 
     return fetch(url, options).then(responseSearchACB).then(getBirdACB);
 }
-
 
