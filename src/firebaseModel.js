@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "/src/firebaseConfig.js";
-import { getDatabase, ref, get, set, off, remove} from "firebase/database";
+import { getDatabase, ref, get, set, off, onValue} from "firebase/database";
+
 
 import { getAuth, onAuthStateChanged,} from 'firebase/auth';
 
@@ -33,9 +34,6 @@ function userModelToPresistence(model){
 function persistenceToModel(data , model){ 
         const hotBirds = data?.hotBirds || [];
         model.hotBirds = hotBirds;
-    
-
-
     return model;
 }
 function userPresistenceToModel(data, model){
@@ -52,9 +50,9 @@ function saveToFirebase(model){
         const data = modelToPersistence(model);
         if(model.user){
         const userData = userModelToPresistence(model);
-        
         set(ref(db,`${Users}/${model.user.uid}`), userData);
         }
+
         set(rf, data);
     }
     
@@ -93,18 +91,18 @@ function connectToFirebase(model, watchFunction){
     function saveChangedValues(){
         saveToFirebase(model);
     }
+    
 
     function loginOrOutACB(user){
-        console.log("user " + user);
         if(user){
             model.user = user;
+        
         }
         else{
             model.user = null;
             
         }
     }
-
     onAuthStateChanged(auth, loginOrOutACB);
     readFromFirebase(model);
     watchFunction(watchedValues, saveChangedValues);
@@ -113,3 +111,4 @@ function connectToFirebase(model, watchFunction){
 export {modelToPersistence, persistenceToModel, saveToFirebase, readFromFirebase, userPresistenceToModel, auth}
 
 export default connectToFirebase;
+
