@@ -2,7 +2,6 @@ import HomeP from "./HomeP.jsx";
 import SearchP from "./SearchP.jsx";
 import HotlistP from "./HotlistP.jsx";
 import MyBirdsP from "./MyBirdsP.jsx";
-import CurrentbirdP from "./CurrentbirdP.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { theme } from "../theme.js";
@@ -42,14 +41,6 @@ export default observer(function ReactRoot(props) {
       element: (
         <NavbarP auth={props.auth} model={props.model} >
           <MyBirdsP model={props.model} />
-        </NavbarP>
-      ),
-    },
-    {
-      path: "/currentbird",
-      element: (
-        <NavbarP>
-          <CurrentbirdP model={props.model} />
         </NavbarP>
       ),
     },
