@@ -16,49 +16,49 @@ export default observer(function ReactRoot(props) {
     {
       path: "/",
       element: (
-        <Navbar>
-          <HomeP model={props.model} auth={props.auth} /> 
-        </Navbar>
+        <NavbarP auth={props.auth} model={props.model} >
+          <HomeP model={props.model}  />
+        </NavbarP>
       ),
     },
     {
       path: "/search",
       element: (
-        <Navbar>
+        <NavbarP auth={props.auth} model={props.model} >
           <SearchP model={props.model} />
-        </Navbar>
+        </NavbarP>
       ),
     },
     {
       path: "/hotlist",
       element: (
-        <Navbar>
+        <NavbarP auth={props.auth} model={props.model} >
           <HotlistP model={props.model} />
-        </Navbar>
+        </NavbarP>
       ),
     },
     {
       path: "/mybirds",
       element: (
-        <Navbar>
+        <NavbarP auth={props.auth} model={props.model} >
           <MyBirdsP model={props.model} />
-        </Navbar>
+        </NavbarP>
       ),
     },
     {
       path: "/currentbird",
       element: (
-        <Navbar>
+        <NavbarP>
           <CurrentbirdP model={props.model} />
-        </Navbar>
+        </NavbarP>
       ),
     },
     {
       path: "/bird",
       element: (
-        <Navbar>
+        <NavbarP auth={props.auth} model={props.model}>
           <BirdP model={props.model} />
-        </Navbar>
+        </NavbarP>
       ),
     },
   ]);

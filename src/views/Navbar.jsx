@@ -3,11 +3,31 @@ import { useTheme } from "@emotion/react";
 import { Icon } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 
-export default function Navbar({ children }, props) {
+export default function Navbar({ children, onButtonClick, currentRoute, logOutHandler, logInHandler, user}) {
   const theme = useTheme();
-  const navigate = useNavigate();
+  const onHomeClickACB = () => {
+    onButtonClick("/");
+  };
+  const onSearchClickACB = () => {
+    onButtonClick("/search");
+  };
+  const onHotlistClickACB = () => {
+    onButtonClick("/hotlist");
+  };
+  const onMybirdsClickACB = () => {
+    onButtonClick("/mybirds");
+  };
+  const onAuthClickACB = () => {
+    //onButtonClick("/auth");
+  };
 
-  
+  const onLogInClickACB =() => {
+    logInHandler();
+  }
+
+  const onLogOutClick = () => {
+    logOutHandler();
+  }
   return (
     <div>
       <div
@@ -154,6 +174,49 @@ export default function Navbar({ children }, props) {
             >
               My Birds
             </p>
+          </div>
+          <div
+            className={css`
+              align-items: center;
+              margin: auto;
+            `}
+          >    {user ? (
+            // User is logged in, show logout button
+            <p
+              className={css`
+                cursor: pointer;
+                user-select: none;
+                border-bottom: 1px solid
+                  ${currentRoute == "/auth"
+                    ? theme.colors.light
+                    : "rgba(0, 0, 0, 0)"};
+                :hover {
+                  border-bottom: 1px solid ${theme.colors.light};
+                }
+              `}
+              onClick={onLogOutClick}
+            >
+              Logout
+            </p>
+          ) : (
+            // User is not logged in, show login button
+            <p
+              className={css`
+                cursor: pointer;
+                user-select: none;
+                border-bottom: 1px solid
+                  ${currentRoute == "/auth"
+                    ? theme.colors.light
+                    : "rgba(0, 0, 0, 0)"};
+                :hover {
+                  border-bottom: 1px solid ${theme.colors.light};
+                }
+              `}
+              onClick={onLogInClickACB}
+            >
+              Login
+            </p>
+          )}
           </div>
         </div>
       </div>

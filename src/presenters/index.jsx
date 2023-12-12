@@ -14,7 +14,9 @@ window.React = { createElement: createElement };
 import { createRoot } from "react-dom/client";
 import ReactRoot from "./ReactRoot.jsx";
 import connectToFirebase from "../firebaseModel.js";
-console.log("auth in index.jsx " + auth);
+
+
+
 createRoot(document.getElementById("root")).render(
   <ReactRoot model={reactiveModel} auth = {auth} />
 );

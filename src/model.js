@@ -1,14 +1,14 @@
 import { getBirdDetails } from "./modelSource";
 import resolvePromise from "./resolvePromise";
 import { searchBird } from "./modelSource";
-import {auth} from "./firebaseModel";
-import {signOut} from "firebase/auth";
+import {auth} from "./firebaseModel"
+import {signOut} from "firebase/auth"
 
 export default {
   user: null,
-
+  
   likedBirds: [],
-
+  
   hotBirds: [],
   searchParams: {},
   searchResultsPromiseState: {},
@@ -133,7 +133,6 @@ export default {
     }
 
   },
-
   signOut(){
     signOut(auth);
   },

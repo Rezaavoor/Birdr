@@ -110,7 +110,7 @@ function connectToFirebase(model, watchFunction){
     watchFunction(watchedValues, saveChangedValues);
 }
 
-export {modelToPersistence, persistenceToModel, saveToFirebase, readFromFirebase,userPresistenceToModel, auth}
+export {modelToPersistence, persistenceToModel, saveToFirebase, readFromFirebase, userPresistenceToModel, auth}
 
 export default connectToFirebase;
 
