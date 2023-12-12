@@ -3,6 +3,8 @@ import Bird from "../views/Bird";
 import { useToast } from "@chakra-ui/react";
 
 export default observer(function BirdP(props) {
+
+  //props.model.setCurrentBird(props.model.currentBird);
   const toast = useToast();
   function onClickAddToMyBirds() {
     props.model.addLikedBird(props.model.currentBird);

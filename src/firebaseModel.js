@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "/src/firebaseConfig.js";
-import { getDatabase, ref, get, set,} from "firebase/database";
+import { getDatabase, ref, get, set, onValue, off} from "firebase/database";
 
 import { getAuth, onAuthStateChanged,} from 'firebase/auth';
 
@@ -95,6 +95,7 @@ function connectToFirebase(model, watchFunction){
     function loginOrOutACB(user){
         if(user){
             model.user = user;
+
         }
         else{
             model.user = null;
