@@ -105,7 +105,6 @@ export default {
   },
 
   setSearchName(name) {
-    console.log(name)
     this.searchParams.name = name;
   },
 

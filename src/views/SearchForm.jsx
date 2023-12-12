@@ -1,7 +1,7 @@
 import React from "react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { Icon, Input } from "@chakra-ui/react";
+import { Input } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
@@ -10,14 +10,18 @@ export default function SearchForm(props) {
   const [value, setValue] = useState("");
 
   function textChangeACB(event) {
-    console.log(event.target.value);
     setValue(event.target.value);
     props.changeTextValue(event.target.value);
   }
 
   function clickSearchHandlerACB() {
-    console.log("You tried to search");
     props.searchClick();
+  }
+
+  function handleKeyDown(event){
+    if(event.key === "Enter"){
+      props.searchClick();
+    }
   }
 
   return (
@@ -45,6 +49,7 @@ export default function SearchForm(props) {
             paddingInlineEnd={10}
             value={value}
             onChange={textChangeACB}
+            onKeyDown={handleKeyDown}
           />
         </div>
         <div
