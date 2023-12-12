@@ -11,7 +11,6 @@ export default function Home({
   onClickMoreDetails,
 }) {
   const theme = useTheme();
-
   return (
     <div
       className={css`
@@ -22,7 +21,7 @@ export default function Home({
       <div
         className={css`
           position: absolute;
-          top: 0;
+          top: -10vh;
           left: 0;
           width: 100vw;
           height: 50vh;
@@ -36,7 +35,7 @@ export default function Home({
       <div
         className={css`
           position: absolute;
-          top: 0;
+          top: -10vh;
           left: 0;
           width: 100vw;
           height: 100vh;
@@ -65,7 +64,7 @@ export default function Home({
         <div
           className={css`
             position: absolute;
-            top: 30vh;
+            top: 20vh;
             width: 100%;
             text-align: center;
             box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
@@ -74,6 +73,9 @@ export default function Home({
             font-size: 2rem;
             color: ${theme.colors.light};
             user-select: none;
+            ${theme.breakpoints.medium} {
+              font-size: 1.5rem;
+            }
           `}
         >
           <p>{status == "data" ? "Bird Of The Day" : ""}</p>
@@ -81,7 +83,7 @@ export default function Home({
         <div
           className={css`
             position: absolute;
-            top: 45vh;
+            top: 35vh;
             width: 100%;
             display: flex;
             justify-content: center;
@@ -96,6 +98,10 @@ export default function Home({
               color: ${theme.colors.white};
               font-weight: bold;
               background-color: rgba(0, 0, 0, 0.3);
+              ${theme.breakpoints.medium} {
+                font-size: 2rem;
+                width: 90%;
+              }
             `}
           >
             {status == "data" ? (
@@ -112,7 +118,10 @@ export default function Home({
         <div
           className={css`
             position: absolute;
-            top: 70vh;
+            top: 65vh;
+            ${theme.breakpoints.medium} {
+              top: 50vh;
+            }
             width: 100%;
             display: flex;
             justify-content: center;
@@ -156,7 +165,6 @@ export default function Home({
             More Details
           </div>
         </div>
-        
       </div>
     </div>
   );
