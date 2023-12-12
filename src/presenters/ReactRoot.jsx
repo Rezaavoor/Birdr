@@ -9,6 +9,7 @@ import { theme } from "../theme.js";
 import { ThemeProvider } from "@emotion/react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Navbar from "../views/Navbar.jsx";
+import NavbarP from "./NavbarP.jsx";
 import BirdP from "./BirdP.jsx";
 
 export default observer(function ReactRoot(props) {
