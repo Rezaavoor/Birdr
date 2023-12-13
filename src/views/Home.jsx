@@ -1,14 +1,16 @@
 import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { InfoIcon, AddIcon } from "@chakra-ui/icons";
+import { InfoIcon, AddIcon, DeleteIcon } from "@chakra-ui/icons";
 
 export default function Home({
   name,
   images,
   status,
-  onClickAddToMyBirds,
+  onClickHandleMyBirds,
   onClickMoreDetails,
+  isBirdLiked,
+  isLoggedIn,
 }) {
   const theme = useTheme();
   return (
@@ -128,23 +130,63 @@ export default function Home({
             align-items: center;
           `}
         >
-          <div
-            onClick={onClickAddToMyBirds}
-            className={css`
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              margin: 50px;
-              cursor: pointer;
-              transition: all 0.2s ease-in-out;
-              :hover {
-                transform: scale(1.1);
-              }
-            `}
-          >
-            <AddIcon boxSize={7} color={theme.colors.white} />
-            Add To My Birds
+          <div className={css``}>
+            {isLoggedIn ? (
+              isBirdLiked ? (
+                <div
+                  onClick={onClickHandleMyBirds}
+                  className={css`
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 50px;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+                    :hover {
+                      transform: scale(1.1);
+                    }
+                  `}
+                >
+                  <DeleteIcon boxSize={7} color={theme.colors.white} />
+                  <p>Remove From My Birds</p>
+                </div>
+              ) : (
+                <div
+                  onClick={onClickHandleMyBirds}
+                  className={css`
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 50px;
+                    cursor: pointer;
+                    transition: all 0.2s ease-in-out;
+                    :hover {
+                      transform: scale(1.1);
+                    }
+                  `}
+                >
+                  <AddIcon boxSize={7} color={theme.colors.white} />
+                  <p>Add To My Birds</p>
+                </div>
+              )
+            ) : (
+              <div
+                className={css`
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  color: ${theme.colors.light};
+                  margin: 50px;
+                  select: none;
+                `}
+              >
+                <AddIcon boxSize={7} color={theme.colors.light} />
+                <p>Add To My Birds</p>
+              </div>
+            )}
           </div>
           <div
             onClick={onClickMoreDetails}

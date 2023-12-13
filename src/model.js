@@ -1,4 +1,4 @@
-import { getBirdDetails } from "./modelSource";
+import { getBirdDetails, getBirdsDetailsById } from "./modelSource";
 import resolvePromise from "./resolvePromise";
 import { searchBird } from "./modelSource";
 import { auth } from "./firebaseModel";
@@ -16,6 +16,8 @@ export default {
   currentBird: null,
   currentBirdPromiseState: {},
   birdOfTheDayPromiseState: {},
+  hotBirdsPromiseState: {},
+  likedBirdsPromiseState: {},
   birdOfTheDay: null,
   birdsOfTheDay: [
     1, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 17, 20, 21, 22, 23, 26, 28, 29, 30,
@@ -74,7 +76,7 @@ export default {
       return b.viewCount - a.viewCount;
     }
 
-    this.hotBirds = [...this.hotBirds];  
+    this.hotBirds = [...this.hotBirds];
   },
   /*********** change********************** */
   addLikedBird(bird) {
@@ -82,8 +84,8 @@ export default {
   },
 
   removeLikedBird(birdToRemove) {
-    function checkBirdsCB(bird) {
-      return bird.id != birdToRemove.id;
+    function checkBirdsCB(birdId) {
+      return birdId != birdToRemove;
     }
 
     this.likedBirds = this.likedBirds.filter(checkBirdsCB);
@@ -104,24 +106,37 @@ export default {
     }
   },
 
+  getHotBirds() {
+    const slicedHotBirds = this.hotBirds.slice(0, 10)
+    const ids = slicedHotBirds.map((bird) => bird.birdId);
+    resolvePromise(getBirdsDetailsById(ids), this.hotBirdsPromiseState);
+  },
+
+  getLikedBirds() {
+    resolvePromise(getBirdsDetailsById(this.likedBirds), this.likedBirdsPromiseState)
+  },
+
   setSearchName(name) {
     this.searchParams.name = name;
   },
 
   setHasImg() {
-    this.searchParams.hasImg = (this.searchParams.hasImg ? false : true);
+    this.searchParams.hasImg = this.searchParams.hasImg ? false : true;
   },
 
-   setSearchRegion(region) {
+  setSearchRegion(region) {
     this.searchParams.region = region;
   },
 
   doSearch(searchParams) {
-    resolvePromise(searchBird(searchParams.name, searchParams.hasImg), this.searchResultsPromiseState)
+    resolvePromise(
+      searchBird(searchParams.name, searchParams.hasImg),
+      this.searchResultsPromiseState
+    );
   },
 
   isBirdLiked(id) {
-    return this.user.likedBirds.filter(isBirdLikedCB).length > 0;
+    return this.likedBirds.filter(isBirdLikedCB).length > 0 && !!this.user;
 
     function isBirdLikedCB(curId) {
       return curId == id;
