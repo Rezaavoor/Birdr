@@ -20,6 +20,10 @@ export function getBirdDetails(id) {
     }
 }
 
+export function getBirdsDetailsById(ids) {
+    const promises = ids.map((id) => getBirdDetails(id))
+    return Promise.all(promises);
+}
 
 export function searchBird(searchParams, hasImg){
 
@@ -56,5 +60,3 @@ export function searchBird(searchParams, hasImg){
 
     return fetch(url, options).then(responseSearchACB).then(getBirdACB);
 }
-
-
