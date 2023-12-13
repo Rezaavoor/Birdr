@@ -81,7 +81,7 @@ export default function Hotlist(props) {
               }
             `}
           >
-            {[...props.currentHotlist].map(displayBirdsCB)}
+            {/*[...props.currentHotlist].map(displayBirdsCB)*/}
 
           </div>
         </div>
