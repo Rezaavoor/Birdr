@@ -99,7 +99,7 @@ export default function Search(props) {
       props.onClickHandler(bird);
     }
     return (
-      <span key={bird.id} onClick={clickHandlerACB} class="result-item">
+      <span key={bird.id} onClick={clickHandlerACB} className="result-item">
         <img src={bird.images[0]} height="100"></img>
         <div>{bird.name}</div>
       </span>
