@@ -4,7 +4,6 @@ import { useTheme } from "@emotion/react";
 
 export default function Search(props) {
   const theme = useTheme();
-  console.log(props);
   return (
     <div
       className={css`

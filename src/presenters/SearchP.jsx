@@ -5,7 +5,7 @@ import { observer } from "mobx-react-lite";
 
 export default observer(function SearchP(props) {
   const navigate = useNavigate();
-  function setCurrerntBirdACB(bird) {
+  function setCurrentBirdACB(bird) {
     props.model.setCurrentBird(bird.id);
     navigate("/bird");
   }
@@ -16,6 +16,10 @@ export default observer(function SearchP(props) {
 
   function searchClickHandlerACB() {
     props.model.doSearch(props.model.searchParams);
+  }
+
+  function onlyImagesHandlerACB(){
+    props.model.setHasImg();
   }
 
   function renderSearchResult() {
@@ -42,7 +46,7 @@ export default observer(function SearchP(props) {
     return (
       <Search
         searchResults={props.model.searchResultsPromiseState.data}
-        onClickHandler={setCurrerntBirdACB}
+        onClickHandler={setCurrentBirdACB}
         status="data"
       />
     );
@@ -54,7 +58,8 @@ export default observer(function SearchP(props) {
         text={props.model.searchParams.name}
         changeTextValue={textChangeHandlerACB}
         searchClick={searchClickHandlerACB}
-        onClickHandler={setCurrerntBirdACB}
+        onClickHandler={setCurrentBirdACB}
+        onlyImages={onlyImagesHandlerACB}
       />
       {renderSearchResult()}
     </div>
