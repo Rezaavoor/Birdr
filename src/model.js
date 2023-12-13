@@ -17,6 +17,7 @@ export default {
   currentBirdPromiseState: {},
   birdOfTheDayPromiseState: {},
   hotBirdsPromiseState: {},
+  likedBirdsPromiseState: {},
   birdOfTheDay: null,
   birdsOfTheDay: [
     1, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 17, 20, 21, 22, 23, 26, 28, 29, 30,
@@ -109,6 +110,10 @@ export default {
     const slicedHotBirds = this.hotBirds.slice(0, 10)
     const ids = slicedHotBirds.map((bird) => bird.birdId);
     resolvePromise(getBirdsDetailsById(ids), this.hotBirdsPromiseState);
+  },
+
+  getLikedBirds() {
+    resolvePromise(getBirdsDetailsById(this.likedBirds), this.likedBirdsPromiseState)
   },
 
   setSearchName(name) {
