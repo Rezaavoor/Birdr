@@ -1,14 +1,14 @@
 import { getBirdDetails } from "./modelSource";
 import resolvePromise from "./resolvePromise";
 import { searchBird } from "./modelSource";
-import {auth} from "./firebaseModel"
-import {signOut} from "firebase/auth"
+import { auth } from "./firebaseModel";
+import { signOut } from "firebase/auth";
 
 export default {
   user: null,
-  
+
   likedBirds: [],
-  
+
   hotBirds: [],
 
   searchParams: {},
@@ -40,7 +40,7 @@ export default {
     573, 574, 579, 580, 581, 582, 583, 584, 586, 590, 592, 593, 594, 596, 598,
     599, 601, 602, 603, 605, 606, 608, 610, 616, 617, 618, 621, 622, 623, 624,
     625, 626, 627, 628, 631, 633, 634, 638, 639, 642, 646, 647, 657, 659, 660,
-    754, 757, 761, 763, 857, 860, 862, 863, 866, 952, 954, 955, 964, 970, 975,
+    754, 757, 761, 763, 857, 860, 465, 863, 866, 952, 954, 955, 964, 970, 975,
     979, 988, 990, 992, 994, 995, 404, 69, 26, 10,
   ],
 
@@ -105,7 +105,7 @@ export default {
   },
 
   setSearchName(name) {
-    console.log(name)
+    console.log(name);
     this.searchParams.name = name;
   },
 
@@ -122,7 +122,7 @@ export default {
   },*/
 
   doSearch(searchParams) {
-    resolvePromise(searchBird(searchParams), this.searchResultsPromiseState)
+    resolvePromise(searchBird(searchParams), this.searchResultsPromiseState);
   },
 
   isBirdLiked(id) {
@@ -131,10 +131,8 @@ export default {
     function isBirdLikedCB(curId) {
       return curId == id;
     }
-
   },
-  signOut(){
+  signOut() {
     signOut(auth);
   },
-
 };
