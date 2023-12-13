@@ -6,15 +6,29 @@ export default observer(function BirdP(props) {
 
   //props.model.setCurrentBird(props.model.currentBird);
   const toast = useToast();
-  function onClickAddToMyBirds() {
-    props.model.addLikedBird(props.model.currentBird);
-    toast({
-      title: "Bird added.",
-      description: `You added ${props.model.currentBirdPromiseState.data.name} to My Birds.`,
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
+  const isLoggedIn = !!props.model.user;
+  const isBirdLiked = props.model.isBirdLiked(props.model.currentBird);
+
+  function onClickHandleMyBirds() {
+    if (!isBirdLiked) {
+      props.model.addLikedBird(props.model.currentBird);
+      toast({
+        title: "Bird added.",
+        description: `You added ${props.model.currentBirdPromiseState.data.name} to My Birds.`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } else {
+      props.model.removeLikedBird(props.model.currentBird);
+      toast({
+        title: "Bird removed.",
+        description: `You removed ${props.model.currentBirdPromiseState.data.name} from My Birds.`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   }
   if (!props.model.currentBirdPromiseState.promise) {
     return <Bird status="no data" />;
@@ -39,7 +53,9 @@ export default observer(function BirdP(props) {
   return (
     <Bird
       bird={props.model.currentBirdPromiseState.data}
-      onClickAddToMyBirds={onClickAddToMyBirds}
+      onClickHandleMyBirds={onClickHandleMyBirds}
+      isBirdLiked={isBirdLiked}
+      isLoggedIn={isLoggedIn}
       status="data"
     />
   );

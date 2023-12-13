@@ -1,10 +1,16 @@
 import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
 import AudioPlayer from "react-h5-audio-player";
 
-export default function Bird({ bird, status, onClickAddToMyBirds }) {
+export default function Bird({
+  bird,
+  status,
+  onClickHandleMyBirds,
+  isBirdLiked,
+  isLoggedIn,
+}) {
   const theme = useTheme();
   return (
     <div
@@ -47,20 +53,59 @@ export default function Bird({ bird, status, onClickAddToMyBirds }) {
               >
                 {bird.name}
               </h1>
-              <div
-                onClick={onClickAddToMyBirds}
-                className={css`
-                  align-items: center;
-                  cursor: pointer;
-                  transition: all 0.2s ease-in-out;
-                  :hover {
-                    transform: scale(1.4);
-                  }
-                  margin-left: 40px;
-                `}
-              >
-                <AddIcon boxSize={6} color={theme.colors.white} />
-              </div>
+              {isLoggedIn ? (
+                isBirdLiked ? (
+                  <div
+                    onClick={onClickHandleMyBirds}
+                    className={css`
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      align-items: center;
+                      margin: 50px;
+                      cursor: pointer;
+                      transition: all 0.2s ease-in-out;
+                      :hover {
+                        transform: scale(1.1);
+                      }
+                    `}
+                  >
+                    <DeleteIcon boxSize={7} color={theme.colors.white} />
+                  </div>
+                ) : (
+                  <div
+                    onClick={onClickHandleMyBirds}
+                    className={css`
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      align-items: center;
+                      margin: 50px;
+                      cursor: pointer;
+                      transition: all 0.2s ease-in-out;
+                      :hover {
+                        transform: scale(1.1);
+                      }
+                    `}
+                  >
+                    <AddIcon boxSize={7} color={theme.colors.white} />
+                  </div>
+                )
+              ) : (
+                <div
+                  className={css`
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: ${theme.colors.light};
+                    margin: 50px;
+                    select: none;
+                  `}
+                >
+                  <AddIcon boxSize={7} color={theme.colors.light} />
+                </div>
+              )}
             </div>
             <p>Family: {bird.family}</p>
             {bird.lengthMin && bird.lengthMax && (

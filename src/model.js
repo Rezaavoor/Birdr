@@ -1,14 +1,14 @@
 import { getBirdDetails } from "./modelSource";
 import resolvePromise from "./resolvePromise";
 import { searchBird } from "./modelSource";
-import {auth} from "./firebaseModel"
-import {signOut} from "firebase/auth"
+import { auth } from "./firebaseModel";
+import { signOut } from "firebase/auth";
 
 export default {
   user: null,
-  
+
   likedBirds: [],
-  
+
   hotBirds: [],
   searchParams: {},
   searchResultsPromiseState: {},
@@ -39,14 +39,11 @@ export default {
     573, 574, 579, 580, 581, 582, 583, 584, 586, 590, 592, 593, 594, 596, 598,
     599, 601, 602, 603, 605, 606, 608, 610, 616, 617, 618, 621, 622, 623, 624,
     625, 626, 627, 628, 631, 633, 634, 638, 639, 642, 646, 647, 657, 659, 660,
-    754, 757, 761, 763, 857, 860, 862, 863, 866, 952, 954, 955, 964, 970, 975,
+    754, 757, 761, 763, 857, 860, 465, 863, 866, 952, 954, 955, 964, 970, 975,
     979, 988, 990, 992, 994, 995, 404, 69, 26, 10,
   ],
 
   setCurrentBird(id) {
-    /* getBirdDetails(id)
-      .then((res) => res.json())
-      .then((res) => (this.currentBird = res));*/
     resolvePromise(getBirdDetails(id), this.currentBirdPromiseState);
     this.currentBird = id;
     this.updataViewCount(id);
@@ -69,12 +66,15 @@ export default {
       };
 
       this.hotBirds.push(birdEntry);
-      this.hotBirds.sort(sortBirdCB);
-
-      function sortBirdCB(a, b) {
-        return b.viewCount - a.viewCount;
-      }
     }
+
+    this.hotBirds.sort(sortBirdCB);
+
+    function sortBirdCB(a, b) {
+      return b.viewCount - a.viewCount;
+    }
+
+    this.hotBirds = [...this.hotBirds];
   },
  
   addLikedBird(bird) {
@@ -82,8 +82,8 @@ export default {
   },
 
   removeLikedBird(birdToRemove) {
-    function checkBirdsCB(bird) {
-      return bird.id != birdToRemove.id;
+    function checkBirdsCB(birdId) {
+      return birdId != birdToRemove;
     }
 
     this.likedBirds = this.likedBirds.filter(checkBirdsCB);
@@ -105,36 +105,32 @@ export default {
   },
 
   setSearchName(name) {
-    console.log(name)
     this.searchParams.name = name;
   },
 
-  setHasImg(hasImg) {
-    this.searchParams.hasImg = hasImg;
+  setHasImg() {
+    this.searchParams.hasImg = this.searchParams.hasImg ? false : true;
   },
 
-  /* setSearchRegion(region) {
+  setSearchRegion(region) {
     this.searchParams.region = region;
   },
 
-  setSearchSciName(sciName) {
-    this.searchParams.sciName = sciName;
-  },*/
-
   doSearch(searchParams) {
-    resolvePromise(searchBird(searchParams), this.searchResultsPromiseState)
+    resolvePromise(
+      searchBird(searchParams.name, searchParams.hasImg),
+      this.searchResultsPromiseState
+    );
   },
 
   isBirdLiked(id) {
-    return this.user.likedBirds.filter(isBirdLikedCB).length > 0;
+    return this.likedBirds.filter(isBirdLikedCB).length > 0 && !!this.user;
 
     function isBirdLikedCB(curId) {
       return curId == id;
     }
-
   },
-  signOut(){
+  signOut() {
     signOut(auth);
   },
-
 };

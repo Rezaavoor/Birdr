@@ -4,7 +4,6 @@ import { useTheme } from "@emotion/react";
 
 export default function Search(props) {
   const theme = useTheme();
-  console.log(props);
   return (
     <div
       className={css`
@@ -84,9 +83,9 @@ export default function Search(props) {
     function clickHandlerACB(){
       props.onClickHandler(bird);
     }
-    return(
-      <span key={bird.id} onClick={clickHandlerACB} class="result-item">
-        <img src={bird.images[0]} height = "100"></img>
+    return (
+      <span key={bird.id} onClick={clickHandlerACB} className="result-item">
+        <img src={bird.images[0]} height="100"></img>
         <div>{bird.name}</div>
       </span>
     )

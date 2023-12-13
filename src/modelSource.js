@@ -21,11 +21,19 @@ export function getBirdDetails(id) {
 }
 
 
-export function searchBird(searchParams){
+export function searchBird(searchParams, hasImg){
+
+    if(searchParams !== "") {
+        searchParams = "&name=" + searchParams;
+    }
+
+    if(hasImg) {
+        searchParams = searchParams + "&hasImg=true";
+    }
 
     //const queryParams = new URLSearchParams(searchParams);
 
-    const url = BASE_URL + "v2/birds?page=1&pageSize=10&name=" + searchParams + "&hasImg=true&operator=AND"; 
+    const url = BASE_URL + "v2/birds?page=1&pageSize=25" + searchParams + "&operator=AND"; 
 
 
     const options = {
