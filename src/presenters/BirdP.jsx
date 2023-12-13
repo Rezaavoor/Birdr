@@ -9,6 +9,8 @@ export default observer(function BirdP(props) {
   const isLoggedIn = !!props.model.user;
   const isBirdLiked = props.model.isBirdLiked(props.model.currentBird);
 
+  
+
   function onClickHandleMyBirds() {
     if (!isBirdLiked) {
       props.model.addLikedBird(props.model.currentBird);
