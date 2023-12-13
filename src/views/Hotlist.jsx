@@ -5,7 +5,6 @@ import { useTheme } from "@emotion/react";
 
 export default function Hotlist(props) {
   const theme = useTheme();
-  console.log(props.currentHotlist);
   return (
     <div
       className={css`
@@ -81,8 +80,15 @@ export default function Hotlist(props) {
               }
             `}
           >
-            {/*[...props.currentHotlist].map(displayBirdsCB)*/}
-
+            {props.status == "data" ? (
+              [...props.currentHotlist].map(displayBirdsCB)
+            ) : props.status == "loading" ? (
+              <Spinner size="xl" />
+            ) : props.status == "error" ? (
+              <h1>"Error"</h1>
+            ) : (
+              <h1></h1>
+            )}
           </div>
         </div>
       </div>
