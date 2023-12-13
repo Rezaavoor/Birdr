@@ -58,7 +58,7 @@ export default observer(function ReactRoot(props) {
   return (
     <ChakraProvider disableGlobalStyle>
       <ThemeProvider theme={theme}>
-      { (props.model.ready || props.model.user)? <RouterProvider router={router} /> : <Spinner size = "xl"/>} 
+      { (props.model.ready )? <RouterProvider router={router} /> : <Spinner size = "xl"/>} 
       </ThemeProvider>
     </ChakraProvider>
   );
