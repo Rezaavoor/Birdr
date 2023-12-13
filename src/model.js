@@ -51,7 +51,7 @@ export default {
     this.currentBird = id;
     this.updataViewCount(id);
   },
-  /*********** change********************** */
+
   updataViewCount(birdId) {
     const foundBird = this.hotBirds.find(findBirdCB);
 
@@ -76,7 +76,7 @@ export default {
       }
     }
   },
-  /*********** change********************** */
+ 
   addLikedBird(bird) {
     this.likedBirds = [...this.likedBirds, bird];
   },

@@ -95,7 +95,6 @@ function connectToFirebase(model, watchFunction){
     function loginOrOutACB(user){
         if(user){
             model.user = user;
-
         }
         else{
             model.user = null;
