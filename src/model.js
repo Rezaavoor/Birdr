@@ -43,9 +43,6 @@ export default {
   ],
 
   setCurrentBird(id) {
-    /* getBirdDetails(id)
-      .then((res) => res.json())
-      .then((res) => (this.currentBird = res));*/
     resolvePromise(getBirdDetails(id), this.currentBirdPromiseState);
     this.currentBird = id;
     this.updataViewCount(id);
@@ -67,12 +64,15 @@ export default {
       };
 
       this.hotBirds.push(birdEntry);
-      this.hotBirds.sort(sortBirdCB);
-
-      function sortBirdCB(a, b) {
-        return b.viewCount - a.viewCount;
-      }
     }
+
+    this.hotBirds.sort(sortBirdCB);
+
+    function sortBirdCB(a, b) {
+      return b.viewCount - a.viewCount;
+    }
+
+    this.hotBirds = [...this.hotBirds];  
   },
   /*********** change********************** */
   addLikedBird(bird) {
@@ -107,17 +107,13 @@ export default {
     this.searchParams.name = name;
   },
 
-  setHasImg(hasImg) {
-    this.searchParams.hasImg = hasImg;
+  setHasImg() {
+    this.searchParams.hasImg = (this.searchParams.hasImg ? false : true);
   },
 
-  /* setSearchRegion(region) {
+   setSearchRegion(region) {
     this.searchParams.region = region;
   },
-
-  setSearchSciName(sciName) {
-    this.searchParams.sciName = sciName;
-  },*/
 
   doSearch(searchParams) {
     resolvePromise(searchBird(searchParams.name, searchParams.hasImg), this.searchResultsPromiseState)
