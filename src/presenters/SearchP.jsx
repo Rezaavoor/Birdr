@@ -15,7 +15,7 @@ export default observer(function SearchP(props) {
   }
 
   function searchClickHandlerACB() {
-    props.model.doSearch(props.model.searchParams.name);
+    props.model.doSearch(props.model.searchParams);
   }
 
   function onlyImagesHandlerACB(){
