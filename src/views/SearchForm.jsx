@@ -1,7 +1,7 @@
 import React from "react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { Input } from "@chakra-ui/react";
+import { Input, Switch, FormControl, FormLabel } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
@@ -22,6 +22,10 @@ export default function SearchForm(props) {
     if(event.key === "Enter"){
       props.searchClick();
     }
+  }
+
+  function hasImageACB(){
+    props.onlyImages();
   }
 
   return (
@@ -64,6 +68,14 @@ export default function SearchForm(props) {
             color={theme.colors.dark}
             onClick={clickSearchHandlerACB}
           />
+        </div>
+        <div>
+        <FormControl display='flex' alignItems='center'>
+          <FormLabel htmlFor='img-only' mb='0'>
+            Only want search results with images?
+          </FormLabel>
+          <Switch id='img-only' onChange={hasImageACB}/>
+        </FormControl>
         </div>
       </div>
     </div>
