@@ -3,7 +3,7 @@ import resolvePromise from "./resolvePromise";
 import { searchBird } from "./modelSource";
 import { auth } from "./firebaseModel";
 import { signOut } from "firebase/auth";
-import { setCurrentBirdInURL } from './utils';
+
 
 
 export default {
@@ -47,13 +47,12 @@ export default {
 
   setCurrentBird(id) {
     
-
     resolvePromise(getBirdDetails(id), this.currentBirdPromiseState);
     this.currentBird = id;
     this.updataViewCount(id);
 
-    localStorage.setItem('currentBird', id);
-   // setCurrentBirdInURL(id);
+    //localStorage.setItem('currentBird', id);
+   
    
   },
 
