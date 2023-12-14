@@ -33,7 +33,10 @@ export default observer(function HomeP(props) {
   }
   function onClickMoreDetails() {
     props.model.setCurrentBird(props.model.birdOfTheDay);
-    navigate("/bird");
+    
+    navigate(`/bird`); 
+
+    
   }
 
   if (!props.model.birdOfTheDayPromiseState.promise) {

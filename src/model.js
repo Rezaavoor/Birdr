@@ -4,6 +4,7 @@ import { searchBird } from "./modelSource";
 import { auth } from "./firebaseModel";
 import { signOut } from "firebase/auth";
 
+
 export default {
   user: null,
 
@@ -44,9 +45,14 @@ export default {
   ],
 
   setCurrentBird(id) {
+    
+
     resolvePromise(getBirdDetails(id), this.currentBirdPromiseState);
     this.currentBird = id;
     this.updataViewCount(id);
+
+    localStorage.setItem('currentBird', id);
+   
   },
 
   updataViewCount(birdId) {
@@ -132,5 +138,12 @@ export default {
   },
   signOut() {
     signOut(auth);
+  },
+
+  init() {
+    const storedCurrentBird = localStorage.getItem('currentBird');
+    if (storedCurrentBird) {
+      this.setCurrentBird(storedCurrentBird);
+    }
   },
 };

@@ -22,3 +22,4 @@ createRoot(document.getElementById("root")).render(
 );
 window.myModel = reactiveModel;
 connectToFirebase(reactiveModel, reaction)
+reactiveModel.init();
