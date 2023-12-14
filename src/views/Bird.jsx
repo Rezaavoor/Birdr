@@ -26,14 +26,18 @@ export default function Bird({
         <div
           className={css`
             display: flex;
-            justify-content: space-between;
+            justify-content: space-around;
             align-items: center;
             margin-bottom: 15px;
+            ${theme.breakpoints.medium} {
+              flex-direction: column;
+            }
           `}
         >
           <div
             className={css`
-              padding: 20px;
+              margin: 20px;
+              position: relative;
             `}
           >
             <div
@@ -49,6 +53,9 @@ export default function Bird({
                   font-size: 2rem;
                   font-weight: 700;
                   text-align: center;
+                  ${theme.breakpoints.medium} {
+                    font-size: 1.5rem;
+                  }
                 `}
               >
                 {bird.name}
@@ -107,32 +114,56 @@ export default function Bird({
                 </div>
               )}
             </div>
-            <p>Family: {bird.family}</p>
-            {bird.lengthMin && bird.lengthMax && (
-              <p>
-                Size: {bird.lengthMin}-{bird.lengthMax} cm
-              </p>
-            )}
-            {bird.wingspanMin && bird.wingspanMax && (
-              <p>
-                Wing Span: {bird.wingspanMin}-{bird.wingspanMax} cm
-              </p>
-            )}
+            <div
+              className={css`
+                font-size: 1rem;
+                background-color: ${theme.colors.gray};
+                border-radius: 10px;
+                padding: 15px;
+              `}
+            >
+              <p>Family: {bird.family}</p>
+              {bird.lengthMin && bird.lengthMax && (
+                <p>
+                  Size: {bird.lengthMin}-{bird.lengthMax} cm
+                </p>
+              )}
+              {bird.wingspanMin && bird.wingspanMax && (
+                <p>
+                  Wing Span: {bird.wingspanMin}-{bird.wingspanMax} cm
+                </p>
+              )}
 
-            {bird.sciName && <p>Scientific Name: {bird.sciName}</p>}
-            {bird.region && <p>Region: {bird.region[0]}</p>}
-            {bird.status && <p>Status: {bird.status}</p>}
-            {bird.order && <p>Order: {bird.order}</p>}
+              {bird.sciName && <p>Scientific Name: {bird.sciName}</p>}
+              {bird.region && <p>Region: {bird.region[0]}</p>}
+              {bird.status && <p>Status: {bird.status}</p>}
+              {bird.order && <p>Order: {bird.order}</p>}
+            </div>
           </div>
-          <div>
+          <div
+            className={css`
+              max-width: 40%;
+              ${theme.breakpoints.medium} {
+                max-width: 80%;
+              }
+            `}
+          >
             {bird.images.length ? (
               <Image
                 src={bird.images[0]}
                 alt={bird.name}
                 objectFit="cover"
-                boxSize={500}
                 borderRadius={"20%"}
                 fallbackSrc="/Placeholder.svg"
+                boxSize="100%"
+                className={css`
+                  width: 500px;
+                  height: 500px;
+                  ${theme.breakpoints.medium} {
+                    width: 200px;
+                    height: 200px;
+                  }
+                `}
               />
             ) : (
               <Image
@@ -157,7 +188,7 @@ export default function Bird({
       ) : status == "error" ? (
         <h1>"Error"</h1>
       ) : (
-        <h1>"No Data"</h1>
+        <h1></h1>
       )}
     </div>
   );
