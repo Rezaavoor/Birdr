@@ -46,7 +46,7 @@ export default {
   ],
 
   setCurrentBird(id) {
-    
+
     resolvePromise(getBirdDetails(id), this.currentBirdPromiseState);
     this.currentBird = id;
     this.updataViewCount(id);
@@ -142,13 +142,15 @@ export default {
   },
 
   init() {
+    //if(this.user === null){
     const currentPath = window.location.pathname;
     const match = currentPath.match(/\/bird\/(\d+)/);
     const birdId = match ? match[1] : null;
 
     if(birdId){
       this.setCurrentBird(birdId);
-    }
+   // }
+  }
   },
 };
 

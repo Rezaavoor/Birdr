@@ -23,7 +23,7 @@ function modelToPersistence(model) {
 function userModelToPresistence(model) {
   return {
     likedBirds: model.likedBirds || [],
-    currentBird: model.currentBird || "",
+    //currentBird: model.currentBird || "",
   };
 }
 
@@ -34,11 +34,11 @@ function persistenceToModel(data, model) {
 }
 function userPresistenceToModel(data, model) {
   const likedBirds = data?.likedBirds || [];
-  if (data?.currentBird) {
-    model.setCurrentBird(data.currentBird);
-  } else {
-    model.currentBird = "";
-  }
+ // if (data?.currentBird) {
+  //  model.setCurrentBird(data.currentBird);
+ // } else {
+ //   model.currentBird = "";
+ // }
   model.likedBirds = likedBirds;
 
   return model;
@@ -99,7 +99,7 @@ function connectToFirebase(model, watchFunction) {
     } else {
       model.user = null;
       model.likedBirds = [];
-      model.currentBird = "";
+     // model.currentBird = "";
     }
     readFromFirebase(model);
   }
