@@ -54,10 +54,10 @@ export default {
     this.currentBird = id;
     this.updataViewCount(id);
 
-    localStorage.setItem('currentBird', id);
+    //localStorage.setItem('currentBird', id);
    // setCurrentBirdInURL(id);
 
-    setCurrentBirdInURL(id);
+    //setCurrentBirdInURL(id);
    
   },
 
