@@ -8,7 +8,6 @@ export default observer(function SearchP(props) {
 
   function setCurrentBirdACB(bird) {
     props.model.setCurrentBird(bird.id);
-    saveCurrentBirdToLocalStorage(bird.id)
     navigate(`/bird`); 
   }
 
