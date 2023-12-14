@@ -8,7 +8,7 @@ export default observer(function SearchP(props) {
 
   function setCurrentBirdACB(bird) {
     props.model.setCurrentBird(bird.id);
-    navigate(`/bird`); 
+    navigate(`/bird/${bird.id}`); 
   }
 
   function textChangeHandlerACB(birdName) {

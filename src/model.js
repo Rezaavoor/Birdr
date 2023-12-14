@@ -53,7 +53,7 @@ export default {
     this.updataViewCount(id);
 
     localStorage.setItem('currentBird', id);
-    setCurrentBirdInURL(id);
+   // setCurrentBirdInURL(id);
    
   },
 
@@ -143,9 +143,20 @@ export default {
   },
 
   init() {
-    const storedCurrentBird = localStorage.getItem('currentBird');
+    const currentPath = window.location.pathname;
+    const match = currentPath.match(/\/bird\/(\d+)/);
+    const birdId = match ? match[1] : null;
+
+    if(birdId){
+      this.setCurrentBird(birdId);
+    }
+  },
+};
+
+/***
+ *  const storedCurrentBird = localStorage.getItem('currentBird');
     if (storedCurrentBird) {
       this.setCurrentBird(storedCurrentBird);
     }
   },
-};
+ */

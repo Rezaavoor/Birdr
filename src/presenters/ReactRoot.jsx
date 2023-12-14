@@ -46,7 +46,7 @@ export default observer(function ReactRoot(props) {
       ),
     },
     {
-      path: "/bird",
+      path: "/bird/:id",
       element: (
         <NavbarP auth={props.auth} model={props.model}>
           <BirdP model={props.model} />
