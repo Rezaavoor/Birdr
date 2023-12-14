@@ -4,13 +4,13 @@ import { searchBird } from "./modelSource";
 import { auth } from "./firebaseModel";
 import { signOut } from "firebase/auth";
 
+
 export default {
   user: null,
 
   likedBirds: [],
 
   hotBirds: [],
-
   searchParams: {},
   searchResultsPromiseState: {},
   currentBird: null,
@@ -47,11 +47,16 @@ export default {
   ],
 
   setCurrentBird(id) {
+    
+
     resolvePromise(getBirdDetails(id), this.currentBirdPromiseState);
     this.currentBird = id;
     this.updataViewCount(id);
+
+    localStorage.setItem('currentBird', id);
+   
   },
-  /*********** change********************** */
+
   updataViewCount(birdId) {
     const foundBird = this.hotBirds.find(findBirdCB);
 
@@ -62,6 +67,7 @@ export default {
     if (foundBird) {
       foundBird.viewCount += 1;
     } else {
+
       const birdEntry = {
         birdId: birdId,
         viewCount: 1,
@@ -78,7 +84,7 @@ export default {
 
     this.hotBirds = [...this.hotBirds];
   },
-  /*********** change********************** */
+ 
   addLikedBird(bird) {
     this.likedBirds = [...this.likedBirds, bird];
   },
@@ -144,5 +150,12 @@ export default {
   },
   signOut() {
     signOut(auth);
+  },
+
+  init() {
+    const storedCurrentBird = localStorage.getItem('currentBird');
+    if (storedCurrentBird) {
+      this.setCurrentBird(storedCurrentBird);
+    }
   },
 };

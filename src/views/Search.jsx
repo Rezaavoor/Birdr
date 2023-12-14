@@ -14,7 +14,6 @@ export default function Search(props) {
       <div
         className={css`
           position: absolute;
-          overflow: hidden;
           top: 0;
           left: 0;
           width: 100vw;
@@ -43,28 +42,16 @@ export default function Search(props) {
             box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
             -webkit-box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
             -moz-box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 1);
-            font-size: 1.5rem;
-            ${theme.breakpoints.medium} {
-              font-size: 0.8rem;
-            }
-            ${theme.breakpoints.large} {
-              font-size: 0.9rem;
-            }
+            font-size: 2rem;
             color: ${theme.colors.light};
             user-select: none;
             padding: 1%;
           `}
         >
-          <p
+          <p>Search Result:</p>
+            <div
             className={css`
-              margin: 50px 0;
-            `}
-          >
-            Search Result:
-          </p>
-          <div
-            className={css`
-              width: 90%;
+              width: 100%;
               max-width: 100%;
               display: grid;
               grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
@@ -73,29 +60,27 @@ export default function Search(props) {
               justify-content: center;
               align-items: center;
               flex-grow: 1;
+              max-width 800px;
               margin: 0 auto;
-              ${theme.breakpoints.medium} {
-                gap: 50px 50px;
-              }
             `}
           >
-            {props.status == "data" ? (
-              [...props.searchResults].map(displayBirdsCB)
-            ) : props.status == "loading" ? (
-              <Spinner size="xl" />
-            ) : props.status == "error" ? (
-              <h1>"Error"</h1>
-            ) : (
-              <h1></h1>
-            )}
+              {props.status == "data" ? (
+                [...props.searchResults].map(displayBirdsCB)
+              ) : props.status == "loading" ? (
+                <Spinner size="xl" />
+              ) : props.status == "error" ? (
+                <h1>"Error"</h1>
+              ) : (
+                <h1></h1>
+              )}
           </div>
         </div>
       </div>
     </div>
   );
 
-  function displayBirdsCB(bird) {
-    function clickHandlerACB() {
+  function displayBirdsCB(bird){
+    function clickHandlerACB(){
       props.onClickHandler(bird);
     }
     return (
@@ -103,6 +88,6 @@ export default function Search(props) {
         <img src={bird.images[0]} height="100"></img>
         <div>{bird.name}</div>
       </span>
-    );
+    )
   }
 }

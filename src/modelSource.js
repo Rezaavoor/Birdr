@@ -60,3 +60,4 @@ export function searchBird(searchParams, hasImg){
 
     return fetch(url, options).then(responseSearchACB).then(getBirdACB);
 }
+

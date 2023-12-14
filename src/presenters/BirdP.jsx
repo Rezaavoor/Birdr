@@ -3,9 +3,14 @@ import Bird from "../views/Bird";
 import { useToast } from "@chakra-ui/react";
 
 export default observer(function BirdP(props) {
+
+
+
   const toast = useToast();
   const isLoggedIn = !!props.model.user;
   const isBirdLiked = props.model.isBirdLiked(props.model.currentBird);
+
+ 
 
   function onClickHandleMyBirds() {
     if (!isBirdLiked) {
@@ -58,3 +63,29 @@ export default observer(function BirdP(props) {
     />
   );
 });
+
+/**
+ *     function getCurrentBirdFromLocalStorage() {
+      return localStorage.getItem('currentBird');
+  }
+
+  function saveCurrentBirdToLocalStorage(id) {
+    localStorage.setItem('currentBird', id);
+  }
+ useEffect(() => {
+    async function fetchData() {
+      try {
+        // Save and retrieve currentBird from local storage
+        saveCurrentBirdToLocalStorage(props.model.currentBird);
+        const currentBirdId = getCurrentBirdFromLocalStorage();
+
+        // Set current bird in the model
+        await props.model.setCurrentBird(currentBirdId);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    }
+
+    fetchData();
+  }, [props.model]);
+ */

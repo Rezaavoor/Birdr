@@ -9,6 +9,7 @@ import { ThemeProvider } from "@emotion/react";
 import { ChakraProvider, Spinner } from "@chakra-ui/react";
 import NavbarP from "./NavbarP.jsx";
 import BirdP from "./BirdP.jsx";
+import { Spinner } from "@chakra-ui/react";
 
 export default observer(function ReactRoot(props) {
   const router = createBrowserRouter([
@@ -57,8 +58,8 @@ export default observer(function ReactRoot(props) {
   return (
     <ChakraProvider disableGlobalStyle>
       <ThemeProvider theme={theme}>
-      { (props.model.ready) ? <RouterProvider router={router} /> : <Spinner size= "xl"/>
-}      </ThemeProvider>
+      { (props.model.ready )? <RouterProvider router={router} /> : <Spinner size = "xl"/>} 
+      </ThemeProvider>
     </ChakraProvider>
   );
 });

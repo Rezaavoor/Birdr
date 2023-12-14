@@ -6,7 +6,7 @@ const firebaseConfig = {
   storageBucket: "birdr-7cc64.appspot.com",
   messagingSenderId: "706065286091",
   appId: "1:706065286091:web:297d026c94c79bbb1eec4e",
-  measurementId: "G-PG6YSV2MW8",
+  measurementId: "G-PG6YSV2MW8"
 };
 
 export default firebaseConfig;

@@ -2,15 +2,6 @@ body{
   font-family: sans-serif;
   background-color: #151515;
   color: white;
-  overflow-x: hidden;
-
-  /**media queires*/
-  @media (max-width: 768px) {
-    font-size: 0.8rem;
-  }
-  @media (max-width: 576px) {
-    font-size: 0.7rem;
-  }
 }
 
 
