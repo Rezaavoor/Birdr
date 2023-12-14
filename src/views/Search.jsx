@@ -1,4 +1,4 @@
-import { Spinner } from "@chakra-ui/react";
+import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 
@@ -100,8 +100,22 @@ export default function Search(props) {
     }
     return (
       <span key={bird.id} onClick={clickHandlerACB} className="result-item">
-        <img src={bird.images[0]} height="100"></img>
-        <div>{bird.name}</div>
+          <div className={css`
+              height: 200px;
+              width: 200px;
+              overflow: hidden;
+          `}>
+              <Image
+              src={bird.images[0]}
+              alt={bird.name}
+              objectFit="cover"
+              width="100%"
+              height="100%"
+            />
+          </div>
+        <div className={css`
+            font-size: 1.2rem;
+        `}>{bird.name}</div>
       </span>
     );
   }
