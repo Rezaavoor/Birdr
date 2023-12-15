@@ -102,22 +102,27 @@ export default function Hotlist(props) {
     const birdPosition = index + 1;
     return (
       <span key={bird.id} onClick={clickHandlerACB} className="result-item">
-          <div className={css`
-              height: 200px;
-              width: 200px;
-              overflow: hidden;
-          `}>
-              <Image
-              src={bird.images[0]}
-              alt={bird.name}
-              objectFit="cover"
-              width="100%"
-              height="100%"
-            />
-          </div>
-        <div className={css`
+        <div
+          className={css`
+            height: 200px;
+            width: 200px;
+            overflow: hidden;
+          `}
+        >
+          <Image
+            src={bird.images[0]}
+            alt={bird.name}
+            fallbackSrc="/Placeholder.svg"
+            objectFit="cover"
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div
+          className={css`
             font-size: 1.2rem;
-        `}>{`${birdPosition}. ${bird.name}`}</div>
+          `}
+        >{`${birdPosition}. ${bird.name}`}</div>
       </span>
     );
   }

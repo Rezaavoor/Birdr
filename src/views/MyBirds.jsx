@@ -118,6 +118,7 @@ export default function MyBirds(props) {
           <Image
             src={bird.images[0]}
             alt={bird.name}
+            fallbackSrc="/Placeholder.svg"
             objectFit="cover"
             width="100%"
             height="100%"

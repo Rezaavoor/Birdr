@@ -49,7 +49,7 @@ export default function Search(props) {
           `}
         >
           <p>Search Result:</p>
-            <div
+          <div
             className={css`
               width: 100%;
               max-width: 100%;
@@ -64,44 +64,51 @@ export default function Search(props) {
               margin: 0 auto;
             `}
           >
-              {props.status == "data" ? (
-                [...props.searchResults].map(displayBirdsCB)
-              ) : props.status == "loading" ? (
-                <Spinner size="xl" />
-              ) : props.status == "error" ? (
-                <h1>"Error"</h1>
-              ) : (
-                <h1></h1>
-              )}
+            {props.status == "data" ? (
+              [...props.searchResults].map(displayBirdsCB)
+            ) : props.status == "loading" ? (
+              <Spinner size="xl" />
+            ) : props.status == "error" ? (
+              <h1>"Error"</h1>
+            ) : (
+              <h1></h1>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 
-  function displayBirdsCB(bird){
-    function clickHandlerACB(){
+  function displayBirdsCB(bird) {
+    function clickHandlerACB() {
       props.onClickHandler(bird);
     }
     return (
       <span key={bird.id} onClick={clickHandlerACB} className="result-item">
-          <div className={css`
-              height: 200px;
-              width: 200px;
-              overflow: hidden;
-          `}>
-              <Image
-              src={bird.images[0]}
-              alt={bird.name}
-              objectFit="cover"
-              width="100%"
-              height="100%"
-            />
-          </div>
-        <div className={css`
+        <div
+          className={css`
+            height: 200px;
+            width: 200px;
+            overflow: hidden;
+          `}
+        >
+          <Image
+            src={bird.images[0]}
+            alt={bird.name}
+            fallbackSrc="/Placeholder.svg"
+            objectFit="cover"
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div
+          className={css`
             font-size: 1.2rem;
-        `}>{bird.name}</div>
+          `}
+        >
+          {bird.name}
+        </div>
       </span>
-    )
+    );
   }
 }
