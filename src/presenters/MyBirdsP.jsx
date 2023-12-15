@@ -6,7 +6,7 @@ import { useToast } from "@chakra-ui/react";
 
 export default observer(function MyBirdsP(props) {
   const navigate = useNavigate();
-  const toast = useToast;
+  const toast = useToast();
 
   useEffect(() => {
     const fetchData = async () => {
