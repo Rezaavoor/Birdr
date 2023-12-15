@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "/src/firebaseConfig.js";
-import { getDatabase, ref, get, set,} from "firebase/database";
+import { getDatabase, ref, get, set } from "firebase/database";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -66,7 +66,9 @@ function readFromFirebase(model) {
     );
     const modelPromise = get(rf).then(convertACB);
 
-    return Promise.all([userPromise, modelPromise]).then(setModelToReadyACB);
+    return Promise.all([userPromise, modelPromise]).then(
+      setModelToReadyACB(model)
+    );
   } else {
     return get(rf).then(convertACB).then(setModelToReadyACB);
   }
@@ -74,10 +76,7 @@ function readFromFirebase(model) {
 
 function connectToFirebase(model, watchFunction) {
   function watchedValues() {
-    return [
-      model.hotBirds,
-      model.likedBirds,
-    ];
+    return [model.hotBirds, model.likedBirds];
   }
 
   function saveChangedValues() {
@@ -108,4 +107,3 @@ export {
 };
 
 export default connectToFirebase;
-
