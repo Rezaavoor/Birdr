@@ -7,11 +7,21 @@ export default observer(function HotlistP(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    props.model.getHotBirds();
-  }, []);
+    const fetchData = async () => {
+      try {
+        await props.model.getHotBirds();
+      } catch (error) {
+        console.error("Error fetching hot birds:", error);
+      }
+    };
+  
+    if (!props.model.hotBirdsPromiseState.data) {
+      fetchData();
+    }
+  }, [props.model.hotBirdsPromiseState.data, props.model]);
 
-  function onClickMoreDetails() {
-    props.model.setCurrentBird(props.model.birdOfTheDay);
+  function onClickMoreDetails(bird) {
+    props.model.setCurrentBird(bird.id);
     navigate("/bird");
   }
 
