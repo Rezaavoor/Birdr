@@ -81,6 +81,7 @@ export default {
   /*********** change********************** */
   addLikedBird(bird) {
     this.likedBirds = [...this.likedBirds, bird];
+    this.getLikedBirds();
   },
 
   removeLikedBird(birdToRemove) {
@@ -89,6 +90,7 @@ export default {
     }
 
     this.likedBirds = this.likedBirds.filter(checkBirdsCB);
+    this.getLikedBirds();
   },
 
   async setBirdOfTheDay() {
@@ -107,13 +109,16 @@ export default {
   },
 
   getHotBirds() {
-    const slicedHotBirds = this.hotBirds.slice(0, 10)
+    const slicedHotBirds = this.hotBirds.slice(0, 10);
     const ids = slicedHotBirds.map((bird) => bird.birdId);
     resolvePromise(getBirdsDetailsById(ids), this.hotBirdsPromiseState);
   },
 
   getLikedBirds() {
-    resolvePromise(getBirdsDetailsById(this.likedBirds), this.likedBirdsPromiseState)
+    resolvePromise(
+      getBirdsDetailsById(this.likedBirds),
+      this.likedBirdsPromiseState
+    );
   },
 
   setSearchName(name) {

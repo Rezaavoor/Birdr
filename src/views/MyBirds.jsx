@@ -7,11 +7,6 @@ import { DeleteIcon } from "@chakra-ui/icons";
 export default function MyBirds(props) {
   const theme = useTheme();
 
-  function removeMyBird(bird){
-    console.log("Tried to remove: ", bird)
-    props.removeBird(bird);
-  }
-
   return (
     <div
       className={css`
@@ -106,41 +101,53 @@ export default function MyBirds(props) {
     function clickHandlerACB() {
       props.onClickHandler(bird);
     }
+    function removeMyBird() {
+      console.log("Tried to remove: ", bird);
+      props.removeBird(bird);
+    }
     return (
       <span key={bird.id} className="result-item">
-          <div onClick={clickHandlerACB} className={css`
-              height: 200px;
-              width: 200px;
-              overflow: hidden;
-          `}>
-              <Image
-              src={bird.images[0]}
-              alt={bird.name}
-              objectFit="cover"
-              width="100%"
-              height="100%"
-            />
-          </div>
-        <div onClick={clickHandlerACB} className={css`
+        <div
+          onClick={clickHandlerACB}
+          className={css`
+            height: 200px;
+            width: 200px;
+            overflow: hidden;
+          `}
+        >
+          <Image
+            src={bird.images[0]}
+            alt={bird.name}
+            objectFit="cover"
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div
+          onClick={clickHandlerACB}
+          className={css`
             font-size: 1.2rem;
-        `}>{bird.name}</div>
-                        <div
-                  onClick={removeMyBird}
-                  className={css`
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    margin: 50px;
-                    cursor: pointer;
-                    transition: all 0.2s ease-in-out;
-                    :hover {
-                      transform: scale(1.1);
-                    }
-                  `}
-                >
-                  <DeleteIcon boxSize={7} color={theme.colors.white} />
-                </div>
+          `}
+        >
+          {bird.name}
+        </div>
+        <div
+          onClick={removeMyBird}
+          className={css`
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            :hover {
+              transform: scale(1.1);
+            }
+          `}
+        >
+          <DeleteIcon boxSize={7} color={theme.colors.white} />
+        </div>
       </span>
     );
   }

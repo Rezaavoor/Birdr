@@ -4,7 +4,7 @@ import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useToast } from "@chakra-ui/react";
 
-export default observer (function MyBirdsP(props) {
+export default observer(function MyBirdsP(props) {
   const navigate = useNavigate();
   const toast = useToast;
 
@@ -18,26 +18,26 @@ export default observer (function MyBirdsP(props) {
     };
 
     console.log(props.model.likedBirdsPromiseState);
-  
+
     if (!props.model.likedBirdsPromiseState.data) {
       fetchData();
     }
-  }, [props.model.likedBirdsPromiseState.data, props.model]);
+  }, [props.model.likedBirds]);
 
   function onClickMoreDetails(bird) {
     props.model.setCurrentBird(bird.id);
     navigate("/bird");
   }
 
-  function removeMyBird(bird){
-    props.model.removeLikedBird(bird);
-    toast({
-      title: "Bird removed.",
-      description: `You removed ${props.model.birdOfTheDayPromiseState.data.name} from My Birds.`,
-      status: "error",
-      duration: 5000,
-      isClosable: true,
-    });
+  function removeMyBird(bird) {
+    props.model.removeLikedBird(bird.id);
+    // toast({
+    //   title: "Bird removed.",
+    //   description: `You removed ${bird.name} from My Birds.`,
+    //   status: "error",
+    //   duration: 5000,
+    //   isClosable: true,
+    // });
   }
 
   if (!props.model.likedBirdsPromiseState.promise) {
@@ -60,17 +60,17 @@ export default observer (function MyBirdsP(props) {
     return (
       <MyBirds
         status="loading"
-        onClickHandler = {onClickMoreDetails}
-        removeBird = {removeMyBird}
+        onClickHandler={onClickMoreDetails}
+        removeBird={removeMyBird}
       />
     );
   }
 
   return (
     <MyBirds
-      myBirds = {props.model.likedBirdsPromiseState.data}
-      onClickHandler = {onClickMoreDetails}
-      removeBird = {removeMyBird}
+      myBirds={props.model.likedBirdsPromiseState.data}
+      onClickHandler={onClickMoreDetails}
+      removeBird={removeMyBird}
       status="data"
     />
   );
