@@ -29,11 +29,13 @@ function userModelToPresistence(model) {
 function persistenceToModel(data, model) {
   const hotBirds = data?.hotBirds || [];
   model.hotBirds = hotBirds;
+  model.getHotBirds();
   return model;
 }
 function userPresistenceToModel(data, model) {
   const likedBirds = data?.likedBirds || [];
   model.likedBirds = likedBirds;
+  model.getLikedBirds();
 
   return model;
 }
