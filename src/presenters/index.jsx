@@ -21,5 +21,6 @@ createRoot(document.getElementById("root")).render(
   <ReactRoot model={reactiveModel} auth = {auth} />
 );
 window.myModel = reactiveModel;
+reactiveModel.doSearch({name: ""})
 connectToFirebase(reactiveModel, reaction)
 reactiveModel.init();
