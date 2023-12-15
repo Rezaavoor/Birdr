@@ -81,6 +81,7 @@ export default {
 
   addLikedBird(bird) {
     this.likedBirds = [...this.likedBirds, bird];
+    this.getLikedBirds();
   },
 
   removeLikedBird(birdToRemove) {
@@ -89,6 +90,7 @@ export default {
     }
 
     this.likedBirds = this.likedBirds.filter(checkBirdsCB);
+    this.getLikedBirds();
   },
 
   async setBirdOfTheDay() {
