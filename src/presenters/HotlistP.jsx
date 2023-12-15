@@ -14,7 +14,7 @@ export default observer(function HotlistP(props) {
         console.error("Error fetching hot birds:", error);
       }
     };
-  
+
     if (!props.model.hotBirdsPromiseState.data) {
       fetchData();
     }
@@ -22,7 +22,7 @@ export default observer(function HotlistP(props) {
 
   function onClickMoreDetails(bird) {
     props.model.setCurrentBird(bird.id);
-    navigate("/bird");
+    navigate(`/bird/${bird.id}`);
   }
 
   if (!props.model.hotBirdsPromiseState.promise) {
@@ -42,18 +42,13 @@ export default observer(function HotlistP(props) {
     !props.model.hotBirdsPromiseState.error &&
     !props.model.hotBirdsPromiseState.data
   ) {
-    return (
-      <Hotlist
-        status="loading"
-        onClickHandler = {onClickMoreDetails}
-      />
-    );
+    return <Hotlist status="loading" onClickHandler={onClickMoreDetails} />;
   }
 
   return (
     <Hotlist
-      currentHotlist = {props.model.hotBirdsPromiseState.data}
-      onClickHandler = {onClickMoreDetails}
+      currentHotlist={props.model.hotBirdsPromiseState.data}
+      onClickHandler={onClickMoreDetails}
       status="data"
     />
   );

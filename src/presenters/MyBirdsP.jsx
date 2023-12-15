@@ -26,7 +26,7 @@ export default observer(function MyBirdsP(props) {
 
   function onClickMoreDetails(bird) {
     props.model.setCurrentBird(bird.id);
-    navigate("/bird");
+    navigate(`/bird/${bird.id}`);
   }
 
   function removeMyBird(bird) {
