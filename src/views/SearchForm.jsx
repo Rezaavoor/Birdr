@@ -74,7 +74,7 @@ export default function SearchForm(props) {
           <FormLabel htmlFor='img-only' mb='0'>
             Only want search results with images?
           </FormLabel>
-          <Switch id='img-only' onChange={hasImageACB}/>
+          <Switch id='img-only' onChange={hasImageACB} defaultChecked={props.hasImg}/>
         </FormControl>
         </div>
       </div>
