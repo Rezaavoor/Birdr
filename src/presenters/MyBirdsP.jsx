@@ -6,7 +6,7 @@ import { useToast } from "@chakra-ui/react";
 
 export default observer (function MyBirdsP(props) {
   const navigate = useNavigate();
-  const toast = useToast;
+  const toast = useToast();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,10 +30,11 @@ export default observer (function MyBirdsP(props) {
   }
 
   function removeMyBird(bird){
-    props.model.removeLikedBird(bird);
+    props.model.removeLikedBird(bird.id);
+    console.log(bird.id); //remove later
     toast({
       title: "Bird removed.",
-      description: `You removed ${props.model.birdOfTheDayPromiseState.data.name} from My Birds.`,
+      description: `You removed ${bird.name} from My Birds.`,
       status: "error",
       duration: 5000,
       isClosable: true,

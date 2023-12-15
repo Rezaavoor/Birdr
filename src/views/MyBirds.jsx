@@ -125,7 +125,7 @@ export default function MyBirds(props) {
             font-size: 1.2rem;
         `}>{bird.name}</div>
                         <div
-                  onClick={removeMyBird}
+                  onClick={removeMyBird(bird.id)}
                   className={css`
                     display: flex;
                     flex-direction: column;
