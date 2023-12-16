@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "/src/firebaseConfig.js";
-import { getDatabase, ref, get, set, off, onValue } from "firebase/database";
+import { getDatabase, ref, get, set } from "firebase/database";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
@@ -23,23 +23,19 @@ function modelToPersistence(model) {
 function userModelToPresistence(model) {
   return {
     likedBirds: model.likedBirds || [],
-    //currentBird: model.currentBird || "",
   };
 }
 
 function persistenceToModel(data, model) {
   const hotBirds = data?.hotBirds || [];
   model.hotBirds = hotBirds;
+  model.getHotBirds();
   return model;
 }
 function userPresistenceToModel(data, model) {
   const likedBirds = data?.likedBirds || [];
- // if (data?.currentBird) {
-  //  model.setCurrentBird(data.currentBird);
- // } else {
- //   model.currentBird = "";
- // }
   model.likedBirds = likedBirds;
+  model.getLikedBirds();
 
   return model;
 }
@@ -50,7 +46,6 @@ function saveToFirebase(model) {
       const userData = userModelToPresistence(model);
       set(ref(db, `${Users}/${model.user.uid}`), userData);
     }
-
     set(rf, data);
   }
 }
@@ -73,7 +68,9 @@ function readFromFirebase(model) {
     );
     const modelPromise = get(rf).then(convertACB);
 
-    return Promise.all([userPromise, modelPromise]).then(setModelToReadyACB);
+    return Promise.all([userPromise, modelPromise]).then(
+      setModelToReadyACB(model)
+    );
   } else {
     return get(rf).then(convertACB).then(setModelToReadyACB);
   }
@@ -81,12 +78,7 @@ function readFromFirebase(model) {
 
 function connectToFirebase(model, watchFunction) {
   function watchedValues() {
-    return [
-      model.hotBirds,
-      model.currentBird,
-      model.birdOfTheDay,
-      model.likedBirds,
-    ];
+    return [model.hotBirds, model.likedBirds];
   }
 
   function saveChangedValues() {
@@ -99,7 +91,6 @@ function connectToFirebase(model, watchFunction) {
     } else {
       model.user = null;
       model.likedBirds = [];
-     // model.currentBird = "";
     }
     readFromFirebase(model);
   }
@@ -118,4 +109,3 @@ export {
 };
 
 export default connectToFirebase;
-

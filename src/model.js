@@ -1,10 +1,7 @@
-import { getBirdDetails } from "./modelSource";
+import { getBirdDetails, getBirdsDetailsById, searchBird } from "./modelSource";
 import resolvePromise from "./resolvePromise";
-import { searchBird } from "./modelSource";
 import { auth } from "./firebaseModel";
 import { signOut } from "firebase/auth";
-
-
 
 export default {
   user: null,
@@ -17,6 +14,8 @@ export default {
   currentBird: null,
   currentBirdPromiseState: {},
   birdOfTheDayPromiseState: {},
+  hotBirdsPromiseState: {},
+  likedBirdsPromiseState: {},
   birdOfTheDay: null,
   birdsOfTheDay: [
     1, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 17, 20, 21, 22, 23, 26, 28, 29, 30,
@@ -46,14 +45,11 @@ export default {
   ],
 
   setCurrentBird(id) {
-
     resolvePromise(getBirdDetails(id), this.currentBirdPromiseState);
     this.currentBird = id;
     this.updataViewCount(id);
 
     //localStorage.setItem('currentBird', id);
-   
-   
   },
 
   updataViewCount(birdId) {
@@ -66,7 +62,6 @@ export default {
     if (foundBird) {
       foundBird.viewCount += 1;
     } else {
-
       const birdEntry = {
         birdId: birdId,
         viewCount: 1,
@@ -83,9 +78,10 @@ export default {
 
     this.hotBirds = [...this.hotBirds];
   },
- 
+
   addLikedBird(bird) {
     this.likedBirds = [...this.likedBirds, bird];
+    this.getLikedBirds();
   },
 
   removeLikedBird(birdToRemove) {
@@ -94,6 +90,7 @@ export default {
     }
 
     this.likedBirds = this.likedBirds.filter(checkBirdsCB);
+    this.getLikedBirds();
   },
 
   async setBirdOfTheDay() {
@@ -109,6 +106,19 @@ export default {
       resolvePromise(getBirdDetails(id), this.birdOfTheDayPromiseState);
       this.birdOfTheDay = id;
     }
+  },
+
+  getHotBirds() {
+    const slicedHotBirds = this.hotBirds.slice(0, 10);
+    const ids = slicedHotBirds.map((bird) => bird.birdId);
+    resolvePromise(getBirdsDetailsById(ids), this.hotBirdsPromiseState);
+  },
+
+  getLikedBirds() {
+    resolvePromise(
+      getBirdsDetailsById(this.likedBirds),
+      this.likedBirdsPromiseState
+    );
   },
 
   setSearchName(name) {
@@ -147,7 +157,7 @@ export default {
     const match = currentPath.match(/\/bird\/(\d+)/);
     const birdId = match ? match[1] : null;
 
-    if(birdId){
+    if (birdId) {
       this.setCurrentBird(birdId);
    // }
   }

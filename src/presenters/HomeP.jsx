@@ -3,14 +3,12 @@ import Home from "../views/Home";
 import { useNavigate } from "react-router-dom";
 import { useToast } from "@chakra-ui/react";
 
-
 export default observer(function HomeP(props) {
   const navigate = useNavigate();
   const toast = useToast();
   props.model.setBirdOfTheDay();
   const isLoggedIn = !!props.model.user;
   const isBirdLiked = props.model.isBirdLiked(props.model.birdOfTheDay);
-
 
   function onClickHandleMyBirds() {
     if (!isBirdLiked) {
@@ -35,10 +33,7 @@ export default observer(function HomeP(props) {
   }
   function onClickMoreDetails() {
     props.model.setCurrentBird(props.model.birdOfTheDay);
-    
-    navigate(`/bird/${props.model.birdOfTheDay}`); 
-
-    
+    navigate(`/bird/${props.model.birdOfTheDay}`);
   }
 
   if (!props.model.birdOfTheDayPromiseState.promise) {

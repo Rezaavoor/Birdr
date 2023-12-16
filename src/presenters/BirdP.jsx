@@ -3,14 +3,9 @@ import Bird from "../views/Bird";
 import { useToast } from "@chakra-ui/react";
 
 export default observer(function BirdP(props) {
-
-
-
   const toast = useToast();
   const isLoggedIn = !!props.model.user;
   const isBirdLiked = props.model.isBirdLiked(props.model.currentBird);
-
- 
 
   function onClickHandleMyBirds() {
     if (!isBirdLiked) {

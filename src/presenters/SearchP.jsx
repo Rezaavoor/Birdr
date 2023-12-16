@@ -61,6 +61,7 @@ export default observer(function SearchP(props) {
         searchClick={searchClickHandlerACB}
         onClickHandler={setCurrentBirdACB}
         onlyImages={onlyImagesHandlerACB}
+        hasImg = {props.model.searchParams.hasImg}
       />
       {renderSearchResult()}
     </div>

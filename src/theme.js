@@ -7,9 +7,9 @@ export const theme = {
     dark: "#151515",
   },
   breakpoints: {
-    small: "576px",
-    medium: "768px",
-    large: "992px",
-    xlarge: "1200px",
+    small: `@media (max-width: 576px)`,
+    medium: `@media (max-width: 768px)`,
+    large: `@media (max-width: 992px)`,
+    xlarge: `@media (max-width: 1200px)`,
   },
 };

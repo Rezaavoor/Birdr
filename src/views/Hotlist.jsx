@@ -1,11 +1,10 @@
 import React from "react";
-import { Spinner } from "@chakra-ui/react";
+import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 
 export default function Hotlist(props) {
   const theme = useTheme();
-  console.log(props.currentHotlist);
   return (
     <div
       className={css`
@@ -62,7 +61,7 @@ export default function Hotlist(props) {
               margin: 50px 0;
             `}
           >
-            HotList
+            Hot List, The top viewed birds on the website.
           </p>
           <div
             className={css`
@@ -81,22 +80,49 @@ export default function Hotlist(props) {
               }
             `}
           >
-            {[...props.currentHotlist].map(displayBirdsCB)}
-
+            {props.status == "data" ? (
+              [...props.currentHotlist].map(displayBirdsCB)
+            ) : props.status == "loading" ? (
+              <Spinner size="xl" />
+            ) : props.status == "error" ? (
+              <h1>"Error"</h1>
+            ) : (
+              <h1></h1>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 
-  function displayBirdsCB(bird) {
+  function displayBirdsCB(bird, index) {
     function clickHandlerACB() {
       props.onClickHandler(bird);
     }
+    const birdPosition = index + 1;
     return (
-      <span key={bird.id} onClick={clickHandlerACB} class="result-item">
-        <img  height="100"></img>
-        <div>{bird.name}</div>
+      <span key={bird.id} onClick={clickHandlerACB} className="result-item">
+        <div
+          className={css`
+            height: 200px;
+            width: 200px;
+            overflow: hidden;
+          `}
+        >
+          <Image
+            src={bird.images[0]}
+            alt={bird.name}
+            fallbackSrc="/Placeholder.svg"
+            objectFit="cover"
+            width="100%"
+            height="100%"
+          />
+        </div>
+        <div
+          className={css`
+            font-size: 1.2rem;
+          `}
+        >{`${birdPosition}. ${bird.name}`}</div>
       </span>
     );
   }

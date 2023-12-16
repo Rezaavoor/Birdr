@@ -1,16 +1,17 @@
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { Icon } from "@chakra-ui/react";
+import { useLocation } from "react-router-dom";
 
 export default function Navbar({
   children,
   onButtonClick,
-  currentRoute,
   logOutHandler,
   logInHandler,
   user,
 }) {
   const theme = useTheme();
+  const currentRoute = useLocation().pathname;
   const onHomeClickACB = () => {
     onButtonClick("/");
   };
