@@ -8,7 +8,6 @@ export default function Search(props) {
     <div
       className={css`
         position: relative;
-        background-color: ${theme.colors.dark};
       `}
     >
       <div
@@ -48,7 +47,7 @@ export default function Search(props) {
               justify-content: center;
               align-items: center;
               flex-grow: 1;
-              margin: 0 auto;
+              margin: 10px auto;
             `}
           >
             {props.status == "data" ? (
@@ -71,7 +70,16 @@ export default function Search(props) {
       props.onClickHandler(bird);
     }
     return (
-      <span key={bird.id} onClick={clickHandlerACB} className="result-item">
+      <span
+        key={bird.id}
+        onClick={clickHandlerACB}
+        className={css`
+          transition: all 0.2s ease-in-out;
+          :hover {
+            transform: scale(1.1);
+          }
+        `}
+      >
         <div
           className={css`
             height: 200px;

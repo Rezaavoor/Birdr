@@ -9,7 +9,6 @@ export default function Hotlist(props) {
     <div
       className={css`
         position: relative;
-        background-color: ${theme.colors.dark};
       `}
     >
       <div
@@ -86,7 +85,16 @@ export default function Hotlist(props) {
     }
     const birdPosition = index + 1;
     return (
-      <span key={bird.id} onClick={clickHandlerACB} className="result-item">
+      <span
+        key={bird.id}
+        onClick={clickHandlerACB}
+        className={css`
+          transition: all 0.2s ease-in-out;
+          :hover {
+            transform: scale(1.1);
+          }
+        `}
+      >
         <div
           className={css`
             display: flex;

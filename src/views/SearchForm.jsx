@@ -74,6 +74,7 @@ export default function SearchForm(props) {
               top: -28px;
             }
             z-index: 2;
+            cursor: pointer;
           `}
         >
           <SearchIcon

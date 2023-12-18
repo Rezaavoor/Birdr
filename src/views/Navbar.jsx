@@ -226,7 +226,7 @@ export default function Navbar({
                 `}
                 onClick={onLogOutClick}
               >
-                Log Out
+                Logout
               </p>
             ) : (
               // User is not logged in, show login button
@@ -244,7 +244,7 @@ export default function Navbar({
                 `}
                 onClick={onLogInClickACB}
               >
-                Log In
+                Login
               </p>
             )}
           </div>
@@ -252,7 +252,7 @@ export default function Navbar({
       </div>
       <div
         className={css`
-          padding-top: 90px;
+          padding-top: 80px;
           ${theme.breakpoints.medium} {
             padding-top: 0px;
           }

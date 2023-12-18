@@ -2,7 +2,6 @@ import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { InfoIcon, AddIcon, DeleteIcon } from "@chakra-ui/icons";
-import { useState } from "react";
 
 export default function Home({
   name,
@@ -25,6 +24,9 @@ export default function Home({
         className={css`
           position: absolute;
           top: -10vh;
+          ${theme.breakpoints.medium} {
+            top: 0;
+          }
           left: 0;
           width: 100vw;
           height: 50vh;
@@ -39,12 +41,14 @@ export default function Home({
         className={css`
           position: absolute;
           top: -10vh;
+          ${theme.breakpoints.medium} {
+            top: 0;
+          }
           left: 0;
           width: 100vw;
           height: 100vh;
           overflow: hidden;
           z-index: 1;
-          transition: all 0.8s ease-in-out;
         `}
         id="image-div"
       >
