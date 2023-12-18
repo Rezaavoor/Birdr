@@ -18,13 +18,13 @@ export default function SearchForm(props) {
     props.searchClick();
   }
 
-  function handleKeyDown(event){
-    if(event.key === "Enter"){
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
       props.searchClick();
     }
   }
 
-  function hasImageACB(){
+  function hasImageACB() {
     props.onlyImages();
   }
 
@@ -37,7 +37,16 @@ export default function SearchForm(props) {
           align-items: center;
           position: relative;
           justify-content: center;
+          margin: 10 5vw;
           margin-top: 15vh;
+          font-size: 1.5rem;
+          ${theme.breakpoints.medium} {
+            font-size: 0.8rem;
+            flex-direction: column;
+          }
+          ${theme.breakpoints.large} {
+            font-size: 0.9rem;
+          }
         `}
       >
         <div
@@ -60,7 +69,12 @@ export default function SearchForm(props) {
           className={css`
             position: relative;
             left: -30px;
+            ${theme.breakpoints.medium} {
+              left: 80px;
+              top: -28px;
+            }
             z-index: 2;
+            cursor: pointer;
           `}
         >
           <SearchIcon
@@ -70,12 +84,16 @@ export default function SearchForm(props) {
           />
         </div>
         <div>
-        <FormControl display='flex' alignItems='center'>
-          <FormLabel htmlFor='img-only' mb='0'>
-            Only want search results with images?
-          </FormLabel>
-          <Switch id='img-only' onChange={hasImageACB} defaultChecked={props.hasImg}/>
-        </FormControl>
+          <FormControl display="flex" alignItems="center">
+            <FormLabel htmlFor="img-only" mb="0">
+              Only want search results with images?
+            </FormLabel>
+            <Switch
+              id="img-only"
+              onChange={hasImageACB}
+              defaultChecked={props.hasImg}
+            />
+          </FormControl>
         </div>
       </div>
     </div>

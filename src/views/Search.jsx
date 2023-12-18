@@ -8,23 +8,8 @@ export default function Search(props) {
     <div
       className={css`
         position: relative;
-        background-color: ${theme.colors.dark};
       `}
     >
-      <div
-        className={css`
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 50vh;
-          background-image: linear-gradient(
-            ${theme.colors.dark},
-            rgba(0, 0, 0, 0)
-          );
-          z-index: 2;
-        `}
-      />
       <div
         className={css`
           position: relative;
@@ -32,6 +17,13 @@ export default function Search(props) {
           display: flex;
           flex-direction: column;
           align-items: center;
+          font-size: 1.5rem;
+          ${theme.breakpoints.medium} {
+            font-size: 0.8rem;
+          }
+          ${theme.breakpoints.large} {
+            font-size: 0.9rem;
+          }
         `}
       >
         <div
@@ -39,10 +31,6 @@ export default function Search(props) {
             position: absolute;
             width: 100%;
             text-align: left;
-            box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
-            -webkit-box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
-            -moz-box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 1);
-            font-size: 2rem;
             color: ${theme.colors.light};
             user-select: none;
             padding: 1%;
@@ -56,12 +44,10 @@ export default function Search(props) {
               display: grid;
               grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
               gap: 100px 100px;
-              padding 16px;
               justify-content: center;
               align-items: center;
               flex-grow: 1;
-              max-width 800px;
-              margin: 0 auto;
+              margin: 10px auto;
             `}
           >
             {props.status == "data" ? (
@@ -84,12 +70,22 @@ export default function Search(props) {
       props.onClickHandler(bird);
     }
     return (
-      <span key={bird.id} onClick={clickHandlerACB} className="result-item">
+      <span
+        key={bird.id}
+        onClick={clickHandlerACB}
+        className={css`
+          transition: all 0.2s ease-in-out;
+          :hover {
+            transform: scale(1.1);
+          }
+        `}
+      >
         <div
           className={css`
             height: 200px;
             width: 200px;
             overflow: hidden;
+            cursor: pointer;
           `}
         >
           <Image
@@ -104,6 +100,7 @@ export default function Search(props) {
         <div
           className={css`
             font-size: 1.2rem;
+            cursor: pointer;
           `}
         >
           {bird.name}

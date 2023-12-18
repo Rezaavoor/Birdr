@@ -9,6 +9,9 @@ import { ThemeProvider } from "@emotion/react";
 import { ChakraProvider, Spinner } from "@chakra-ui/react";
 import NavbarP from "./NavbarP.jsx";
 import BirdP from "./BirdP.jsx";
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+
+
 
 export default observer(function ReactRoot(props) {
   const router = createBrowserRouter([
@@ -52,6 +55,19 @@ export default observer(function ReactRoot(props) {
         </NavbarP>
       ),
     },
+    {
+      path: "/bird", // Alternative rout when bird id not defined in url
+      element: (
+        <NavbarP auth={props.auth} model={props.model}>
+          <BirdP model={props.model} />
+        </NavbarP>
+      ),
+    },
+    // handle 404 by redirect to default rout
+    {
+      path: "*", 
+      element: <Navigate to="/" />,
+    }
   ]);
 
   return (

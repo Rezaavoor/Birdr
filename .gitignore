@@ -9,3 +9,4 @@ package-lock.json
 **/*Config.js*
 *.env
 **/.firebase/*
+.firebase/hosting.ZGlzdA.cache

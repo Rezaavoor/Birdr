@@ -252,7 +252,10 @@ export default function Navbar({
       </div>
       <div
         className={css`
-          padding-top: 90px;
+          padding-top: 80px;
+          ${theme.breakpoints.medium} {
+            padding-top: 0px;
+          }
         `}
       >
         {children}
