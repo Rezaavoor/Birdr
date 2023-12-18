@@ -56,11 +56,9 @@ export default function Search(props) {
               display: grid;
               grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
               gap: 100px 100px;
-              padding 16px;
               justify-content: center;
               align-items: center;
               flex-grow: 1;
-              max-width 800px;
               margin: 0 auto;
             `}
           >

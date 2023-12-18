@@ -70,7 +70,6 @@ export default function Hotlist(props) {
               display: grid;
               grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
               gap: 100px 100px;
-              padding 16px;
               justify-content: center;
               align-items: center;
               flex-grow: 1;
@@ -104,6 +103,9 @@ export default function Hotlist(props) {
       <span key={bird.id} onClick={clickHandlerACB} className="result-item">
         <div
           className={css`
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             height: 200px;
             width: 200px;
             overflow: hidden;
@@ -123,6 +125,8 @@ export default function Hotlist(props) {
           className={css`
             font-size: 1.2rem;
             cursor: pointer;
+            margin-top: 5px;
+            white-space: nowrap;
           `}
         >{`${birdPosition}. ${bird.name}`}</div>
       </span>
