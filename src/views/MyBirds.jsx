@@ -16,22 +16,10 @@ export default function MyBirds(props) {
     >
       <div
         className={css`
-          position: absolute;
-          overflow: hidden;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 50vh;
-          background-image: linear-gradient(
-            ${theme.colors.dark},
-            rgba(0, 0, 0, 0)
-          );
-          z-index: 2;
-        `}
-      />
-      <div
-        className={css`
           position: relative;
+          ${theme.breakpoints.medium} {
+            margin-top: 10vh;
+          }
           z-index: 3;
           display: flex;
           flex-direction: column;
@@ -43,9 +31,6 @@ export default function MyBirds(props) {
             position: absolute;
             width: 100%;
             text-align: left;
-            box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
-            -webkit-box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
-            -moz-box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 1);
             font-size: 1.5rem;
             ${theme.breakpoints.medium} {
               font-size: 0.8rem;
@@ -102,7 +87,6 @@ export default function MyBirds(props) {
       props.onClickHandler(bird);
     }
     function removeMyBird() {
-      console.log("Tried to remove: ", bird);
       props.removeBird(bird);
     }
     return (
@@ -113,6 +97,7 @@ export default function MyBirds(props) {
             height: 200px;
             width: 200px;
             overflow: hidden;
+            cursor: pointer;
           `}
         >
           <Image
@@ -128,6 +113,7 @@ export default function MyBirds(props) {
           onClick={clickHandlerACB}
           className={css`
             font-size: 1.2rem;
+            cursor: pointer;
           `}
         >
           {bird.name}

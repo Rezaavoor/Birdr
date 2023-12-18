@@ -2,6 +2,7 @@ import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { InfoIcon, AddIcon, DeleteIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
 export default function Home({
   name,
@@ -43,7 +44,9 @@ export default function Home({
           height: 100vh;
           overflow: hidden;
           z-index: 1;
+          transition: all 0.8s ease-in-out;
         `}
+        id="image-div"
       >
         {status == "data" && images[0] ? (
           <Image
@@ -94,15 +97,30 @@ export default function Home({
         >
           <div
             className={css`
+              position: relative;
               width: 50%;
               text-align: center;
               font-size: 2.5rem;
               color: ${theme.colors.white};
               font-weight: bold;
-              background-color: rgba(0, 0, 0, 0.3);
+              background-color: rgba(0, 0, 0, 0.1);
+              backdrop-filter: blur(10px);
               ${theme.breakpoints.medium} {
                 font-size: 2rem;
                 width: 90%;
+              }
+              border-radius: 20px;
+              transition: all 0.5s ease-in-out;
+              * {
+                transition: all 0.5s ease-in-out;
+              }
+              :hover {
+                transform: translateY(15px);
+                background-color: rgba(0, 0, 0, 0);
+                backdrop-filter: blur(0px);
+                * {
+                  transform: scale(1.1);
+                }
               }
             `}
           >
@@ -149,7 +167,7 @@ export default function Home({
                   `}
                 >
                   <DeleteIcon boxSize={7} color={theme.colors.white} />
-                  <p>Remove From My Birds</p>
+                  <p>Remove This Bird</p>
                 </div>
               ) : (
                 <div
