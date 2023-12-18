@@ -49,7 +49,7 @@ export default {
     this.currentBird = id;
     this.updataViewCount(id);
 
-    //localStorage.setItem('currentBird', id);
+    localStorage.setItem('currentBird', id);
   },
 
   updataViewCount(birdId) {
@@ -154,7 +154,7 @@ export default {
   init() {
     const currentPath = window.location.pathname;
     const match = currentPath.match(/\/bird\/(\d+)/);
-    const birdId = match ? match[1] : null;
+    const birdId = (match ? match[1] : null) || localStorage.getItem('currentBird');
 
     if (birdId) {
       this.setCurrentBird(birdId);
@@ -162,10 +162,4 @@ export default {
   },
 };
 
-/***
- *  const storedCurrentBird = localStorage.getItem('currentBird');
-    if (storedCurrentBird) {
-      this.setCurrentBird(storedCurrentBird);
-    }
-  },
- */
+
