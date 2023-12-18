@@ -226,7 +226,7 @@ export default function Navbar({
                 `}
                 onClick={onLogOutClick}
               >
-                Logout
+                Log Out
               </p>
             ) : (
               // User is not logged in, show login button
@@ -244,7 +244,7 @@ export default function Navbar({
                 `}
                 onClick={onLogInClickACB}
               >
-                Login
+                Log In
               </p>
             )}
           </div>

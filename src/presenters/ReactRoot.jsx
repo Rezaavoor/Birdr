@@ -52,6 +52,15 @@ export default observer(function ReactRoot(props) {
         </NavbarP>
       ),
     },
+    // handle 404 by redirect to default rout
+    {
+      path: "*", 
+      element: (
+        <NavbarP auth={props.auth} model={props.model}>
+          <HomeP model={props.model} />
+        </NavbarP>
+      ),
+    }
   ]);
 
   return (
