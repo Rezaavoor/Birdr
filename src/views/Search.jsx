@@ -90,6 +90,7 @@ export default function Search(props) {
             height: 200px;
             width: 200px;
             overflow: hidden;
+            cursor: pointer;
           `}
         >
           <Image
@@ -104,6 +105,7 @@ export default function Search(props) {
         <div
           className={css`
             font-size: 1.2rem;
+            cursor: pointer;
           `}
         >
           {bird.name}

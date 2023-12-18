@@ -102,7 +102,6 @@ export default function MyBirds(props) {
       props.onClickHandler(bird);
     }
     function removeMyBird() {
-      console.log("Tried to remove: ", bird);
       props.removeBird(bird);
     }
     return (
@@ -113,6 +112,7 @@ export default function MyBirds(props) {
             height: 200px;
             width: 200px;
             overflow: hidden;
+            cursor: pointer;
           `}
         >
           <Image
@@ -128,6 +128,7 @@ export default function MyBirds(props) {
           onClick={clickHandlerACB}
           className={css`
             font-size: 1.2rem;
+            cursor: pointer;
           `}
         >
           {bird.name}
