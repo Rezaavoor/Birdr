@@ -25,6 +25,9 @@ export default function Home({
         className={css`
           position: absolute;
           top: -10vh;
+          ${theme.breakpoints.medium} {
+            top: 0;
+          }
           left: 0;
           width: 100vw;
           height: 50vh;
@@ -39,12 +42,14 @@ export default function Home({
         className={css`
           position: absolute;
           top: -10vh;
+          ${theme.breakpoints.medium} {
+            top: 0;
+          }
           left: 0;
           width: 100vw;
           height: 100vh;
           overflow: hidden;
           z-index: 1;
-          transition: all 0.8s ease-in-out;
         `}
         id="image-div"
       >

@@ -8,7 +8,6 @@ export default function Search(props) {
     <div
       className={css`
         position: relative;
-        background-color: ${theme.colors.dark};
       `}
     >
       <div

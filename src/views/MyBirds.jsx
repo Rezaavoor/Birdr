@@ -11,7 +11,6 @@ export default function MyBirds(props) {
     <div
       className={css`
         position: relative;
-        background-color: ${theme.colors.dark};
       `}
     >
       <div

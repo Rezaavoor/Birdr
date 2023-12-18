@@ -9,7 +9,6 @@ export default function Hotlist(props) {
     <div
       className={css`
         position: relative;
-        background-color: ${theme.colors.dark};
       `}
     >
       <div
