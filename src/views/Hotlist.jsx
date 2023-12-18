@@ -14,26 +14,14 @@ export default function Hotlist(props) {
     >
       <div
         className={css`
-          position: absolute;
-          overflow: hidden;
-          top: 0;
-          left: 0;
-          width: 100vw;
-          height: 50vh;
-          background-image: linear-gradient(
-            ${theme.colors.dark},
-            rgba(0, 0, 0, 0)
-          );
-          z-index: 2;
-        `}
-      />
-      <div
-        className={css`
           position: relative;
           z-index: 3;
           display: flex;
           flex-direction: column;
           align-items: center;
+          ${theme.breakpoints.medium} {
+            margin-top: 10vh;
+          }
         `}
       >
         <div
@@ -41,10 +29,8 @@ export default function Hotlist(props) {
             position: absolute;
             width: 100%;
             text-align: left;
-            box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
-            -webkit-box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 0.5);
-            -moz-box-shadow: 0px 32px 61px 12px rgba(0, 0, 0, 1);
             font-size: 1.5rem;
+
             ${theme.breakpoints.medium} {
               font-size: 0.8rem;
             }
@@ -61,7 +47,7 @@ export default function Hotlist(props) {
               margin: 50px 0;
             `}
           >
-            Hot List, The top viewed birds on the website.
+            Hot List, The top viewed birds on the website:
           </p>
           <div
             className={css`
