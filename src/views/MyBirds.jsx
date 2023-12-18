@@ -89,7 +89,15 @@ export default function MyBirds(props) {
       props.removeBird(bird);
     }
     return (
-      <span key={bird.id} className="result-item">
+      <span
+        key={bird.id}
+        className={css`
+          transition: all 0.2s ease-in-out;
+          :hover {
+            transform: scale(1.1);
+          }
+        `}
+      >
         <div
           onClick={clickHandlerACB}
           className={css`
