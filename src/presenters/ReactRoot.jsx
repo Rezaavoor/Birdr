@@ -9,7 +9,8 @@ import { ThemeProvider } from "@emotion/react";
 import { ChakraProvider, Spinner } from "@chakra-ui/react";
 import NavbarP from "./NavbarP.jsx";
 import BirdP from "./BirdP.jsx";
-import { BrowserRouter as  Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+
 
 
 export default observer(function ReactRoot(props) {
