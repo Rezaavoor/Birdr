@@ -2,7 +2,6 @@ import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { InfoIcon, AddIcon, DeleteIcon } from "@chakra-ui/icons";
-import { useState } from "react";
 
 export default function Home({
   name,
