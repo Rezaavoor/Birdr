@@ -9,7 +9,10 @@ export default {
   likedBirds: [],
 
   hotBirds: [],
-  searchParams: {},
+  searchParams: {
+    hasImg: true,
+    pageNr: 1,
+  },
   searchResultsPromiseState: {},
   currentBird: null,
   currentBirdPromiseState: {},
@@ -129,13 +132,17 @@ export default {
     this.searchParams.hasImg = this.searchParams.hasImg ? false : true;
   },
 
-  setSearchRegion(region) {
+  /*setSearchRegion(region) {
     this.searchParams.region = region;
+  },*/
+
+  setPageNr(pageNr) {
+    this.searchParams.pageNr = pageNr;
   },
 
   doSearch(searchParams) {
     resolvePromise(
-      searchBird(searchParams.name, searchParams.hasImg),
+      searchBird(searchParams.name, searchParams.hasImg, searchParams.pageNr),
       this.searchResultsPromiseState
     );
   },
