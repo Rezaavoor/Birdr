@@ -1,7 +1,8 @@
 import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { InfoIcon, AddIcon, DeleteIcon } from "@chakra-ui/icons";
+import { InfoIcon, Icon } from "@chakra-ui/icons";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 export default function Home({
   name,
@@ -170,7 +171,7 @@ export default function Home({
                     }
                   `}
                 >
-                  <DeleteIcon boxSize={7} color={theme.colors.white} />
+                  <Icon as={FaHeart} boxSize={7} color={theme.colors.white} />
                   <p>Remove This Bird</p>
                 </div>
               ) : (
@@ -189,7 +190,11 @@ export default function Home({
                     }
                   `}
                 >
-                  <AddIcon boxSize={7} color={theme.colors.white} />
+                  <Icon
+                    as={FaRegHeart}
+                    boxSize={7}
+                    color={theme.colors.white}
+                  />
                   <p>Add To My Birds</p>
                 </div>
               )
@@ -205,7 +210,7 @@ export default function Home({
                   select: none;
                 `}
               >
-                <AddIcon boxSize={7} color={theme.colors.light} />
+                <Icon as={FaRegHeart} boxSize={7} color={theme.colors.light} />
                 <p>Add To My Birds</p>
               </div>
             )}

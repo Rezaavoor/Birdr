@@ -1,7 +1,13 @@
 import React from "react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { Input, Switch, FormControl, FormLabel } from "@chakra-ui/react";
+import {
+  Input,
+  Switch,
+  FormControl,
+  FormLabel,
+  Tooltip,
+} from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 
@@ -77,11 +83,13 @@ export default function SearchForm(props) {
             cursor: pointer;
           `}
         >
-          <SearchIcon
-            boxSize={6}
-            color={theme.colors.dark}
-            onClick={clickSearchHandlerACB}
-          />
+          <Tooltip hasArrow label="Click to search!">
+            <SearchIcon
+              boxSize={6}
+              color={theme.colors.dark}
+              onClick={clickSearchHandlerACB}
+            />
+          </Tooltip>
         </div>
         <div>
           <FormControl display="flex" alignItems="center">

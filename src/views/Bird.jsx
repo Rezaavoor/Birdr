@@ -1,7 +1,8 @@
-import { Image, Spinner } from "@chakra-ui/react";
+import { Image, Spinner, Tooltip } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { AddIcon, DeleteIcon } from "@chakra-ui/icons";
+import { Icon } from "@chakra-ui/icons";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import AudioPlayer from "react-h5-audio-player";
 
 export default function Bird({
@@ -77,7 +78,15 @@ export default function Bird({
                       }
                     `}
                   >
-                    <DeleteIcon boxSize={7} color={theme.colors.white} />
+                    <Tooltip label="Remove this bird" fontSize="md">
+                      <div>
+                        <Icon
+                          as={FaHeart}
+                          boxSize={7}
+                          color={theme.colors.white}
+                        />
+                      </div>
+                    </Tooltip>
                   </div>
                 ) : (
                   <div
@@ -95,7 +104,15 @@ export default function Bird({
                       }
                     `}
                   >
-                    <AddIcon boxSize={7} color={theme.colors.white} />
+                    <Tooltip label="Add this bird" fontSize="md">
+                      <div>
+                        <Icon
+                          as={FaRegHeart}
+                          boxSize={7}
+                          color={theme.colors.white}
+                        />
+                      </div>
+                    </Tooltip>
                   </div>
                 )
               ) : (
@@ -110,7 +127,15 @@ export default function Bird({
                     select: none;
                   `}
                 >
-                  <AddIcon boxSize={7} color={theme.colors.light} />
+                  <Tooltip label="Add this bird" fontSize="md">
+                    <div>
+                      <Icon
+                        as={FaRegHeart}
+                        boxSize={7}
+                        color={theme.colors.white}
+                      />
+                    </div>
+                  </Tooltip>
                 </div>
               )}
             </div>
