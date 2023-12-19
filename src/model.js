@@ -13,6 +13,7 @@ export default {
     hasImg: true,
     pageNr: 1,
   },
+  pages: null,
   searchResultsPromiseState: {},
   currentBird: null,
   currentBirdPromiseState: {},
@@ -145,6 +146,13 @@ export default {
       searchBird(searchParams.name, searchParams.hasImg, searchParams.pageNr),
       this.searchResultsPromiseState
     );
+  },
+
+  // How many pages are in the search result
+  getPages() {
+    const total = this.searchResultsPromiseState.data.total
+    const pageSize = this.searchResultsPromiseState.data.pageSize
+    this.pages = Math.floor(total / pageSize) + 1
   },
 
   isBirdLiked(id) {

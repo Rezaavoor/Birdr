@@ -57,7 +57,7 @@ export function searchBird(searchParams, hasImg, pageNr){
     }
 
     function getBirdACB(data){
-        return data.entities;
+        return data;
     }
 
     return fetch(url, options).then(responseSearchACB).then(getBirdACB);

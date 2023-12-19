@@ -46,7 +46,7 @@ export default observer(function SearchP(props) {
 
     return (
       <Search
-        searchResults={props.model.searchResultsPromiseState.data}
+        searchResults={props.model.searchResultsPromiseState.data.entities}
         onClickHandler={setCurrentBirdACB}
         status="data"
       />
