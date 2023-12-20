@@ -25,7 +25,9 @@ export function getBirdsDetailsById(ids) {
     return Promise.all(promises);
 }
 
-export function searchBird(searchParams, hasImg){
+export function searchBird(searchParams, hasImg, pageNr){
+
+    searchParams = searchParams + "&page=" + pageNr
 
     if(searchParams !== "") {
         searchParams = "&name=" + searchParams;
@@ -37,7 +39,7 @@ export function searchBird(searchParams, hasImg){
 
     //const queryParams = new URLSearchParams(searchParams);
 
-    const url = BASE_URL + "v2/birds?page=1&pageSize=25" + searchParams + "&operator=AND"; 
+    const url = BASE_URL + "v2/birds?pageSize=25" + searchParams + "&operator=AND"; 
 
 
     const options = {
@@ -55,7 +57,7 @@ export function searchBird(searchParams, hasImg){
     }
 
     function getBirdACB(data){
-        return data.entities;
+        return data;
     }
 
     return fetch(url, options).then(responseSearchACB).then(getBirdACB);

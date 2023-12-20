@@ -9,7 +9,11 @@ export default {
   likedBirds: [],
 
   hotBirds: [],
-  searchParams: {},
+  searchParams: {
+    hasImg: true,
+    pageNr: 1,
+  },
+  pages: null,
   searchResultsPromiseState: {},
   currentBird: null,
   currentBirdPromiseState: {},
@@ -129,15 +133,28 @@ export default {
     this.searchParams.hasImg = this.searchParams.hasImg ? false : true;
   },
 
-  setSearchRegion(region) {
+  /*setSearchRegion(region) {
     this.searchParams.region = region;
+  },*/
+
+  setPageNr(pageNr) {
+    this.searchParams.pageNr = pageNr;
   },
 
   doSearch(searchParams) {
     resolvePromise(
-      searchBird(searchParams.name, searchParams.hasImg),
+      searchBird(searchParams.name, searchParams.hasImg, searchParams.pageNr),
       this.searchResultsPromiseState
     );
+    //this.getPages()
+  },
+
+  // How many pages are in the search result
+  getPages() {
+    const total = this.searchResultsPromiseState.data.total
+    const pageSize = this.searchResultsPromiseState.data.pageSize
+    const extraPage = (total % pageSize == 0 ? 0 : 1) // is there a non full page?
+    this.pages = Math.floor(total / pageSize) + extraPage
   },
 
   isBirdLiked(id) {
