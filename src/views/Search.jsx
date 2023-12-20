@@ -73,6 +73,10 @@ export default function Search(props) {
                     flex-wrap: wrap;
                     justify-content: center;
                     align-items: center;
+                    margin: 15px;
+                    ${theme.breakpoints.medium} {
+                      flex-direction: column;
+                    }
                   `}
                 >
                   <p
@@ -82,9 +86,18 @@ export default function Search(props) {
                   >
                     {"Pages:"}
                   </p>
-                  {Array.from(Array(props.totalPages).keys()).map(
-                    displayPageButtonsCB
-                  )}
+                  <div
+                    className={css`
+                      display: flex;
+                      flex-wrap: wrap;
+                      justify-content: center;
+                      align-items: center;
+                    `}
+                  >
+                    {Array.from(Array(props.totalPages).keys()).map(
+                      displayPageButtonsCB
+                    )}
+                  </div>
                 </div>
               </div>
             ) : (
@@ -165,10 +178,14 @@ export default function Search(props) {
       props.onBirdClick(bird);
     }
     return (
-      <span
+      <div
         key={bird.id}
         onClick={birdClickHandlerACB}
         className={css`
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           transition: all 0.2s ease-in-out;
           :hover {
             transform: scale(1.1);
@@ -190,6 +207,7 @@ export default function Search(props) {
             objectFit="cover"
             width="100%"
             height="100%"
+            borderRadius={10}
           />
         </div>
         <div
@@ -200,7 +218,7 @@ export default function Search(props) {
         >
           {bird.name}
         </div>
-      </span>
+      </div>
     );
   }
 }
