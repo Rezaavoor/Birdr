@@ -2,8 +2,11 @@ import { useNavigate } from "react-router-dom";
 import Search from "../views/Search";
 import SearchForm from "../views/SearchForm";
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
 export default observer(function SearchP(props) {
+
+
   const navigate = useNavigate();
 
   function setCurrentBirdACB(bird) {
@@ -19,7 +22,7 @@ export default observer(function SearchP(props) {
     props.model.setSearchName(birdName);
   }
 
-  function searchClickHandlerACB() {
+  async function searchClickHandlerACB() {
     props.model.setPageNr(1);
   }
 
@@ -55,6 +58,7 @@ export default observer(function SearchP(props) {
         totalResults={props.model.searchResultsPromiseState.data.total}
         currentPage={props.model.searchResultsPromiseState.data.page}
         totalPages={props.model.pages}
+        suggestedResults ={props.model.suggestResultsPromiseState.data}
         onBirdClick={setCurrentBirdACB}
         onPageClick={setCurrentPageACB}
         status="data"
@@ -71,8 +75,25 @@ export default observer(function SearchP(props) {
         onClickHandler={setCurrentBirdACB}
         onlyImages={onlyImagesHandlerACB}
         hasImg={props.model.searchParams.hasImg}
+        
       />
       {renderSearchResult()}
     </div>
   );
 });
+
+/**
+ * useEffect(() => {
+    const fetchData = async () => {
+      try {
+        await props.model.suggestResults();
+      } catch (error) {
+        console.error("Error fetching suggestBird:", error);
+      }
+    };
+
+    if (!props.model.suggestResultsPromiseState.data) {
+      fetchData();
+    }
+  }, [props.model.suggestResultsPromiseState.data, props.model]);
+ */

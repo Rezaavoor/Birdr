@@ -4,6 +4,9 @@ import { useTheme } from "@emotion/react";
 
 export default function Search(props) {
   const theme = useTheme();
+
+  console.log(" searchView suggestedbird\n" + props.suggestedResults);
+  
   function displayPageButtonsCB(buttonNumberIndex) {
     const page = buttonNumberIndex + 1;
     function onPageClickACB() {
@@ -85,7 +88,45 @@ export default function Search(props) {
                 </div>
               </div>
             ) : (
+              <div className={css`
+              margin-bottom: 50px;
+            `}>
               <p>No birds was found :(</p>
+              <div className={css`
+              margin-bottom: 50px;
+            `}>
+              <p>Popular Picks:</p>
+              <div
+            className={css`
+              width: 100%;
+              max-width: 100%;
+              display: grid;
+              grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
+              gap: 100px 100px;
+              justify-content: center;
+              align-items: center;
+              flex-grow: 1;
+              margin: 10px auto;
+            `}
+          >
+            {
+            props.status === "data" ? (
+              props.suggestedResults ? (
+                [...props.suggestedResults].map(displayBirdsCB)
+              ) : (
+                <h1></h1>
+              )
+            ) : props.status === "loading" ? (              
+              <Spinner size="xl" />
+            ) : props.status === "error" ? (
+              <h1>"Error"</h1>
+            ) : (          
+              <h1></h1>
+            )
+          }
+          </div>
+              </div>
+              </div>
             )
           ) : (
             <p></p>

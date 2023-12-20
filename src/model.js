@@ -15,6 +15,7 @@ export default {
     pageNr: 1,
   },
   pages: null,
+  suggestResultsPromiseState:{},
   searchResultsPromiseState: {},
   currentBird: null,
   currentBirdPromiseState: {},
@@ -118,6 +119,14 @@ export default {
     const ids = slicedHotBirds.map((bird) => bird.birdId);
     resolvePromise(getBirdsDetailsById(ids), this.hotBirdsPromiseState);
   },
+// *********************************
+suggestResults(){
+    const length = this.hotBirds.length;
+    const randomIndex = Math.floor(Math.random() * (length - 8));
+    const suggestedBirds = this.hotBirds.slice(randomIndex, (randomIndex + 8));
+    const ids = suggestedBirds.map((bird) => bird.birdId );
+    return resolvePromise(getBirdsDetailsById(ids), this.suggestResultsPromiseState);
+  },
 
   getLikedBirds() {
     resolvePromise(
@@ -144,10 +153,12 @@ export default {
   },
 
   doSearch(searchParams) {
+    
     resolvePromise(
       searchBird(searchParams.name, searchParams.hasImg, searchParams.pageNr),
       this.searchResultsPromiseState
     );
+    this.suggestResults();
     //this.getPages()
   },
 
