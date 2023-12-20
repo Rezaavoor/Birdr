@@ -124,7 +124,6 @@ suggestResults(){
     const length = this.birdsOfTheDay.length;
     const randomIndex = Math.floor(Math.random() * (length - 8));
     const suggestedBirds = this.birdsOfTheDay.slice(randomIndex, (randomIndex + 8));
-    //const ids = suggestedBirds.map((bird) => bird.birdId );
     return resolvePromise(getBirdsDetailsById(suggestedBirds), this.suggestResultsPromiseState);
   },
 
