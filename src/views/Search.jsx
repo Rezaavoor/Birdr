@@ -124,10 +124,14 @@ export default function Search(props) {
       props.onBirdClick(bird);
     }
     return (
-      <span
+      <div
         key={bird.id}
         onClick={birdClickHandlerACB}
         className={css`
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           transition: all 0.2s ease-in-out;
           :hover {
             transform: scale(1.1);
@@ -159,7 +163,7 @@ export default function Search(props) {
         >
           {bird.name}
         </div>
-      </span>
+      </div>
     );
   }
 }

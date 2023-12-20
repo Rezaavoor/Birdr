@@ -85,10 +85,14 @@ export default function Hotlist(props) {
     }
     const birdPosition = index + 1;
     return (
-      <span
+      <div
         key={bird.id}
         onClick={clickHandlerACB}
         className={css`
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           transition: all 0.2s ease-in-out;
           :hover {
             transform: scale(1.1);
@@ -123,7 +127,7 @@ export default function Hotlist(props) {
             white-space: nowrap;
           `}
         >{`${birdPosition}. ${bird.name}`}</div>
-      </span>
+      </div>
     );
   }
 }

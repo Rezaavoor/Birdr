@@ -144,9 +144,13 @@ export default function MyBirds(props) {
       );
     }
     return (
-      <span
+      <div
         key={bird.id}
         className={css`
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
           transition: all 0.2s ease-in-out;
           :hover {
             transform: scale(1.1);
@@ -186,7 +190,7 @@ export default function MyBirds(props) {
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 25px;
+            margin: 5px;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             :hover {
@@ -197,7 +201,7 @@ export default function MyBirds(props) {
         >
           <DeleteButton />
         </div>
-      </span>
+      </div>
     );
   }
 }
