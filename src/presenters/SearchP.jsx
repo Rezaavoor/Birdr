@@ -8,7 +8,11 @@ export default observer(function SearchP(props) {
 
   function setCurrentBirdACB(bird) {
     props.model.setCurrentBird(bird.id);
-    navigate(`/bird/${bird.id}`); 
+    navigate(`/bird/${bird.id}`);
+  }
+  function setCurrentPageACB(page) {
+    if (page != props.model.searchResultsPromiseState.data.page)
+      props.model.setPageNr(page);
   }
 
   function textChangeHandlerACB(birdName) {
@@ -16,11 +20,12 @@ export default observer(function SearchP(props) {
   }
 
   function searchClickHandlerACB() {
-    props.model.doSearch(props.model.searchParams);
+    props.model.setPageNr(1);
   }
 
-  function onlyImagesHandlerACB(){
+  function onlyImagesHandlerACB() {
     props.model.setHasImg();
+    props.model.setPageNr(1);
   }
 
   function renderSearchResult() {
@@ -43,11 +48,15 @@ export default observer(function SearchP(props) {
     ) {
       return <Search status="loading" />;
     }
-
+    props.model.getPages();
     return (
       <Search
         searchResults={props.model.searchResultsPromiseState.data.entities}
-        onClickHandler={setCurrentBirdACB}
+        totalResults={props.model.searchResultsPromiseState.data.total}
+        currentPage={props.model.searchResultsPromiseState.data.page}
+        totalPages={props.model.pages}
+        onBirdClick={setCurrentBirdACB}
+        onPageClick={setCurrentPageACB}
         status="data"
       />
     );
@@ -61,7 +70,7 @@ export default observer(function SearchP(props) {
         searchClick={searchClickHandlerACB}
         onClickHandler={setCurrentBirdACB}
         onlyImages={onlyImagesHandlerACB}
-        hasImg = {props.model.searchParams.hasImg}
+        hasImg={props.model.searchParams.hasImg}
       />
       {renderSearchResult()}
     </div>
