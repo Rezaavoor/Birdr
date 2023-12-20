@@ -70,6 +70,10 @@ export default function Search(props) {
                     flex-wrap: wrap;
                     justify-content: center;
                     align-items: center;
+                    margin: 15px;
+                    ${theme.breakpoints.medium} {
+                      flex-direction: column;
+                    }
                   `}
                 >
                   <p
@@ -79,9 +83,18 @@ export default function Search(props) {
                   >
                     {"Pages:"}
                   </p>
-                  {Array.from(Array(props.totalPages).keys()).map(
-                    displayPageButtonsCB
-                  )}
+                  <div
+                    className={css`
+                      display: flex;
+                      flex-wrap: wrap;
+                      justify-content: center;
+                      align-items: center;
+                    `}
+                  >
+                    {Array.from(Array(props.totalPages).keys()).map(
+                      displayPageButtonsCB
+                    )}
+                  </div>
                 </div>
               </div>
             ) : (
