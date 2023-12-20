@@ -173,6 +173,7 @@ export default function MyBirds(props) {
             objectFit="cover"
             width="100%"
             height="100%"
+            borderRadius={10}
           />
         </div>
         <div
