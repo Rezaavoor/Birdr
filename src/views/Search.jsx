@@ -150,12 +150,19 @@ export default function Search(props) {
               width: 100%;
               max-width: 100%;
               display: grid;
+              @media (min-width: ${theme.breakpoints.medium}){
+                grid-template-columns: repeat(auto-fill, minmax(80%, 1fr));
+              }
+              @media (max-width: 450px){
+                grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
+              }
               grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
               gap: 100px 100px;
               justify-content: center;
               align-items: center;
               flex-grow: 1;
               margin: 10px auto;
+              padding: 16px
             `}
           >
             {props.status == "data" ? (
