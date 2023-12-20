@@ -9,7 +9,12 @@ export default {
   likedBirds: [],
 
   hotBirds: [],
-  searchParams: {},
+  searchParams: {
+    name: "",
+    hasImg: true,
+    pageNr: 1,
+  },
+  pages: null,
   searchResultsPromiseState: {},
   currentBird: null,
   currentBirdPromiseState: {},
@@ -49,7 +54,7 @@ export default {
     this.currentBird = id;
     this.updataViewCount(id);
 
-    localStorage.setItem('currentBird', id);
+    localStorage.setItem("currentBird", id);
   },
 
   updataViewCount(birdId) {
@@ -129,15 +134,29 @@ export default {
     this.searchParams.hasImg = this.searchParams.hasImg ? false : true;
   },
 
-  setSearchRegion(region) {
+  /*setSearchRegion(region) {
     this.searchParams.region = region;
+  },*/
+
+  setPageNr(pageNr) {
+    this.searchParams.pageNr = pageNr;
+    this.doSearch(this.searchParams);
   },
 
   doSearch(searchParams) {
     resolvePromise(
-      searchBird(searchParams.name, searchParams.hasImg),
+      searchBird(searchParams.name, searchParams.hasImg, searchParams.pageNr),
       this.searchResultsPromiseState
     );
+    //this.getPages()
+  },
+
+  // How many pages are in the search result
+  getPages() {
+    const total = this.searchResultsPromiseState.data.total;
+    const pageSize = this.searchResultsPromiseState.data.pageSize;
+    const extraPage = total % pageSize == 0 ? 0 : 1; // is there a non full page?
+    this.pages = Math.floor(total / pageSize) + extraPage;
   },
 
   isBirdLiked(id) {
@@ -155,7 +174,8 @@ export default {
     //if(this.user === null){
     const currentPath = window.location.pathname;
     const match = currentPath.match(/\/bird\/(\d+)/);
-    const birdId = (match ? match[1] : null) || localStorage.getItem('currentBird');
+    const birdId =
+      (match ? match[1] : null) || localStorage.getItem("currentBird");
 
     if (birdId) {
       this.setCurrentBird(birdId);
@@ -163,5 +183,3 @@ export default {
   }
   },
 };
-
-

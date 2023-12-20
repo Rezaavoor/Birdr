@@ -1,5 +1,17 @@
-import React from "react";
-import { Image, Spinner } from "@chakra-ui/react";
+import React, { useRef } from "react";
+import {
+  AlertDialog,
+  AlertDialogBody,
+  AlertDialogContent,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogOverlay,
+  Button,
+  Image,
+  Spinner,
+  Tooltip,
+  useDisclosure,
+} from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
 import { DeleteIcon } from "@chakra-ui/icons";
@@ -82,11 +94,54 @@ export default function MyBirds(props) {
   );
 
   function displayBirdsCB(bird) {
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const cancelRef = useRef();
     function clickHandlerACB() {
       props.onClickHandler(bird);
     }
     function removeMyBird() {
+      onClose();
       props.removeBird(bird);
+    }
+    function DeleteButton() {
+      return (
+        <>
+          <div onClick={onOpen}>
+            <Tooltip label="Remove this bird" fontSize="md">
+              <div>
+                <DeleteIcon boxSize={7} color={theme.colors.white} />
+              </div>
+            </Tooltip>
+          </div>
+
+          <AlertDialog
+            isOpen={isOpen}
+            leastDestructiveRef={cancelRef}
+            onClose={onClose}
+          >
+            <AlertDialogOverlay color={"black"}>
+              <AlertDialogContent>
+                <AlertDialogHeader fontSize="lg" fontWeight="bold">
+                  Remove Bird
+                </AlertDialogHeader>
+
+                <AlertDialogBody>
+                  Are you sure you want to remove this LOVELY bird? :(
+                </AlertDialogBody>
+
+                <AlertDialogFooter>
+                  <Button ref={cancelRef} onClick={onClose}>
+                    Cancel
+                  </Button>
+                  <Button colorScheme="red" onClick={removeMyBird} ml={3}>
+                    Delete
+                  </Button>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
+        </>
+      );
     }
     return (
       <span
@@ -126,21 +181,21 @@ export default function MyBirds(props) {
           {bird.name}
         </div>
         <div
-          onClick={removeMyBird}
           className={css`
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            margin: 50px;
+            margin: 25px;
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             :hover {
               transform: scale(1.1);
+              color: black;
             }
           `}
         >
-          <DeleteIcon boxSize={7} color={theme.colors.white} />
+          <DeleteButton />
         </div>
       </span>
     );
