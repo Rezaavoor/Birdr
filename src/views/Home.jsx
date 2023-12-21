@@ -101,6 +101,7 @@ export default function Home({
           `}
         >
           <div
+            onClick={onClickMoreDetails}
             className={css`
               position: relative;
               width: 50%;
@@ -108,8 +109,9 @@ export default function Home({
               font-size: 2.5rem;
               color: ${theme.colors.white};
               font-weight: bold;
-              background-color: rgba(0, 0, 0, 0.1);
+              background-color: rgba(0, 0, 0, 0.2);
               backdrop-filter: blur(10px);
+              cursor: pointer;
               ${theme.breakpoints.medium} {
                 font-size: 2rem;
                 width: 90%;
@@ -124,8 +126,8 @@ export default function Home({
               }
               :hover {
                 transform: translateY(15px);
-                background-color: rgba(0, 0, 0, 0);
-                backdrop-filter: blur(0px);
+                background-color: rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
                 * {
                   transform: scale(1.1);
                 }
