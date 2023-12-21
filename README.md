@@ -7,36 +7,31 @@ The most popular birds gets a spot on the hotlist which is a list for the most p
 
 Live webpage: https://birdr-7cc64.web.app/
 
-# What we have done so far:
- - Homepage (Bird Of The Day Feature)
- - Search page (you can search for birds)
- - Bird details paged (info, image and recording)
- - Mostly all backend (Hotlist, Likedbirds partially)
- - Figma design for all views
- - Deployed the website
- - Received a few user evaluations
+# How to setup the project locally
+## 1. Clone this repository
+## 2. Open the main directory in your preffered editor
+## 3. Run command `npm install`
+## 4. Add a file called "apiConfig.js" in /src directory and insert your api key and base url as following:
+```js
+const BASE_URL = "https://nuthatch.lastelm.software/";
+const API_KEY = YOUR_OWN_API_KEY;
+export {BASE_URL , API_KEY};
+```
 
-# What we plan to do:
- - Add authentication and persist user data (via firebase)
- - Make search page to show more results
- - Implement Hotlist and MyBirds pages
- - Show multiple images and recordings (if available)
- - Make the website mobile-friendly (add responsiveness)
- - Implement user evaluations
+## 5. Add a file called "firebaseConfig.js" in /src directory and insert your own credentials as following (Make sure you have created a project in Firebase and have a realtime database and authentication configured):
+```js
+const firebaseConfig = {
+  apiKey: YOUR_OWN_API_KEY,
+  authDomain: YOUR_OWN,
+  databaseURL: YOUR_OWN,
+  projectId: YOUR_OWN,
+  storageBucket: YOUR_OWN,
+  messagingSenderId: YOUR_OWN,
+  appId: YOUR_OWN,
+  measurementId: YOUR_OWN
+};
 
-# File structure
-We follow MVP dataflow and have two different folders (views, presenters) and a model (model.js).
- - Home and HomeP: It the homepage of the webapp and shows the Bird Of The Day
- - SearchForm and SearchP: the search input in search page
- - Search and SearchP: Here you see the search results
- - Hotlist and HotlistP: It shows a global list of most viewed birds
- - MyBids and MyBirdsP: It "will" show user's liked birds
- - Navbar: The navigation bar on top
-
-The public folder stores favicon and image placeholder.
-model.js holds all required data for the website.
-modelSource.js handles the communication with the API.
-resolvePromise.js handles all promises.
-firebaseConfig.js and firebaseModel.js take care of persistence.
-theme.js and globalstyle.css are for the theming of website.
-The rest of the files are react/vite files
+export default firebaseConfig;
+```
+## 6. Run command `npm run dev` to start the project on your local host
+## 7. Go to `http://localhost:8080/` in your broswer to see the project
