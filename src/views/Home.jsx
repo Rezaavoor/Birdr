@@ -168,6 +168,8 @@ export default function Home({
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+                    width: 200px;
+                    height: 70px;
                     margin: 50px;
                     cursor: pointer;
                     background-color: rgba(0, 0, 0, 0.2);
@@ -191,6 +193,8 @@ export default function Home({
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+                    width: 200px;
+                    height: 70px;
                     margin: 50px;
                     cursor: pointer;
                     background-color: rgba(0, 0, 0, 0.2);
@@ -235,6 +239,8 @@ export default function Home({
               flex-direction: column;
               justify-content: center;
               align-items: center;
+              width: 200px;
+              height: 70px;
               margin: 50px;
               cursor: pointer;
               background-color: rgba(0, 0, 0, 0.2);
