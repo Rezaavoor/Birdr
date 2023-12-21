@@ -18,7 +18,6 @@ import connectToFirebase from "../firebaseModel.js";
 createRoot(document.getElementById("root")).render(
   <ReactRoot model={reactiveModel} auth={auth} />
 );
-window.myModel = reactiveModel;
 connectToFirebase(reactiveModel, reaction);
 reactiveModel.doSearch(reactiveModel.searchParams);
 reactiveModel.init();

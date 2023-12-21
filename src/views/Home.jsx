@@ -101,6 +101,7 @@ export default function Home({
           `}
         >
           <div
+            onClick={onClickMoreDetails}
             className={css`
               position: relative;
               width: 50%;
@@ -108,11 +109,15 @@ export default function Home({
               font-size: 2.5rem;
               color: ${theme.colors.white};
               font-weight: bold;
-              background-color: rgba(0, 0, 0, 0.1);
+              background-color: rgba(0, 0, 0, 0.2);
               backdrop-filter: blur(10px);
+              cursor: pointer;
               ${theme.breakpoints.medium} {
                 font-size: 2rem;
                 width: 90%;
+              }
+              ${theme.breakpoints.small} {
+                top: 25vh;
               }
               border-radius: 20px;
               transition: all 0.5s ease-in-out;
@@ -121,8 +126,8 @@ export default function Home({
               }
               :hover {
                 transform: translateY(15px);
-                background-color: rgba(0, 0, 0, 0);
-                backdrop-filter: blur(0px);
+                background-color: rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
                 * {
                   transform: scale(1.1);
                 }
@@ -145,7 +150,7 @@ export default function Home({
             position: absolute;
             top: 65vh;
             ${theme.breakpoints.medium} {
-              top: 50vh;
+              top: 70vh;
             }
             width: 100%;
             display: flex;
@@ -163,11 +168,21 @@ export default function Home({
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+                    width: 200px;
+                    height: 70px;
                     margin: 50px;
                     cursor: pointer;
+                    background-color: rgba(0, 0, 0, 0.2);
+                    backdrop-filter: blur(10px);
+                    border-radius: 20px;
+                    ${theme.breakpoints.small} {
+                      width: 110px; 
+                      height: 50px; 
+                    }
                     transition: all 0.2s ease-in-out;
                     :hover {
                       transform: scale(1.1);
+                      background-color: rgba(0, 0, 0, 0.1);
                     }
                   `}
                 >
@@ -182,11 +197,21 @@ export default function Home({
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
+                    width: 200px;
+                    height: 70px;
                     margin: 50px;
                     cursor: pointer;
+                    background-color: rgba(0, 0, 0, 0.2);
+                    backdrop-filter: blur(10px);
+                    border-radius: 20px;
+                    ${theme.breakpoints.small} {
+                      width: 110px; 
+                      height: 50px; 
+                    }
                     transition: all 0.2s ease-in-out;
                     :hover {
                       transform: scale(1.1);
+                      background-color: rgba(0, 0, 0, 0.1);
                     }
                   `}
                 >
@@ -222,11 +247,21 @@ export default function Home({
               flex-direction: column;
               justify-content: center;
               align-items: center;
+              width: 200px;
+              height: 70px;
               margin: 50px;
               cursor: pointer;
+              background-color: rgba(0, 0, 0, 0.2);
+              backdrop-filter: blur(10px);
+              border-radius: 20px;
+              ${theme.breakpoints.small} {
+                width: 110px; 
+                height: 50px; 
+              }
               transition: all 0.2s ease-in-out;
               :hover {
                 transform: scale(1.1);
+                background-color: rgba(0, 0, 0, 0.1);
               }
             `}
           >

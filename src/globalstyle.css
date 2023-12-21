@@ -14,7 +14,7 @@ html, body{
     background-size: auto;
   }
   @media (max-width: 576px) {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
   }
 }
 ::-webkit-scrollbar {

@@ -81,19 +81,3 @@ export default observer(function SearchP(props) {
     </div>
   );
 });
-
-/**
- * useEffect(() => {
-    const fetchData = async () => {
-      try {
-        await props.model.suggestResults();
-      } catch (error) {
-        console.error("Error fetching suggestBird:", error);
-      }
-    };
-
-    if (!props.model.suggestResultsPromiseState.data) {
-      fetchData();
-    }
-  }, [props.model.suggestResultsPromiseState.data, props.model]);
- */

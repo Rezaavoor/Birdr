@@ -50,18 +50,23 @@ export default function Hotlist(props) {
           </p>
           <div
             className={css`
-              width: 90%;
+              width: 100%;
               max-width: 100%;
               display: grid;
-              grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
+              grid-template-columns: repeat(4, minmax(15%, 1fr));
               gap: 100px 100px;
-              justify-content: center;
-              align-items: center;
-              flex-grow: 1;
-              margin: 0 auto;
+              ${theme.breakpoints.large} {
+                grid-template-columns: repeat(3, minmax(15%, 1fr));
+              }
               ${theme.breakpoints.medium} {
+                grid-template-columns: repeat(2, minmax(15%, 1fr));
+              }
+              ${theme.breakpoints.small} {
+                grid-template-columns: repeat(2, minmax(15%, 1fr));
                 gap: 50px 50px;
               }
+              justify-content: center;
+              align-items: center;
             `}
           >
             {props.status == "data" ? (
@@ -106,6 +111,10 @@ export default function Hotlist(props) {
             align-items: center;
             height: 200px;
             width: 200px;
+            ${theme.breakpoints.small} {
+              height: 150px;
+              width: 150px;
+            }
             overflow: hidden;
             cursor: pointer;
           `}
@@ -122,10 +131,17 @@ export default function Hotlist(props) {
         </div>
         <div
           className={css`
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-top: 5px;
-            white-space: nowrap;
+          position: relative;
+          top: -50px;
+          background-color: rgba(0, 0, 0, 0.5);
+          width: ${bird.images[0] ? "200px" : "198px"};
+          ${theme.breakpoints.small} {
+            width: ${bird.images[0] ? "150px" : "148px"};
+            top: -40px;
+          }
+          text-align: center;
+          font-size: ${bird.name.length > 15 ? "0.9rem" : "1.2rem"};
+          cursor: pointer;
           `}
         >{`${birdPosition}. ${bird.name}`}</div>
       </div>
