@@ -231,8 +231,17 @@ export default function Home({
                   justify-content: center;
                   align-items: center;
                   color: ${theme.colors.light};
+                  width: 200px;
+                  height: 70px;
                   margin: 50px;
                   select: none;
+                  background-color: rgba(0, 0, 0, 0.2);
+                  backdrop-filter: blur(10px);
+                  border-radius: 20px;
+                  ${theme.breakpoints.small} {
+                    width: 110px; 
+                    height: 50px; 
+                  }
                 `}
               >
                 <Icon as={FaRegHeart} boxSize={7} color={theme.colors.light} />

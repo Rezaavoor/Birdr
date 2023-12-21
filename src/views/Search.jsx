@@ -5,8 +5,6 @@ import { useTheme } from "@emotion/react";
 export default function Search(props) {
   const theme = useTheme();
 
-  console.log(" searchView suggestedbird\n" + props.suggestedResults);
-
   function displayPageButtonsCB(buttonNumberIndex) {
     const page = buttonNumberIndex + 1;
     function onPageClickACB() {
