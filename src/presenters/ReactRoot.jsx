@@ -1,14 +1,21 @@
-import HomeP from "./HomeP.jsx";
-import SearchP from "./SearchP.jsx";
-import HotlistP from "./HotlistP.jsx";
-import MyBirdsP from "./MyBirdsP.jsx";
+const HomeP = React.lazy(() => import("./HomeP.jsx"));
+const SearchP = React.lazy(() => import("./SearchP.jsx"));
+const HotlistP = React.lazy(() => import("./HotlistP.jsx"));
+const MyBirdsP = React.lazy(() => import("./MyBirdsP.jsx"));
+
+//import HomeP from "./HomeP.jsx";
+//import SearchP from "./SearchP.jsx";
+//import HotlistP from "./HotlistP.jsx";
+//import MyBirdsP from "./MyBirdsP.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { theme } from "../theme.js";
 import { ThemeProvider } from "@emotion/react";
 import { ChakraProvider, Spinner } from "@chakra-ui/react";
-import NavbarP from "./NavbarP.jsx";
-import BirdP from "./BirdP.jsx";
+const NavbarP = React.lazy(() => import("./NavbarP.jsx"));
+const BirdP = React.lazy(() => import("./BirdP.jsx"));
+//import NavbarP from "./NavbarP.jsx";
+//import BirdP from "./BirdP.jsx";
 import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
 
 
