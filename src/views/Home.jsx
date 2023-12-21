@@ -115,7 +115,7 @@ export default function Home({
                 width: 90%;
               }
               ${theme.breakpoints.small} {
-                top: 30vh;
+                top: 25vh;
               }
               border-radius: 20px;
               transition: all 0.5s ease-in-out;
@@ -149,9 +149,6 @@ export default function Home({
             top: 65vh;
             ${theme.breakpoints.medium} {
               top: 70vh;
-            }
-            ${theme.breakpoints.small} {
-              top: 80vh;
             }
             width: 100%;
             display: flex;
