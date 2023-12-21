@@ -118,15 +118,20 @@ export default function Search(props) {
                       width: 100%;
                       max-width: 100%;
                       display: grid;
-                      grid-template-columns: repeat(
-                        auto-fill,
-                        minmax(15%, 1fr)
-                      );
+                      grid-template-columns: repeat(4, minmax(15%, 1fr));
                       gap: 100px 100px;
+                      ${theme.breakpoints.large} {
+                        grid-template-columns: repeat(3, minmax(15%, 1fr));
+                      }
+                      ${theme.breakpoints.medium} {
+                        grid-template-columns: repeat(2, minmax(15%, 1fr));
+                      }
+                      ${theme.breakpoints.small} {
+                        grid-template-columns: repeat(2, minmax(15%, 1fr));
+                        gap: 50px 50px;
+                      }
                       justify-content: center;
                       align-items: center;
-                      flex-grow: 1;
-                      margin: 10px auto;
                     `}
                   >
                     {props.status === "data" ? (
