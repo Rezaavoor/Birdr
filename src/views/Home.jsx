@@ -170,9 +170,13 @@ export default function Home({
                     align-items: center;
                     margin: 50px;
                     cursor: pointer;
+                    background-color: rgba(0, 0, 0, 0.2);
+                    backdrop-filter: blur(10px);
+                    border-radius: 20px;
                     transition: all 0.2s ease-in-out;
                     :hover {
                       transform: scale(1.1);
+                      background-color: rgba(0, 0, 0, 0.1);
                     }
                   `}
                 >
@@ -189,9 +193,13 @@ export default function Home({
                     align-items: center;
                     margin: 50px;
                     cursor: pointer;
+                    background-color: rgba(0, 0, 0, 0.2);
+                    backdrop-filter: blur(10px);
+                    border-radius: 20px;
                     transition: all 0.2s ease-in-out;
                     :hover {
                       transform: scale(1.1);
+                      background-color: rgba(0, 0, 0, 0.1);
                     }
                   `}
                 >
