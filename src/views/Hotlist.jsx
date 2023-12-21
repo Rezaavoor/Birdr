@@ -50,18 +50,23 @@ export default function Hotlist(props) {
           </p>
           <div
             className={css`
-              width: 90%;
+              width: 100%;
               max-width: 100%;
               display: grid;
-              grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
+              grid-template-columns: repeat(4, minmax(15%, 1fr));
               gap: 100px 100px;
-              justify-content: center;
-              align-items: center;
-              flex-grow: 1;
-              margin: 0 auto;
+              ${theme.breakpoints.large} {
+                grid-template-columns: repeat(3, minmax(15%, 1fr));
+              }
               ${theme.breakpoints.medium} {
+                grid-template-columns: repeat(2, minmax(15%, 1fr));
+              }
+              ${theme.breakpoints.small} {
+                grid-template-columns: repeat(2, minmax(15%, 1fr));
                 gap: 50px 50px;
               }
+              justify-content: center;
+              align-items: center;
             `}
           >
             {props.status == "data" ? (
@@ -106,6 +111,10 @@ export default function Hotlist(props) {
             align-items: center;
             height: 200px;
             width: 200px;
+            ${theme.breakpoints.small} {
+              height: 150px;
+              width: 150px;
+            }
             overflow: hidden;
             cursor: pointer;
           `}

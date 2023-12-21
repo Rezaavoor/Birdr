@@ -6,7 +6,7 @@ export default function Search(props) {
   const theme = useTheme();
 
   console.log(" searchView suggestedbird\n" + props.suggestedResults);
-  
+
   function displayPageButtonsCB(buttonNumberIndex) {
     const page = buttonNumberIndex + 1;
     function onPageClickACB() {
@@ -101,44 +101,49 @@ export default function Search(props) {
                 </div>
               </div>
             ) : (
-              <div className={css`
-              margin-bottom: 50px;
-            `}>
-              <p>No birds was found :(</p>
-              <div className={css`
-              margin-bottom: 50px;
-            `}>
-              <p>Popular Picks:</p>
               <div
-            className={css`
-              width: 100%;
-              max-width: 100%;
-              display: grid;
-              grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
-              gap: 100px 100px;
-              justify-content: center;
-              align-items: center;
-              flex-grow: 1;
-              margin: 10px auto;
-            `}
-          >
-            {
-            props.status === "data" ? (
-              props.suggestedResults ? (
-                [...props.suggestedResults].map(displayBirdsCB)
-              ) : (
-                <h1></h1>
-              )
-            ) : props.status === "loading" ? (              
-              <Spinner size="xl" />
-            ) : props.status === "error" ? (
-              <h1>"Error"</h1>
-            ) : (          
-              <h1></h1>
-            )
-          }
-          </div>
-              </div>
+                className={css`
+                  margin-bottom: 50px;
+                `}
+              >
+                <p>No birds was found :(</p>
+                <div
+                  className={css`
+                    margin-bottom: 50px;
+                  `}
+                >
+                  <p>Popular Picks:</p>
+                  <div
+                    className={css`
+                      width: 100%;
+                      max-width: 100%;
+                      display: grid;
+                      grid-template-columns: repeat(
+                        auto-fill,
+                        minmax(15%, 1fr)
+                      );
+                      gap: 100px 100px;
+                      justify-content: center;
+                      align-items: center;
+                      flex-grow: 1;
+                      margin: 10px auto;
+                    `}
+                  >
+                    {props.status === "data" ? (
+                      props.suggestedResults ? (
+                        [...props.suggestedResults].map(displayBirdsCB)
+                      ) : (
+                        <h1></h1>
+                      )
+                    ) : props.status === "loading" ? (
+                      <Spinner size="xl" />
+                    ) : props.status === "error" ? (
+                      <h1>"Error"</h1>
+                    ) : (
+                      <h1></h1>
+                    )}
+                  </div>
+                </div>
               </div>
             )
           ) : (
@@ -150,19 +155,20 @@ export default function Search(props) {
               width: 100%;
               max-width: 100%;
               display: grid;
-              @media (min-width: ${theme.breakpoints.medium}){
-                grid-template-columns: repeat(auto-fill, minmax(80%, 1fr));
-              }
-              @media (max-width: 450px){
-                grid-template-columns: repeat(auto-fill, minmax(50%, 1fr));
-              }
-              grid-template-columns: repeat(auto-fill, minmax(15%, 1fr));
+              grid-template-columns: repeat(4, minmax(15%, 1fr));
               gap: 100px 100px;
+              ${theme.breakpoints.large} {
+                grid-template-columns: repeat(3, minmax(15%, 1fr));
+              }
+              ${theme.breakpoints.medium} {
+                grid-template-columns: repeat(2, minmax(15%, 1fr));
+              }
+              ${theme.breakpoints.small} {
+                grid-template-columns: repeat(2, minmax(15%, 1fr));
+                gap: 50px 50px;
+              }
               justify-content: center;
               align-items: center;
-              flex-grow: 1;
-              margin: 10px auto;
-              padding: 16px
             `}
           >
             {props.status == "data" ? (
@@ -203,6 +209,10 @@ export default function Search(props) {
           className={css`
             height: 200px;
             width: 200px;
+            ${theme.breakpoints.small} {
+              height: 150px;
+              width: 150px;
+            }
             overflow: hidden;
             cursor: pointer;
           `}
@@ -219,7 +229,16 @@ export default function Search(props) {
         </div>
         <div
           className={css`
-            font-size: 1.2rem;
+            position: relative;
+            top: -50px;
+            background-color: rgba(0, 0, 0, 0.5);
+            width: ${bird.images[0] ? "200px" : "198px"};
+            ${theme.breakpoints.small} {
+              width: ${bird.images[0] ? "150px" : "148px"};
+              top: -40px;
+            }
+            text-align: center;
+            font-size: ${bird.name.length > 15 ? "0.9rem" : "1.2rem"};
             cursor: pointer;
           `}
         >
