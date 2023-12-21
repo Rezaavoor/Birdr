@@ -131,10 +131,17 @@ export default function Hotlist(props) {
         </div>
         <div
           className={css`
-            font-size: 1.2rem;
-            cursor: pointer;
-            margin-top: 5px;
-            white-space: nowrap;
+          position: relative;
+          top: -50px;
+          background-color: rgba(0, 0, 0, 0.5);
+          width: ${bird.images[0] ? "200px" : "198px"};
+          ${theme.breakpoints.small} {
+            width: ${bird.images[0] ? "150px" : "148px"};
+            top: -40px;
+          }
+          text-align: center;
+          font-size: ${bird.name.length > 15 ? "0.9rem" : "1.2rem"};
+          cursor: pointer;
           `}
         >{`${birdPosition}. ${bird.name}`}</div>
       </div>
