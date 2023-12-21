@@ -175,6 +175,10 @@ export default function Home({
                     background-color: rgba(0, 0, 0, 0.2);
                     backdrop-filter: blur(10px);
                     border-radius: 20px;
+                    ${theme.breakpoints.small} {
+                      width: 110px; 
+                      height: 50px; 
+                    }
                     transition: all 0.2s ease-in-out;
                     :hover {
                       transform: scale(1.1);
@@ -246,6 +250,10 @@ export default function Home({
               background-color: rgba(0, 0, 0, 0.2);
               backdrop-filter: blur(10px);
               border-radius: 20px;
+              ${theme.breakpoints.small} {
+                width: 110px; 
+                height: 50px; 
+              }
               transition: all 0.2s ease-in-out;
               :hover {
                 transform: scale(1.1);
