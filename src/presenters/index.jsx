@@ -21,3 +21,4 @@ createRoot(document.getElementById("root")).render(
 connectToFirebase(reactiveModel, reaction);
 reactiveModel.doSearch(reactiveModel.searchParams);
 reactiveModel.init();
+
