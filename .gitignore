@@ -1,12 +1,8 @@
 **/node_modules
 **/*~
 dist
-**/*Config.js*
 package-lock.json
 **/*solved*
 **/*Config.js*
 /public/*.js
 /public/*.html
-*.env
-**/.firebase/*
-.firebase/hosting.ZGlzdA.cache
