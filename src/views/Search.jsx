@@ -107,8 +107,11 @@ export default function Search(props) {
                 <p>No birds was found :(</p>
                 <div
                   className={css`
-                    margin-bottom: 50px;
+                  text-align: center;
+                  margin-bottom: 50px;
+                    
                   `}
+                  
                 >
                   <p>Popular Picks:</p>
                   <div
@@ -252,3 +255,5 @@ export default function Search(props) {
     );
   }
 }
+
+

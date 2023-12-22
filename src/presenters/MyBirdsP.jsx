@@ -23,6 +23,9 @@ export default observer(function MyBirdsP(props) {
     }
   }, [props.model.likedBirds]);
 
+  function searchClickHandler(){
+    navigate(`/search`);
+  }
   function onClickMoreDetails(bird) {
     props.model.setCurrentBird(bird.id);
     navigate(`/bird/${bird.id}`);
@@ -69,6 +72,7 @@ export default observer(function MyBirdsP(props) {
     <MyBirds
       myBirds={props.model.likedBirdsPromiseState.data}
       onClickHandler={onClickMoreDetails}
+      searchClickHandler ={searchClickHandler}
       removeBird={removeMyBird}
       status="data"
     />

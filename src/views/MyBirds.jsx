@@ -11,6 +11,7 @@ import {
   Spinner,
   Tooltip,
   useDisclosure,
+  WrapItem,
 } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
@@ -82,15 +83,26 @@ export default function MyBirds(props) {
               align-items: center;
             `}
           >
-            {props.status == "data" ? (
-              [...props.myBirds].map(displayBirdsCB)
-            ) : props.status == "loading" ? (
-              <Spinner size="xl" />
-            ) : props.status == "error" ? (
-              <h1>"Error"</h1>
+          {props.status === "data" ? (
+            props.myBirds.length === 0 ? (
+              <div style={{ userSelect: 'text', position: 'absolute',
+               top: '50%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                 textAlign: 'center',
+                  marginTop: '50px' }}>
+                <p>Your birdwatching journey begins here! Click <Button colorScheme='green' size='xl' variant='link' onClick={props.searchClickHandler}>here </Button>
+                <span style={{ marginLeft: '8px' }}>to search and add your  first bird  ;) </span></p></div>
             ) : (
-              <h1></h1>
-            )}
+              [...props.myBirds].map(displayBirdsCB)
+            )
+          ) : props.status === "loading" ? (
+            <Spinner size="xl" />
+          ) : props.status === "error" ? (
+            <h1>Error</h1>
+          ) : (
+            <h1></h1>
+          )}
           </div>
         </div>
       </div>

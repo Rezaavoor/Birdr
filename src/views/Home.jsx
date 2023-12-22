@@ -1,7 +1,7 @@
 import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { InfoIcon, Icon } from "@chakra-ui/icons";
+import { InfoIcon, Icon,} from "@chakra-ui/icons";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 export default function Home({
@@ -244,8 +244,9 @@ export default function Home({
                     height: 50px; 
                   }
                 `}
+                title="Join the birdwatching community! Sign in to add your favorite birds"
               >
-                <Icon as={FaRegHeart} boxSize={7} color={theme.colors.light} />
+                <Icon as={FaRegHeart} boxSize={7} color={theme.colors.light}  />
                 <p>Add To My Birds</p>
               </div>
             )}
