@@ -1,19 +1,27 @@
-import { getBirdDetails } from "./modelSource";
+import { getBirdDetails, getBirdsDetailsById, searchBird } from "./modelSource";
 import resolvePromise from "./resolvePromise";
-import { searchBird } from "./modelSource";
+import { auth } from "./firebaseModel";
+import { signOut } from "firebase/auth";
 
 export default {
-  user: {
-    id: null,
-    likedBirds: [],
-  },
-  hotBirds: [],
+  user: null,
 
-  searchParams: {},
+  likedBirds: [],
+
+  hotBirds: [],
+  searchParams: {
+    name: "",
+    hasImg: true,
+    pageNr: 1,
+  },
+  pages: null,
+  suggestResultsPromiseState:{},
   searchResultsPromiseState: {},
   currentBird: null,
   currentBirdPromiseState: {},
   birdOfTheDayPromiseState: {},
+  hotBirdsPromiseState: {},
+  likedBirdsPromiseState: {},
   birdOfTheDay: null,
   birdsOfTheDay: [
     1, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 17, 20, 21, 22, 23, 26, 28, 29, 30,
@@ -38,19 +46,18 @@ export default {
     573, 574, 579, 580, 581, 582, 583, 584, 586, 590, 592, 593, 594, 596, 598,
     599, 601, 602, 603, 605, 606, 608, 610, 616, 617, 618, 621, 622, 623, 624,
     625, 626, 627, 628, 631, 633, 634, 638, 639, 642, 646, 647, 657, 659, 660,
-    754, 757, 761, 763, 857, 860, 862, 863, 866, 952, 954, 955, 964, 970, 975,
+    754, 757, 761, 763, 857, 860, 465, 863, 866, 952, 954, 955, 964, 970, 975,
     979, 988, 990, 992, 994, 995, 404, 69, 26, 10,
   ],
 
   setCurrentBird(id) {
-    /* getBirdDetails(id)
-      .then((res) => res.json())
-      .then((res) => (this.currentBird = res));*/
     resolvePromise(getBirdDetails(id), this.currentBirdPromiseState);
     this.currentBird = id;
     this.updataViewCount(id);
+
+    localStorage.setItem("currentBird", id);
   },
-  /*********** change********************** */
+
   updataViewCount(birdId) {
     const foundBird = this.hotBirds.find(findBirdCB);
 
@@ -67,24 +74,29 @@ export default {
       };
 
       this.hotBirds.push(birdEntry);
-      this.hotBirds.sort(sortBirdCB);
-
-      function sortBirdCB(a, b) {
-        return b.viewCount - a.viewCount;
-      }
     }
+
+    this.hotBirds.sort(sortBirdCB);
+
+    function sortBirdCB(a, b) {
+      return b.viewCount - a.viewCount;
+    }
+
+    this.hotBirds = [...this.hotBirds];
   },
-  /*********** change********************** */
+
   addLikedBird(bird) {
-    this.user.likedBirds = [...this.user.likedBirds, bird];
+    this.likedBirds = [...this.likedBirds, bird];
+    this.getLikedBirds();
   },
 
   removeLikedBird(birdToRemove) {
-    function checkBirdsCB(bird) {
-      return bird.id != birdToRemove.id;
+    function checkBirdsCB(birdId) {
+      return birdId != birdToRemove;
     }
 
     this.likedBirds = this.likedBirds.filter(checkBirdsCB);
+    this.getLikedBirds();
   },
 
   async setBirdOfTheDay() {
@@ -102,34 +114,82 @@ export default {
     }
   },
 
+  getHotBirds() {
+    const slicedHotBirds = this.hotBirds.slice(0, 10);
+    const ids = slicedHotBirds.map((bird) => bird.birdId);
+    resolvePromise(getBirdsDetailsById(ids), this.hotBirdsPromiseState);
+  },
+// *********************************
+suggestResults(){
+    const length = this.birdsOfTheDay.length;
+    const randomIndex = Math.floor(Math.random() * (length - 8));
+    const suggestedBirds = this.birdsOfTheDay.slice(randomIndex, (randomIndex + 8));
+    return resolvePromise(getBirdsDetailsById(suggestedBirds), this.suggestResultsPromiseState);
+  },
+
+  getLikedBirds() {
+    resolvePromise(
+      getBirdsDetailsById(this.likedBirds),
+      this.likedBirdsPromiseState
+    );
+  },
+
   setSearchName(name) {
-    console.log(name)
     this.searchParams.name = name;
   },
 
-  setHasImg(hasImg) {
-    this.searchParams.hasImg = hasImg;
+  setHasImg() {
+    this.searchParams.hasImg = this.searchParams.hasImg ? false : true;
   },
 
-  /* setSearchRegion(region) {
+  /*setSearchRegion(region) {
     this.searchParams.region = region;
-  },
-
-  setSearchSciName(sciName) {
-    this.searchParams.sciName = sciName;
   },*/
 
+  setPageNr(pageNr) {
+    this.searchParams.pageNr = pageNr;
+    this.doSearch(this.searchParams);
+  },
+
   doSearch(searchParams) {
-    resolvePromise(searchBird(searchParams), this.searchResultsPromiseState)
+    
+    resolvePromise(
+      searchBird(searchParams.name, searchParams.hasImg, searchParams.pageNr),
+      this.searchResultsPromiseState
+    );
+    this.suggestResults();
+    //this.getPages()
+  },
+
+  // How many pages are in the search result
+  getPages() {
+    const total = this.searchResultsPromiseState.data.total;
+    const pageSize = this.searchResultsPromiseState.data.pageSize;
+    const extraPage = total % pageSize == 0 ? 0 : 1; // is there a non full page?
+    this.pages = Math.floor(total / pageSize) + extraPage;
   },
 
   isBirdLiked(id) {
-    return this.user.likedBirds.filter(isBirdLikedCB).length > 0;
+    return this.likedBirds.filter(isBirdLikedCB).length > 0 && !!this.user;
 
     function isBirdLikedCB(curId) {
       return curId == id;
     }
+  },
+  signOut() {
+    signOut(auth);
+  },
 
+  init() {
+    //if(this.user === null){
+    const currentPath = window.location.pathname;
+    const match = currentPath.match(/\/bird\/(\d+)/);
+    const birdId =
+      (match ? match[1] : null) || localStorage.getItem("currentBird");
+
+    if (birdId) {
+      this.setCurrentBird(birdId);
+   // }
   }
-
+  },
 };

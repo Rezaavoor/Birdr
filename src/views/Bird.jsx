@@ -1,10 +1,17 @@
-import { Image, Spinner } from "@chakra-ui/react";
+import { Image, Spinner, Tooltip } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { AddIcon } from "@chakra-ui/icons";
+import { Icon } from "@chakra-ui/icons";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import AudioPlayer from "react-h5-audio-player";
 
-export default function Bird({ bird, status, onClickAddToMyBirds }) {
+export default function Bird({
+  bird,
+  status,
+  onClickHandleMyBirds,
+  isBirdLiked,
+  isLoggedIn,
+}) {
   const theme = useTheme();
   return (
     <div
@@ -54,25 +61,83 @@ export default function Bird({ bird, status, onClickAddToMyBirds }) {
               >
                 {bird.name}
               </h1>
-              <div
-                onClick={onClickAddToMyBirds}
-                className={css`
-                  position: relative;
-                  align-items: center;
-                  cursor: pointer;
-                  width: 40px;
-                  margin-left: 10px;
-                  transition: all 0.2s ease-in-out;
-                  :hover {
-                    transform: scale(1.4);
-                  }
-                  ${theme.breakpoints.medium} {
-                    width: 30px;
-                  }
-                `}
-              >
-                <AddIcon boxSize="100%" color={theme.colors.white} />
-              </div>
+              {isLoggedIn ? (
+                isBirdLiked ? (
+                  <div
+                    onClick={onClickHandleMyBirds}
+                    className={css`
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      align-items: center;
+                      margin: 50px;
+                      cursor: pointer;
+                      transition: all 0.2s ease-in-out;
+                      :hover {
+                        transform: scale(1.1);
+                      }
+                    `}
+                  >
+                    <Tooltip label="Remove this bird" fontSize="md">
+                      <div>
+                        <Icon
+                          as={FaHeart}
+                          boxSize={7}
+                          color={theme.colors.white}
+                        />
+                      </div>
+                    </Tooltip>
+                  </div>
+                ) : (
+                  <div
+                    onClick={onClickHandleMyBirds}
+                    className={css`
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: center;
+                      align-items: center;
+                      margin: 50px;
+                      cursor: pointer;
+                      transition: all 0.2s ease-in-out;
+                      :hover {
+                        transform: scale(1.1);
+                      }
+                    `}
+                  >
+                    <Tooltip label="Add this bird" fontSize="md">
+                      <div>
+                        <Icon
+                          as={FaRegHeart}
+                          boxSize={7}
+                          color={theme.colors.white}
+                        />
+                      </div>
+                    </Tooltip>
+                  </div>
+                )
+              ) : (
+                <div
+                  className={css`
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    color: ${theme.colors.light};
+                    margin: 50px;
+                    select: none;
+                  `}
+                >
+                  <Tooltip label="Add this bird" fontSize="md">
+                    <div>
+                      <Icon
+                        as={FaRegHeart}
+                        boxSize={7}
+                        color={theme.colors.white}
+                      />
+                    </div>
+                  </Tooltip>
+                </div>
+              )}
             </div>
             <div
               className={css`
@@ -148,7 +213,7 @@ export default function Bird({ bird, status, onClickAddToMyBirds }) {
       ) : status == "error" ? (
         <h1>"Error"</h1>
       ) : (
-        <h1>"No Data"</h1>
+        <h1></h1>
       )}
     </div>
   );

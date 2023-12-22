@@ -20,12 +20,26 @@ export function getBirdDetails(id) {
     }
 }
 
+export function getBirdsDetailsById(ids) {
+    const promises = ids.map((id) => getBirdDetails(id))
+    return Promise.all(promises);
+}
 
-export function searchBird(searchParams){
+export function searchBird(searchParams, hasImg, pageNr){
+
+    searchParams = searchParams + "&page=" + pageNr
+
+    if(searchParams !== "") {
+        searchParams = "&name=" + searchParams;
+    }
+
+    if(hasImg) {
+        searchParams = searchParams + "&hasImg=true";
+    }
 
     //const queryParams = new URLSearchParams(searchParams);
 
-    const url = BASE_URL + "v2/birds?page=1&pageSize=10&name=" + searchParams + "&hasImg=true&operator=AND"; 
+    const url = BASE_URL + "v2/birds?pageSize=25" + searchParams + "&operator=AND"; 
 
 
     const options = {
@@ -43,10 +57,9 @@ export function searchBird(searchParams){
     }
 
     function getBirdACB(data){
-        return data.entities;
+        return data;
     }
 
     return fetch(url, options).then(responseSearchACB).then(getBirdACB);
 }
-
 

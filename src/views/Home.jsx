@@ -1,14 +1,17 @@
 import { Image, Spinner } from "@chakra-ui/react";
 import { css } from "@emotion/css";
 import { useTheme } from "@emotion/react";
-import { InfoIcon, AddIcon } from "@chakra-ui/icons";
+import { InfoIcon, Icon,} from "@chakra-ui/icons";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 export default function Home({
   name,
   images,
   status,
-  onClickAddToMyBirds,
+  onClickHandleMyBirds,
   onClickMoreDetails,
+  isBirdLiked,
+  isLoggedIn,
 }) {
   const theme = useTheme();
   return (
@@ -22,6 +25,9 @@ export default function Home({
         className={css`
           position: absolute;
           top: -10vh;
+          ${theme.breakpoints.medium} {
+            top: 0;
+          }
           left: 0;
           width: 100vw;
           height: 50vh;
@@ -36,12 +42,16 @@ export default function Home({
         className={css`
           position: absolute;
           top: -10vh;
+          ${theme.breakpoints.medium} {
+            top: 0;
+          }
           left: 0;
           width: 100vw;
           height: 100vh;
           overflow: hidden;
           z-index: 1;
         `}
+        id="image-div"
       >
         {status == "data" && images[0] ? (
           <Image
@@ -91,16 +101,36 @@ export default function Home({
           `}
         >
           <div
+            onClick={onClickMoreDetails}
             className={css`
+              position: relative;
               width: 50%;
               text-align: center;
               font-size: 2.5rem;
               color: ${theme.colors.white};
               font-weight: bold;
-              background-color: rgba(0, 0, 0, 0.3);
+              background-color: rgba(0, 0, 0, 0.2);
+              backdrop-filter: blur(10px);
+              cursor: pointer;
               ${theme.breakpoints.medium} {
                 font-size: 2rem;
                 width: 90%;
+              }
+              ${theme.breakpoints.small} {
+                top: 25vh;
+              }
+              border-radius: 20px;
+              transition: all 0.5s ease-in-out;
+              * {
+                transition: all 0.5s ease-in-out;
+              }
+              :hover {
+                transform: translateY(15px);
+                background-color: rgba(0, 0, 0, 0.1);
+                backdrop-filter: blur(10px);
+                * {
+                  transform: scale(1.1);
+                }
               }
             `}
           >
@@ -120,7 +150,7 @@ export default function Home({
             position: absolute;
             top: 65vh;
             ${theme.breakpoints.medium} {
-              top: 50vh;
+              top: 70vh;
             }
             width: 100%;
             display: flex;
@@ -128,41 +158,128 @@ export default function Home({
             align-items: center;
           `}
         >
-          <div
-            onClick={onClickAddToMyBirds}
-            className={css`
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              margin: 50px;
-              cursor: pointer;
-              transition: all 0.2s ease-in-out;
-              :hover {
-                transform: scale(1.1);
-              }
-            `}
-          >
-            <AddIcon boxSize={7} color={theme.colors.white} />
-            Add To My Birds
+          <div className={css`
+          `}>
+            {isLoggedIn ? (
+              isBirdLiked ? (
+                <div
+                  onClick={onClickHandleMyBirds}
+                  className={css`
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 200px;
+                    height: 70px;
+                    margin: 50px;
+                    cursor: pointer;
+                    background-color: rgba(0, 0, 0, 0.2);
+                    backdrop-filter: blur(10px);
+                    border-radius: 20px;
+                    ${theme.breakpoints.small} {
+                      width: 110px; 
+                      height: 50px; 
+                    }
+                    transition: all 0.2s ease-in-out;
+                    :hover {
+                      transform: scale(1.1);
+                      background-color: rgba(0, 0, 0, 0.1);
+                    }
+                  `}
+                >
+                  <Icon as={FaHeart} boxSize={7} color={theme.colors.white} />
+                  <p>Remove This Bird</p>
+                </div>
+              ) : (
+                <div
+                  onClick={onClickHandleMyBirds}
+                  className={css`
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    width: 200px;
+                    height: 70px;
+                    margin: 50px;
+                    cursor: pointer;
+                    background-color: rgba(0, 0, 0, 0.2);
+                    backdrop-filter: blur(10px);
+                    border-radius: 20px;
+                    ${theme.breakpoints.small} {
+                      width: 110px; 
+                      height: 50px; 
+                    }
+                    transition: all 0.2s ease-in-out;
+                    :hover {
+                      transform: scale(1.1);
+                      background-color: rgba(0, 0, 0, 0.1);
+                    }
+                  `}
+                >
+                  <Icon
+                    as={FaRegHeart}
+                    boxSize={7}
+                    color={theme.colors.white}
+                  />
+                  <p>Add To My Birds</p>
+                </div>
+              )
+            ) : (
+              <div
+                className={css`
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: center;
+                  align-items: center;
+                  color: ${theme.colors.light};
+                  width: 200px;
+                  height: 70px;
+                  margin: 50px;
+                  select: none;
+                  background-color: rgba(0, 0, 0, 0.2);
+                  backdrop-filter: blur(10px);
+                  border-radius: 20px;
+                  ${theme.breakpoints.small} {
+                    width: 110px; 
+                    height: 50px; 
+                  }
+                `}
+                title="Join the birdwatching community! Sign in to add your favorite birds"
+              >
+                <Icon as={FaRegHeart} boxSize={7} color={theme.colors.light}  />
+                <p>Add To My Birds</p>
+              </div>
+            )}
           </div>
-          <div
-            onClick={onClickMoreDetails}
-            className={css`
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
-              align-items: center;
-              margin: 50px;
-              cursor: pointer;
-              transition: all 0.2s ease-in-out;
-              :hover {
-                transform: scale(1.1);
-              }
-            `}
-          >
-            <InfoIcon boxSize={7} color={theme.colors.white} />
-            More Details
+          <div className={css``}>
+            <div
+              onClick={onClickMoreDetails}
+              className={css`
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 200px;
+                height: 70px;
+                margin: 50px;
+                cursor: pointer;
+                background-color: rgba(0, 0, 0, 0.2);
+                backdrop-filter: blur(10px);
+                border-radius: 20px;
+                ${theme.breakpoints.small} {
+                  width: 110px; 
+                  height: 50px; 
+                }
+                transition: all 0.2s ease-in-out;
+                :hover {
+                  transform: scale(1.1);
+                  background-color: rgba(0, 0, 0, 0.1);
+                }
+              `}
+            >
+              <InfoIcon boxSize={7} color={theme.colors.white} />
+              More Details
+            </div>
           </div>
         </div>
       </div>

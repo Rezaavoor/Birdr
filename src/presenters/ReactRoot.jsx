@@ -6,24 +6,27 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { theme } from "../theme.js";
 import { ThemeProvider } from "@emotion/react";
-import { ChakraProvider } from "@chakra-ui/react";
+import { ChakraProvider, Spinner } from "@chakra-ui/react";
 import NavbarP from "./NavbarP.jsx";
 import BirdP from "./BirdP.jsx";
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+
+
 
 export default observer(function ReactRoot(props) {
   const router = createBrowserRouter([
     {
       path: "/",
       element: (
-        <NavbarP>
-          <HomeP model={props.model} />
+        <NavbarP auth={props.auth} model={props.model} >
+          <HomeP model={props.model}  />
         </NavbarP>
       ),
     },
     {
       path: "/search",
       element: (
-        <NavbarP>
+        <NavbarP auth={props.auth} model={props.model} >
           <SearchP model={props.model} />
         </NavbarP>
       ),
@@ -31,7 +34,7 @@ export default observer(function ReactRoot(props) {
     {
       path: "/hotlist",
       element: (
-        <NavbarP>
+        <NavbarP auth={props.auth} model={props.model} >
           <HotlistP model={props.model} />
         </NavbarP>
       ),
@@ -39,26 +42,40 @@ export default observer(function ReactRoot(props) {
     {
       path: "/mybirds",
       element: (
-        <NavbarP>
+        <NavbarP auth={props.auth} model={props.model} >
           <MyBirdsP model={props.model} />
         </NavbarP>
       ),
     },
     {
-      path: "/bird",
+      path: "/bird/:id",
       element: (
-        <NavbarP>
+        <NavbarP auth={props.auth} model={props.model}>
           <BirdP model={props.model} />
         </NavbarP>
       ),
     },
+    {
+      path: "/bird", // Alternative rout when bird id not defined in url
+      element: (
+        <NavbarP auth={props.auth} model={props.model}>
+          <BirdP model={props.model} />
+        </NavbarP>
+      ),
+    },
+    // handle 404 by redirect to default rout
+    {
+      path: "*", 
+      element: <Navigate to="/" />,
+    }
   ]);
 
   return (
     <ChakraProvider disableGlobalStyle>
       <ThemeProvider theme={theme}>
-        <RouterProvider router={router} />
+      { (props.model.ready )? <RouterProvider router={router} /> : <Spinner size = "xl"/>} 
       </ThemeProvider>
     </ChakraProvider>
+    
   );
 });

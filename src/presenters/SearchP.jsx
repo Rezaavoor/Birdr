@@ -2,20 +2,33 @@ import { useNavigate } from "react-router-dom";
 import Search from "../views/Search";
 import SearchForm from "../views/SearchForm";
 import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
 export default observer(function SearchP(props) {
+
+
   const navigate = useNavigate();
-  function setCurrerntBirdACB(bird) {
+
+  function setCurrentBirdACB(bird) {
     props.model.setCurrentBird(bird.id);
-    navigate("/bird");
+    navigate(`/bird/${bird.id}`);
+  }
+  function setCurrentPageACB(page) {
+    if (page != props.model.searchResultsPromiseState.data.page)
+      props.model.setPageNr(page);
   }
 
   function textChangeHandlerACB(birdName) {
     props.model.setSearchName(birdName);
   }
 
-  function searchClickHandlerACB() {
-    props.model.doSearch(props.model.searchParams.name);
+  async function searchClickHandlerACB() {
+    props.model.setPageNr(1);
+  }
+
+  function onlyImagesHandlerACB() {
+    props.model.setHasImg();
+    props.model.setPageNr(1);
   }
 
   function renderSearchResult() {
@@ -38,11 +51,16 @@ export default observer(function SearchP(props) {
     ) {
       return <Search status="loading" />;
     }
-
+    props.model.getPages();
     return (
       <Search
-        searchResults={props.model.searchResultsPromiseState.data}
-        onClickHandler={setCurrerntBirdACB}
+        searchResults={props.model.searchResultsPromiseState.data.entities}
+        totalResults={props.model.searchResultsPromiseState.data.total}
+        currentPage={props.model.searchResultsPromiseState.data.page}
+        totalPages={props.model.pages}
+        suggestedResults ={props.model.suggestResultsPromiseState.data}
+        onBirdClick={setCurrentBirdACB}
+        onPageClick={setCurrentPageACB}
         status="data"
       />
     );
@@ -54,7 +72,10 @@ export default observer(function SearchP(props) {
         text={props.model.searchParams.name}
         changeTextValue={textChangeHandlerACB}
         searchClick={searchClickHandlerACB}
-        onClickHandler={setCurrerntBirdACB}
+        onClickHandler={setCurrentBirdACB}
+        onlyImages={onlyImagesHandlerACB}
+        hasImg={props.model.searchParams.hasImg}
+        
       />
       {renderSearchResult()}
     </div>

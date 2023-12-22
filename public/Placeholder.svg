@@ -1,6 +1,13 @@
-<svg id="Logo-white" xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <rect id="Rectangle_1" data-name="Rectangle 1" width="256" height="256" fill="none"/>
-  <circle id="Ellipse_1" data-name="Ellipse 1" cx="8.5" cy="8.5" r="8.5" transform="translate(152 56)" fill="#242424"/>
-  <line id="Line_1" data-name="Line 1" x1="40" y2="48" transform="translate(80 136)" fill="none" stroke="#242424" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/>
-  <path id="Path_1" data-name="Path 1" d="M208,96v24a96,96,0,0,1-96,96H8L104,96V76A52,52,0,0,1,206.3,62.9L232,80Z" fill="none" stroke="#242424" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_103_19)">
+<path d="M15 0.5H241C249.008 0.5 255.5 6.99187 255.5 15V241C255.5 249.008 249.008 255.5 241 255.5H15C6.99187 255.5 0.5 249.008 0.5 241V15C0.5 6.99187 6.99187 0.5 15 0.5Z" fill="#151515" stroke="#D9D9D9"/>
+<path d="M160.5 73C165.194 73 169 69.1944 169 64.5C169 59.8056 165.194 56 160.5 56C155.806 56 152 59.8056 152 64.5C152 69.1944 155.806 73 160.5 73Z" fill="#242424"/>
+<path d="M120 136L80 184" stroke="#242424" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M208 96.0001V120C208 145.461 197.886 169.879 179.882 187.882C161.879 205.886 137.461 216 112 216H8L104 96.0001V76.0001C104.021 63.3678 108.64 51.1752 116.994 41.6995C125.348 32.2238 136.865 26.113 149.395 24.5085C161.925 22.9039 174.611 25.9154 185.082 32.9804C195.554 40.0454 203.096 50.6807 206.3 62.9001L232 80.0001L208 96.0001Z" stroke="#242424" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_103_19">
+<rect width="256" height="256" fill="white"/>
+</clipPath>
+</defs>
 </svg>

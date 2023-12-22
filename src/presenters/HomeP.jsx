@@ -7,20 +7,33 @@ export default observer(function HomeP(props) {
   const navigate = useNavigate();
   const toast = useToast();
   props.model.setBirdOfTheDay();
+  const isLoggedIn = !!props.model.user;
+  const isBirdLiked = props.model.isBirdLiked(props.model.birdOfTheDay);
 
-  function onClickAddToMyBirds() {
-    props.model.addLikedBird(props.model.birdOfTheDay);
-    toast({
-      title: "Bird added.",
-      description: `You added ${props.model.birdOfTheDayPromiseState.data.name} to My Birds.`,
-      status: "success",
-      duration: 5000,
-      isClosable: true,
-    });
+  function onClickHandleMyBirds() {
+    if (!isBirdLiked) {
+      props.model.addLikedBird(props.model.birdOfTheDay);
+      toast({
+        title: "Bird added.",
+        description: `You added ${props.model.birdOfTheDayPromiseState.data.name} to My Birds.`,
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } else {
+      props.model.removeLikedBird(props.model.birdOfTheDay);
+      toast({
+        title: "Bird removed.",
+        description: `You removed ${props.model.birdOfTheDayPromiseState.data.name} from My Birds.`,
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+      });
+    }
   }
   function onClickMoreDetails() {
     props.model.setCurrentBird(props.model.birdOfTheDay);
-    navigate("/bird");
+    navigate(`/bird/${props.model.birdOfTheDay}`);
   }
 
   if (!props.model.birdOfTheDayPromiseState.promise) {
@@ -42,7 +55,7 @@ export default observer(function HomeP(props) {
   ) {
     return (
       <Home
-        onClickAddToMyBirds={onClickAddToMyBirds}
+        onClickHandleMyBirds={onClickHandleMyBirds}
         onClickMoreDetails={onClickMoreDetails}
         status="loading"
       />
@@ -53,8 +66,10 @@ export default observer(function HomeP(props) {
     <Home
       name={props.model.birdOfTheDayPromiseState.data.name}
       images={props.model.birdOfTheDayPromiseState.data.images}
-      onClickAddToMyBirds={onClickAddToMyBirds}
+      onClickHandleMyBirds={onClickHandleMyBirds}
       onClickMoreDetails={onClickMoreDetails}
+      isBirdLiked={isBirdLiked}
+      isLoggedIn={isLoggedIn}
       status="data"
     />
   );
