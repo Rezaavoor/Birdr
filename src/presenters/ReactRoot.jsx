@@ -76,5 +76,6 @@ export default observer(function ReactRoot(props) {
       { (props.model.ready )? <RouterProvider router={router} /> : <Spinner size = "xl"/>} 
       </ThemeProvider>
     </ChakraProvider>
+    
   );
 });
