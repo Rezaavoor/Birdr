@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite';
 import reactJsxPlugin from '@vitejs/plugin-react';
 
-export default defineConfig({
+export default defineConfig ({
   plugins: [
     reactJsxPlugin(),
   ],
