@@ -15,7 +15,6 @@ export default observer(function NavbarP({ children, auth, model }) {
   async function logInHandlerACB() {
     try {
       const result = await signInWithPopup(auth, provider);
-      console.log("Sign-in successful:", result.user);
     } catch (error) {
       console.error("Sign-in error:", error.message);
     }

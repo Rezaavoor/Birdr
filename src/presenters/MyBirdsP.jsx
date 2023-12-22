@@ -17,7 +17,6 @@ export default observer(function MyBirdsP(props) {
       }
     };
 
-    console.log(props.model.likedBirdsPromiseState);
 
     if (!props.model.likedBirdsPromiseState.data) {
       fetchData();

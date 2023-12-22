@@ -5,8 +5,6 @@ import { useTheme } from "@emotion/react";
 export default function Search(props) {
   const theme = useTheme();
 
-  console.log(" searchView suggestedbird\n" + props.suggestedResults);
-
   function displayPageButtonsCB(buttonNumberIndex) {
     const page = buttonNumberIndex + 1;
     function onPageClickACB() {
@@ -201,6 +199,7 @@ export default function Search(props) {
         onClick={birdClickHandlerACB}
         className={css`
           display: flex;
+          position: relative;
           flex-direction: column;
           justify-content: center;
           align-items: center;
@@ -234,13 +233,13 @@ export default function Search(props) {
         </div>
         <div
           className={css`
-            position: relative;
-            top: -50px;
+            position: absolute;
+            bottom: 30px;
             background-color: rgba(0, 0, 0, 0.5);
             width: ${bird.images[0] ? "200px" : "198px"};
             ${theme.breakpoints.small} {
               width: ${bird.images[0] ? "150px" : "148px"};
-              top: -40px;
+              bottom: 10px;
             }
             text-align: center;
             font-size: ${bird.name.length > 15 ? "0.9rem" : "1.2rem"};

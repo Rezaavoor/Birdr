@@ -76,8 +76,8 @@ export default function SearchForm(props) {
             position: relative;
             left: -30px;
             ${theme.breakpoints.medium} {
-              left: 65px;
-              top: -23px;
+              left: 85px;
+              top: -28px;
             }
             z-index: 2;
             cursor: pointer;
