@@ -92,7 +92,7 @@ export default function MyBirds(props) {
                  textAlign: 'center',
                   marginTop: '50px' }}>
                 <p>Your birdwatching journey begins here! Click <Button colorScheme='green' size='xl' variant='link' onClick={props.searchClickHandler}>here </Button>
-                <span style={{ marginLeft: '8px' }}>to search and add your  first bird  ;) </span></p></div>
+                <span style={{ marginLeft: '8px' }}>to search and add your first bird 😉</span></p></div>
             ) : (
               [...props.myBirds].map(displayBirdsCB)
             )
