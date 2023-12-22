@@ -6,4 +6,7 @@ package-lock.json
 **/*Config.js*
 /public/*.js
 /public/*.html
-
+**/*Config.js*
+*.env
+**/.firebase/*
+.firebase/hosting.ZGlzdA.cache
