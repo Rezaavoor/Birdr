@@ -6,3 +6,4 @@ package-lock.json
 **/*Config.js*
 /public/*.js
 /public/*.html
+.DS_Store
