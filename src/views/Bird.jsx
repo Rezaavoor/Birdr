@@ -21,6 +21,7 @@ export default function Bird({
         display: flex;
         align-items: center;
         justify-content: center;
+        margin-top: 30px; /* Add margin to create space from the top */
       `}
     >
       {status == "data" ? (

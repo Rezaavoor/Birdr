@@ -122,10 +122,11 @@ export default function MyBirds(props) {
     function DeleteButton() {
       return (
         <>
-          <div onClick={onOpen}>
+          <div onClick={onOpen}
+          >
             <Tooltip label="Remove this bird" fontSize="md">
               <div>
-                <DeleteIcon boxSize={7} color={theme.colors.white} />
+                <DeleteIcon  boxSize={7} color={theme.colors.white} />
               </div>
             </Tooltip>
           </div>
@@ -185,6 +186,7 @@ export default function MyBirds(props) {
             }
             overflow: hidden;
             cursor: pointer;
+            position: relative; /* Added for positioning */
           `}
         >
           <Image
@@ -196,8 +198,7 @@ export default function MyBirds(props) {
             height="100%"
             borderRadius={10}
           />
-        </div>
-        <div
+           <div
           onClick={clickHandlerACB}
           className={css`
             position: absolute;
@@ -215,6 +216,7 @@ export default function MyBirds(props) {
         >
           {bird.name}
         </div>
+        </div>
         <div
           className={css`
             display: flex;
@@ -228,7 +230,7 @@ export default function MyBirds(props) {
               color: black;
             }
           `}
-        >
+        > 
           <DeleteButton />
         </div>
       </div>
