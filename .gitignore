@@ -10,3 +10,6 @@ package-lock.json
 **/.firebase/*
 .firebase/hosting.ZGlzdA.cache
 src/.DS_Store
+src/.firebaseConfig 2.js.icloud
+.vite.config 2.js.icloud
+.DS_Store
