@@ -7,3 +7,6 @@ package-lock.json
 /public/*.js
 /public/*.html
 .DS_Store
+.firebase/hosting.ZGlzdA.cache
+.vite.config 2.js.icloud
+src/.firebaseConfig 2.js.icloud
